@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar }) => {
   return (
     <>
       <div>Navbar Component</div>
