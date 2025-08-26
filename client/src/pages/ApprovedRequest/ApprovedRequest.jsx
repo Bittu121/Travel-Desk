@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function ApprovedRequest() {
   return (
-    <div>ApprovedRequest</div>
-  )
+    <>
+      <div>ApprovedRequest</div>
+    </>
+  );
 }
 
-export default ApprovedRequest
+export default ApprovedRequest;
