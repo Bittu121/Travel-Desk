@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import connectDB from "./db.js";
 import cors from "cors";
+import userRoute from "./routes/userRoutes.js";
 dotenv.config();
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
     credentials: true,
   })
 );
+app.use("/api/user", userRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
