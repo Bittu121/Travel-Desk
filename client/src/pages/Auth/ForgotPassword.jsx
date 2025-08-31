@@ -13,7 +13,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormData({ email: "" });
-    console.log("formData", formData);
+    // console.log("formData", formData);
   };
 
   return (
