@@ -15,7 +15,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/dashboard");
-    console.log("data", data);
+    // console.log("data", data);
   };
 
   return (
