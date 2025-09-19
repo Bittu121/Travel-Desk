@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import travelImage from "../../assets/travel.webp";
+import { login } from "../../action/authAction.js";
+import LoadingSpinner from "../../pages/LoadingSpinner.jsx";
 
 function Login() {
+  const { loading } = useSelector((state) => state.auth);
   const [data, setData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -15,7 +20,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/dashboard");
-    // console.log("data", data);
+    await dispatch(login(data));
   };
 
   return (
@@ -71,9 +76,12 @@ function Login() {
                   className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? (
-                    <AiOutlineEye size={22}  className="cursor-pointer"/>
+                    <AiOutlineEye size={22} className="cursor-pointer" />
                   ) : (
-                    <AiOutlineEyeInvisible size={22}  className="cursor-pointer"/>
+                    <AiOutlineEyeInvisible
+                      size={22}
+                      className="cursor-pointer"
+                    />
                   )}
                 </button>
               </div>
@@ -84,7 +92,7 @@ function Login() {
                   type="submit"
                   className="w-full py-3 font-semibold rounded-lg text-white bg-gradient-to-r from-pink-500 to-blue-600 hover:opacity-90 transition cursor-pointer"
                 >
-                  {/* {loading ? <LoadingSpinner /> : "Login"} */}Login
+                  {loading ? <LoadingSpinner /> : "Login"}
                 </button>
               </div>
 

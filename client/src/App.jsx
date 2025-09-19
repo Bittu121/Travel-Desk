@@ -12,10 +12,12 @@ import Login from "./pages/Auth/Login.jsx";
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 import ResetPassword from "./pages/Auth/ResetPassword.jsx";
 import UpdateUser from "./pages/Auth/UpdateUser.jsx";
+import { useSelector } from "react-redux";
 
 function App() {
-  const user = true;
-  // const user = false;
+  const { authData: user } = useSelector((state) => state.auth);
+  console.log(user)
+
   return (
     <>
       <Routes>

@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, MenuItem, Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { getUserData, logout } from "../action/authAction.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = ({ toggleSidebar }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -17,7 +21,20 @@ const Navbar = ({ toggleSidebar }) => {
     setAnchorEl(null);
   };
 
+  const fetchUserDetails = async () => {
+    try {
+      await dispatch(getUserData());
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
+  const { authData: user } = useSelector((state) => state.auth);
+
   const logOutHandler = async () => {
+    await dispatch(logout());
     navigate("/login");
   };
 
@@ -43,10 +60,10 @@ const Navbar = ({ toggleSidebar }) => {
             }}
           >
             <Avatar sx={{ width: 32, height: 32 }}>
-              {/* {user?.user?.fullName?.charAt(0) || "U"} */}U
+              {user?.user?.fullName?.charAt(0) || "U"}
             </Avatar>
             <span className="ml-2 text-gray-600">
-              {/* {user?.user?.fullName || "Profile"} */}Bittu
+              {user?.user?.fullName || "Profile"}
             </span>
           </Button>
           <Menu
