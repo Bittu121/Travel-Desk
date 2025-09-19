@@ -20,7 +20,7 @@ app.use(
     credentials: true,
   })
 );
-app.use("/api/user", userRoute);
+app.use("/api/auth/user", userRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -94,6 +94,21 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               </span>
             </NavLink>
             <NavLink
+              to="/update-user"
+              className="flex items-center gap-4 p-4 text-gray-500"
+              style={(e) => {
+                return {
+                  color: e.isActive ? "blue" : "black",
+                  fontWeight: e.isActive ? "bold" : "normal",
+                };
+              }}
+            >
+              <FaUserLarge className="text-xl" size={22} />
+              <span className={`${isOpen ? "hidden" : "block"}`}>
+                Update User
+              </span>
+            </NavLink>
+            <NavLink
               to="/travel-requests"
               className="flex items-center gap-4 p-4 text-gray-500"
               style={(e) => {
@@ -191,6 +206,19 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           >
             <FaUserLarge className="text-xl" size={24} />
             <span>Create User</span>
+          </NavLink>
+          <NavLink
+            to="/update-user"
+            className="flex items-center gap-4 p-4 text-gray-500"
+            style={(e) => {
+              return {
+                color: e.isActive ? "blue" : "black",
+                fontWeight: e.isActive ? "bold" : "normal",
+              };
+            }}
+          >
+            <FaUserLarge className="text-xl" size={24} />
+            <span>Update User</span>
           </NavLink>
           <NavLink
             to="/travel-requests"

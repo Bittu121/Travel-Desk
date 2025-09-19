@@ -11,9 +11,11 @@ import PageNotFound from "./pages/PageNotFound.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 import ResetPassword from "./pages/Auth/ResetPassword.jsx";
+import UpdateUser from "./pages/Auth/UpdateUser.jsx";
 
 function App() {
-  const user = false;
+  const user = true;
+  // const user = false;
   return (
     <>
       <Routes>
@@ -22,6 +24,7 @@ function App() {
           <Route path="/travel-request-form" element={<TravelRequestForm />} />
           <Route path="/applied-form" element={<AppliedForm />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/update-user" element={<UpdateUser />} />
           <Route path="/approved-requests" element={<ApprovedRequest />} />
           <Route path="/travel-requests" element={<TravelRequest />} />
           <Route path="*" element={<PageNotFound />} />
