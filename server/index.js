@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import connectDB from "./db.js";
 import cors from "cors";
 import userRoute from "./routes/userRoutes.js";
@@ -13,6 +14,7 @@ connectDB();
 //middleware
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:5173",
