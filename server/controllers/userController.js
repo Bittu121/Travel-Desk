@@ -18,7 +18,7 @@ export const register = async (req, res) => {
       !department ||
       !email ||
       !password ||
-      !role
+      !vendor
     ) {
       return res
         .status(400)
@@ -158,4 +158,3 @@ export const getUserData = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-

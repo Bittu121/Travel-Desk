@@ -8,7 +8,7 @@ const loginSchema = new Schema({
   password: { type: String, required: true },
   role: {
     type: String,
-    enum: ["user", "manager", "hr", "vender", "finance"],
+    enum: ["user", "manager", "hr", "vendor", "finance"],
     default: "user",
   },
   resetPasswordToken: String,

@@ -67,7 +67,7 @@ function Signup() {
               <option value="user">Empolyee</option>
               <option value="manager">Manager</option>
               <option value="hr">HR</option>
-              <option value="vender">Vendor</option>
+              <option value="vendor">Vendor</option>
               <option value="finance">Finance</option>
             </select>
           </div>
