@@ -158,3 +158,19 @@ export const getUserData = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+//Get all users
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await LoginModel.find();
+    return res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};

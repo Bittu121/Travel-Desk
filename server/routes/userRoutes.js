@@ -4,6 +4,7 @@ import {
   logout,
   register,
   getUserData,
+  getAllUsers,
 } from "../controllers/userController.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 
@@ -12,4 +13,5 @@ router.route("/register").post(register);
 router.route("/login").post(login);
 router.route("/logout").post(logout);
 router.route("/").get(authMiddleWare, getUserData);
+router.route("/all-users").get(authMiddleWare, getAllUsers);
 export default router;
