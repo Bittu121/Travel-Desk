@@ -7,7 +7,7 @@ function PageNotFound() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // navigate("/dashboard");
+      navigate("/dashboard");
     }, 2000);
 
     return () => clearTimeout(timer);
@@ -17,7 +17,7 @@ function PageNotFound() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
       <div className="bg-white p-8 rounded-lg border border-gray-200 text-center w-full max-w-md">
         <div className="flex justify-center mb-6">
-          <SlPlane className="text-blue-600 text-6xl" />
+          <SlPlane className="text-blue-600 text-5xl animate-bounce" />
         </div>
         <h1 className="text-3xl font-bold text-gray-700 mb-3">
           404 - Page Not Found
