@@ -19,22 +19,22 @@ export const login = (formData) => async (dispatch) => {
   }
 };
 
-// export const register = (formData) => async (dispatch) => {
-//   dispatch({ type: "AUTH_START" });
-//   try {
-//     const { data } = await AuthApi.register(formData);
-//     dispatch({ type: "REGISTER_SUCCESS" });
-//     toast.success(data.message);
-//     return { type: "REGISTER_SUCCESS", data };
-//   } catch (error) {
-//     const errorMessage = error.response?.data?.message;
-//     dispatch({
-//       type: "AUTH_FAIL",
-//       error: errorMessage || "Register failed",
-//     });
-//     toast.error(errorMessage);
-//   }
-// };
+export const register = (formData) => async (dispatch) => {
+  dispatch({ type: "AUTH_START" });
+  try {
+    const { data } = await AuthApi.register(formData);
+    dispatch({ type: "REGISTER_SUCCESS" });
+    toast.success(data.message);
+    return { type: "REGISTER_SUCCESS", data };
+  } catch (error) {
+    const errorMessage = error.response?.data?.message;
+    dispatch({
+      type: "AUTH_FAIL",
+      error: errorMessage || "Register failed",
+    });
+    toast.error(errorMessage);
+  }
+};
 
 export const logout = () => async (dispatch) => {
   try {

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import LoadingSpinner from "../LoadingSpinner.jsx";
+import { register } from "../../action/authAction.js";
 
 function Signup() {
+  const { loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     fullName: "",
     empCode: "",
@@ -23,7 +27,10 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("data", data);
+      const result = await dispatch(register(data));
+      if (result.type === "REGISTER_SUCCESS") {
+        navigate("/login");
+      }
       setData({
         fullName: "",
         empCode: "",
@@ -57,13 +64,11 @@ function Signup() {
               value={data.role}
             >
               <option value="">Select Role</option>
-              <option value="fullName">Name</option>
-              <option value="empCode">Employee Code</option>
-              <option value="designation">Designation</option>
-              <option value="department">Department</option>
-              <option value="email">Email</option>
-              <option value="password">Password</option>
-              <option value="role">Role</option>
+              <option value="user">Empolyee</option>
+              <option value="manager">Manager</option>
+              <option value="hr">HR</option>
+              <option value="vender">Vendor</option>
+              <option value="finance">Finance</option>
             </select>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -139,7 +144,7 @@ function Signup() {
             type="submit"
             className="w-full mt-8 py-2 text-lg text-white bg-blue-400 font-bold rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-600 hover:border-2 hover:border-blue-400"
           >
-            {/* {loading ? <LoadingSpinner /> : "Sign Up"} */}Sign Up
+            {loading ? <LoadingSpinner /> : "Sign Up"}
           </button>
         </form>
       </div>

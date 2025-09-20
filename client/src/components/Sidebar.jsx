@@ -7,8 +7,10 @@ import { FaUserLarge } from "react-icons/fa6";
 import { FaUserCheck } from "react-icons/fa";
 import { SiReacthookform } from "react-icons/si";
 import { SlPlane } from "react-icons/sl";
+import { FaUserPen } from "react-icons/fa6";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  
   return (
     <>
       <div>
@@ -103,7 +105,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <FaUserLarge className="text-xl" size={22} />
+              <FaUserPen className="text-xl" size={22} />
               <span className={`${isOpen ? "hidden" : "block"}`}>
                 Update User
               </span>
@@ -217,7 +219,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               };
             }}
           >
-            <FaUserLarge className="text-xl" size={24} />
+            <FaUserPen className="text-xl" size={24} />
             <span>Update User</span>
           </NavLink>
           <NavLink
