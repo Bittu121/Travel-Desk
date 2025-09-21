@@ -69,12 +69,12 @@ function GetUserDetails() {
         <td className="px-4 py-3 text-center">{item?.role}</td>
         <td className="px-4 py-3 text-center">
           <div className="flex justify-center">
-            <UpdateUserDetails item={item} />
+            <UpdateUserDetails item={item} setUserData={setUserData} />
           </div>
         </td>
         <td className="px-4 py-3 text-center">
           <div className="flex justify-center">
-            <DeleteUserDetails item={item} />
+            <DeleteUserDetails item={item} setUserData={setUserData} />
           </div>
         </td>
       </tr>

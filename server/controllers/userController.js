@@ -18,7 +18,7 @@ export const register = async (req, res) => {
       !department ||
       !email ||
       !password ||
-      !vendor
+      !role
     ) {
       return res
         .status(400)
@@ -172,5 +172,67 @@ export const getAllUsers = async (req, res) => {
       success: false,
       error: error.message,
     });
+  }
+};
+
+//Update users
+export const updateUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const updateData = req.body;
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID is required",
+      });
+    }
+    const user = await LoginModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const updatedUser = await LoginModel.findByIdAndUpdate(
+      userId,
+      { ...updateData },
+      { new: true }
+    ).select("-password");
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update user",
+      error: error.message,
+    });
+  }
+};
+
+//Delete users
+export const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const deletedUser = await LoginModel.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+    console.log(error);
   }
 };

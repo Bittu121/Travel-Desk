@@ -1,13 +1,18 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
+import { deleteUser } from "../../api/authApi.js";
 import { toast } from "react-toastify";
 
-function DeleteUserDetails({ item }) {
-    
+function DeleteUserDetails({ item, setUserData }) {
   const deleteUsers = async (id) => {
     try {
-      console.log("id", id);
-      //call api
+      const response = await deleteUser(id);
+      if (response?.data?.success) {
+        toast.success(response.data.message || "User deleted successfully");
+        setUserData((prevData) => prevData.filter((user) => user._id !== id));
+      } else {
+        throw new Error(response?.data?.message || "Failed to delete user");
+      }
     } catch (error) {
       toast.error(error.message || "Failed to delete user");
     }

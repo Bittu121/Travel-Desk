@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { updateUser } from "../../api/authApi.js";
 
-function UpdateUserDetails({ item }) {
+function UpdateUserDetails({ item,setUserData }) {
   const [editData, setEditData] = useState({
     fullName: "",
     empCode: "",
     designation: "",
-    department: "",
-    email: "",
-    role: "",
+    depil: "",
+    rolartment: "",
+    emae: "",
   });
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -39,11 +40,20 @@ function UpdateUserDetails({ item }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("uk", selectedUserId, editData);
-      //call api
+      const updateresponse = await updateUser(selectedUserId, editData);
+      if (updateresponse?.data?.success) {
+        toast.success(
+          updateresponse?.data?.message || "User updated successfully"
+        );
+        setUserData((prevData) =>
+          prevData.map((user) =>
+            user._id === selectedUserId ? updateresponse?.data?.user : user
+          )
+        );
+      }
       setIsOpen(false);
     } catch (error) {
-      toast.error("Failed to update user");
+      toast.error(updateresponse?.data?.message || "Failed to update user");
     }
   };
 

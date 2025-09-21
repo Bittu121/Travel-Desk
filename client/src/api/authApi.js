@@ -10,3 +10,5 @@ export const login = (formData) => API.post("/login", formData);
 export const logout = () => API.post("/logout");
 export const getUserData = () => API.get("/");
 export const getAllUsers = () => API.get("/all-users");
+export const updateUser = (userId,updateData) => API.put(`/update-user/${userId}`,updateData);
+export const deleteUser = (userId) => API.delete(`/delete-user/${userId}`);
