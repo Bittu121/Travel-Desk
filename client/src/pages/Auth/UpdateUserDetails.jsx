@@ -3,7 +3,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { updateUser } from "../../api/authApi.js";
 
-function UpdateUserDetails({ item,setUserData }) {
+function UpdateUserDetails({ item, setUserData }) {
   const [editData, setEditData] = useState({
     fullName: "",
     empCode: "",
@@ -43,12 +43,12 @@ function UpdateUserDetails({ item,setUserData }) {
       const updateresponse = await updateUser(selectedUserId, editData);
       if (updateresponse?.data?.success) {
         toast.success(
-          updateresponse?.data?.message || "User updated successfully"
+          updateresponse?.data?.message || "User updated successfully",
         );
         setUserData((prevData) =>
           prevData.map((user) =>
-            user._id === selectedUserId ? updateresponse?.data?.user : user
-          )
+            user._id === selectedUserId ? updateresponse?.data?.user : user,
+          ),
         );
       }
       setIsOpen(false);
@@ -61,22 +61,29 @@ function UpdateUserDetails({ item,setUserData }) {
     <>
       <div>
         <FaUserEdit
-          size={26}
-          className="cursor-pointer text-blue-600 hover:text-blue-700"
+          size={20}
+          className="cursor-pointer text-gray-600 hover:text-blue-600 transition"
           onClick={() => updateUserHandler(item)}
         />
+
         {isOpen && (
-          <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-xl">
-              <h2 className="text-2xl font-medium mb-4 text-center text-gray-700 pb-2">
-                Update Details
-              </h2>
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+            aria-modal="true"
+            role="dialog"
+          >
+            <div className="w-full max-w-2xl rounded-xl bg-white shadow-lg">
+              <div className="border-b px-6 py-4">
+                <h2 className="text-lg font-semibold text-gray-800">
+                  Update User Details
+                </h2>
+              </div>
               <form
                 onSubmit={handleSubmit}
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                className="grid grid-cols-1 gap-4 px-6 py-5 md:grid-cols-2"
               >
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-start">
+                  <label className="block text-sm font-medium text-gray-700">
                     Name
                   </label>
                   <input
@@ -84,11 +91,11 @@ function UpdateUserDetails({ item,setUserData }) {
                     name="fullName"
                     value={editData.fullName}
                     onChange={handleInputChange}
-                    className="w-full p-1.5 border rounded outline-none"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-start">
+                  <label className="block text-sm font-medium text-gray-700">
                     EMP Code
                   </label>
                   <input
@@ -96,11 +103,11 @@ function UpdateUserDetails({ item,setUserData }) {
                     name="empCode"
                     value={editData.empCode}
                     onChange={handleInputChange}
-                    className="w-full p-1.5 border rounded outline-none"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-start">
+                  <label className="block text-sm font-medium text-gray-700">
                     Designation
                   </label>
                   <input
@@ -108,11 +115,11 @@ function UpdateUserDetails({ item,setUserData }) {
                     name="designation"
                     value={editData.designation}
                     onChange={handleInputChange}
-                    className="w-full p-1.5 border rounded outline-none"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-start">
+                  <label className="block text-sm font-medium text-gray-700">
                     Region
                   </label>
                   <input
@@ -120,11 +127,11 @@ function UpdateUserDetails({ item,setUserData }) {
                     name="department"
                     value={editData.department}
                     onChange={handleInputChange}
-                    className="w-full p-1.5 border rounded outline-none"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-start">
+                  <label className="block text-sm font-medium text-gray-700">
                     Email
                   </label>
                   <input
@@ -132,11 +139,11 @@ function UpdateUserDetails({ item,setUserData }) {
                     name="email"
                     value={editData.email}
                     onChange={handleInputChange}
-                    className="w-full p-1.5 border rounded outline-none"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-start">
+                  <label className="block text-sm font-medium text-gray-700">
                     Role
                   </label>
                   <input
@@ -144,22 +151,22 @@ function UpdateUserDetails({ item,setUserData }) {
                     name="role"
                     value={editData.role}
                     onChange={handleInputChange}
-                    className="w-full p-1.5 border rounded outline-none"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
-                <div className="flex mt-4 col-span-2 justify-end gap-4">
+                <div className="col-span-2 flex justify-end gap-3 border-t pt-4">
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    className="px-4 py-1.5 bg-gray-600 rounded-md hover:bg-gray-700 cursor-pointer text-white"
+                    className="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-1.5 bg-indigo-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"
+                    className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition"
                   >
-                    Save
+                    Save Changes
                   </button>
                 </div>
               </form>

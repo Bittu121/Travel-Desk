@@ -58,10 +58,10 @@ const Navbar = ({ toggleSidebar }) => {
               textTransform: "none",
             }}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>
+            <Avatar sx={{ width: 30, height: 30 }}>
               {user?.user?.fullName?.charAt(0) || "U"}
             </Avatar>
-            <span className="ml-2 text-gray-600">
+            <span className="ml-2 text-gray-600 text-md">
               {user?.user?.fullName || "Profile"}
             </span>
           </Button>

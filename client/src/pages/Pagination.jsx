@@ -26,7 +26,11 @@ function Pagination({ itemsPerPage, totalItems, currentPage, paginate }) {
             boundaryCount={1}
             sx={{
               "& .MuiPaginationItem-root": {
+                minWidth: 36,
+                height: 36,
+                padding: "0 6px",
                 margin: "0 4px",
+                fontSize: "0.875rem",
                 "&.Mui-selected": {
                   backgroundColor: "#3B82F6",
                   color: "white",

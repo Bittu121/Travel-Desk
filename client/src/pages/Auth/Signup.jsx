@@ -47,105 +47,177 @@ function Signup() {
 
   return (
     <>
-      <div className="flex justify-center items-center bg-[#F3F3F3] p-6">
+      <div className="flex items-center justify-center bg-gray-100 px-4 py-10">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-xl bg-white shadow-lg rounded-xl p-10"
+          className="w-full max-w-xl rounded-xl border border-gray-200 bg-white shadow-sm px-8 py-7"
         >
-          <h3 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          {/* Title */}
+          <h3 className="mb-6 text-center text-lg font-semibold text-gray-900">
             Create User
           </h3>
-          <div className="mb-6">
+
+          {/* Role */}
+          <div className="mb-5">
             <select
-              className="bg-gray-200 w-full px-4 py-2 rounded-lg outline-none cursor-pointer border border-blue-200"
               name="role"
               required
               onChange={handleChange}
               value={data.role}
+              className="
+          w-full rounded-md border border-gray-300 bg-white
+          px-3 py-2 text-sm text-gray-900
+          outline-none transition
+          focus:border-blue-600
+          focus:ring-1 focus:ring-blue-600
+        "
             >
-              <option value="">Select Role</option>
-              <option value="user">Empolyee</option>
+              <option value="">Select role</option>
+              <option value="user">Employee</option>
               <option value="manager">Manager</option>
               <option value="hr">HR</option>
               <option value="vendor">Vendor</option>
               <option value="finance">Finance</option>
             </select>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Fields */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <input
-              className="bg-[#28343e12] w-full px-4 py-2 rounded-lg outline-none border border-blue-200"
               type="text"
               name="fullName"
               placeholder="Full Name"
               required
               onChange={handleChange}
               value={data.fullName}
+              className="
+          w-full rounded-md border border-gray-300
+          px-3 py-2 text-sm text-gray-900
+          placeholder-gray-400
+          outline-none transition
+          focus:border-blue-600
+          focus:ring-1 focus:ring-blue-600
+        "
             />
+
             <input
-              className="bg-[#28343e12] w-full px-4 py-2 rounded-lg outline-none border border-blue-200"
               type="text"
               name="empCode"
               placeholder="Employee ID"
               required
               onChange={handleChange}
               value={data.empCode}
+              className="
+          w-full rounded-md border border-gray-300
+          px-3 py-2 text-sm text-gray-900
+          placeholder-gray-400
+          outline-none transition
+          focus:border-blue-600
+          focus:ring-1 focus:ring-blue-600
+        "
             />
+
             <input
-              className="bg-[#28343e12] w-full px-4 py-2 rounded-lg outline-none border border-blue-200"
               type="text"
               name="designation"
               placeholder="Designation"
               required
               onChange={handleChange}
               value={data.designation}
+              className="
+          w-full rounded-md border border-gray-300
+          px-3 py-2 text-sm text-gray-900
+          placeholder-gray-400
+          outline-none transition
+          focus:border-blue-600
+          focus:ring-1 focus:ring-blue-600
+        "
             />
+
             <input
-              className="bg-[#28343e12] w-full px-4 py-2 rounded-lg outline-none border border-blue-200"
               type="text"
               name="department"
               placeholder="Department"
               required
               onChange={handleChange}
               value={data.department}
+              className="
+          w-full rounded-md border border-gray-300
+          px-3 py-2 text-sm text-gray-900
+          placeholder-gray-400
+          outline-none transition
+          focus:border-blue-600
+          focus:ring-1 focus:ring-blue-600
+        "
             />
+
             <input
-              className="bg-[#28343e12] w-full px-4 py-2 rounded-lg outline-none border border-blue-200"
               type="email"
               name="email"
               placeholder="Email"
               required
               onChange={handleChange}
               value={data.email}
+              className="
+          w-full rounded-md border border-gray-300
+          px-3 py-2 text-sm text-gray-900
+          placeholder-gray-400
+          outline-none transition
+          focus:border-blue-600
+          focus:ring-1 focus:ring-blue-600
+        "
             />
-            <div className="relative w-full">
+
+            {/* Password */}
+            <div className="relative">
               <input
-                className="bg-[#28343e12] w-full px-4 py-2 rounded-lg outline-none border border-blue-200"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 required
                 onChange={handleChange}
                 value={data.password}
+                className="
+            w-full rounded-md border border-gray-300
+            px-3 py-2 text-sm text-gray-900
+            placeholder-gray-400
+            outline-none transition
+            focus:border-blue-600
+            focus:ring-1 focus:ring-blue-600
+          "
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-gray-700 hover:text-gray-900 cursor-pointer"
+                className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
               >
                 {showPassword ? (
-                  <AiOutlineEye size={22} />
+                  <AiOutlineEye size={18} />
                 ) : (
-                  <AiOutlineEyeInvisible size={22} />
+                  <AiOutlineEyeInvisible size={18} />
                 )}
               </button>
             </div>
           </div>
-          <button
-            type="submit"
-            className="w-full mt-8 py-2 text-lg text-white bg-blue-400 font-bold rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-600 hover:border-2 hover:border-blue-400"
-          >
-            {loading ? <LoadingSpinner /> : "Sign Up"}
-          </button>
+
+          {/* Action */}
+          <div className="mt-6 flex justify-end">
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+          inline-flex items-center
+          rounded-md bg-blue-600
+          px-5 py-2
+          text-sm font-medium text-white
+          transition
+          hover:bg-blue-700
+          disabled:bg-blue-300 disabled:cursor-not-allowed
+        "
+            >
+              {loading ? <LoadingSpinner /> : "Create User"}
+            </button>
+          </div>
         </form>
       </div>
     </>

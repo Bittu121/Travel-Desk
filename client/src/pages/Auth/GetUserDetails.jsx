@@ -44,7 +44,7 @@ function GetUserDetails() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredUserData.slice(
     indexOfFirstItem,
-    indexOfLastItem
+    indexOfLastItem,
   );
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -60,22 +60,25 @@ function GetUserDetails() {
   ];
   const tableRows = () => {
     return currentItems.map((item) => (
-      <tr key={item?._id} className="border-b hover:bg-gray-50">
-        <td className="px-4 py-3 text-center">{item?.fullName}</td>
-        <td className="px-4 py-3 text-center">{item?.empCode}</td>
-        <td className="px-4 py-3 text-center">{item?.designation}</td>
-        <td className="px-4 py-3 text-center">{item?.department}</td>
-        <td className="px-4 py-3 text-center">{item?.email}</td>
-        <td className="px-4 py-3 text-center">{item?.role}</td>
-        <td className="px-4 py-3 text-center">
-          <div className="flex justify-center">
-            <UpdateUserDetails item={item} setUserData={setUserData} />
-          </div>
+      <tr
+        key={item?._id}
+        className="border-b border-gray-100 hover:bg-gray-50 transition"
+      >
+        <td className="px-4 py-3 text-gray-900">{item?.fullName}</td>
+        <td className="px-4 py-3 text-gray-700">{item?.empCode}</td>
+        <td className="px-4 py-3 text-gray-700">{item?.designation}</td>
+        <td className="px-4 py-3 text-gray-700">{item?.department}</td>
+        <td className="px-4 py-3 text-gray-700">{item?.email}</td>
+        <td className="px-4 py-3">
+          <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 font-medium text-gray-700">
+            {item?.role}
+          </span>
         </td>
-        <td className="px-4 py-3 text-center">
-          <div className="flex justify-center">
-            <DeleteUserDetails item={item} setUserData={setUserData} />
-          </div>
+        <td className="px-4 py-3">
+          <UpdateUserDetails item={item} setUserData={setUserData} />
+        </td>
+        <td className="px-4 py-3">
+          <DeleteUserDetails item={item} setUserData={setUserData} />
         </td>
       </tr>
     ));
@@ -83,30 +86,53 @@ function GetUserDetails() {
   return (
     <>
       <div className="table_component p-2">
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-xs px-4 py-2 border rounded-md outline-none"
-          />
+        <div className="mb-6">
+          <div className="relative w-full max-w-sm">
+            {/* Search Icon */}
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-4.35-4.35m1.6-5.15a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+
+            {/* Input */}
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 shadow-xs
+        outline-none
+        transition
+      "
+            />
+          </div>
         </div>
+
         <div className="overflow-x-auto">
-          <div className="max-w-screen overflow-y-auto max-h-[380px] min-2xl:max-h-[500px]">
-            <table className="mt-5 min-w-[2200px] table-auto border-collapse">
-              <thead>
-                <tr className="text-center text-base">
+          <div className="max-h-[420px] overflow-y-auto">
+            <table className="min-w-[1400px] w-full border-collapse text-sm">
+              <thead className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200">
+                <tr>
                   {tableHeader.map((headerData, index) => (
                     <th
-                      className="px-4 py-3 bg-gray-500 text-white font-bold"
                       key={index}
+                      className="px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wide"
                     >
                       {headerData}
                     </th>
                   ))}
                 </tr>
               </thead>
+
               <tbody>{tableRows()}</tbody>
             </table>
           </div>
