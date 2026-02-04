@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
