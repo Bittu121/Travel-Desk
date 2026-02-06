@@ -111,6 +111,7 @@
 // }
 
 // export default Login;
+
 // import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -430,7 +431,7 @@ function Login() {
                   type="submit"
                   disabled={isDisabled}
                   className="
-                    inline-flex items-center
+                    inline-flex items-center cursor-pointer
                     rounded-md bg-blue-600
                     px-5 py-2
                     text-sm font-medium text-white

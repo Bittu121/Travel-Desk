@@ -17,50 +17,84 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-pink-50 p-6">
-      <div className="flex flex-col md:flex-row bg-white shadow-md rounded-2xl overflow-hidden w-full max-w-4xl min-h-[430px]">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
+      <div className="relative w-full max-w-5xl min-h-[480px] bg-white rounded-xl shadow-sm overflow-hidden grid grid-cols-12">
         {/* Left Section */}
-        <div className="hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-blue-600 to-pink-500 p-8 text-white w-1/2">
-          <img
-            src={travelImage}
-            alt="travel-desk"
-            className="w-72 object-contain mb-4 rounded-b-full rounded-e-full"
+        <div className="relative col-span-5 hidden md:block">
+          <div
+            className="absolute inset-0 bg-blue-700"
+            style={{ clipPath: "polygon(0 0, 100% 0, 75% 100%, 0% 100%)" }}
           />
-          <h2 className="text-2xl font-bold">Travel Desk</h2>
-          <p className="text-sm mt-2 opacity-90">
-            Connect with <span className="font-semibold">Bittu Kumar</span>
-          </p>
+          <div
+            className="absolute inset-0 bg-blue-600/80"
+            style={{ clipPath: "polygon(0 0, 92% 0, 68% 100%, 0% 100%)" }}
+          />
+
+          <div className="relative z-10 h-full flex flex-col justify-center px-12 text-white">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Travel Desk
+            </h2>
+            <p className="mt-2 text-sm text-blue-100 max-w-xs leading-relaxed">
+              Secure internal access for employees and operations teams.
+            </p>
+
+            <div className="mt-10 h-px w-12 bg-blue-300/60" />
+
+            <p className="mt-4 text-xs text-blue-200">
+              Enterprise • Secure • Role-based
+            </p>
+          </div>
         </div>
-        {/* Right Section (Form) */}
-        <div className="flex flex-col justify-center  w-full md:w-1/2 p-8">
-          <h3 className="text-2xl font-bold text-center text-gray-800 mb-6">
-            Forgot Password
-          </h3>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <input
-              className="w-full px-4 py-3 rounded-lg outline-none transition border border-blue-200"
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="w-full py-3 font-semibold rounded-lg text-white bg-gradient-to-r from-pink-500 to-blue-600 hover:opacity-90 transition cursor-pointer"
-              >
-                {/* {loading ? <LoadingSpinner /> : "Send Reset Link"} */}Send
-                Reset Link
-              </button>
+        {/* Right Section */}
+        <div className="col-span-12 md:col-span-7 flex items-center justify-center">
+          <div className="w-full max-w-md bg-gray-50 border border-gray-200 rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] px-10 py-10">
+            {/* Title */}
+            <div className="mb-8">
+              <h3 className="text-base font-semibold text-gray-900">
+                Forgot Password
+              </h3>
+              <p className="mt-1.5 text-sm text-gray-500 leading-relaxed">
+                Enter your registered email address. We’ll send you a secure
+                reset link.
+              </p>
             </div>
-            <div className="flex justify-end text-sm text-gray-600 mt-4">
-              <Link to="/login" className="hover:underline">
-                Remembered your password? Login
-              </Link>
-            </div>
-          </form>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="you@company.com"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
+                />
+              </div>
+
+              {/* Action Row */}
+              <div className="flex items-center justify-between pt-2">
+                <Link
+                  to="/login"
+                  className="text-sm text-gray-600 hover:text-gray-900 transition"
+                >
+                  Back to login
+                </Link>
+
+                <button
+                  type="submit"
+                  className="inline-flex items-center cursor-pointer justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600/30"
+                >
+                  {/* {loading ? <LoadingSpinner /> : "Send Reset Link"}  */}
+                  Send reset link
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

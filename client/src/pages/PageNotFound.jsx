@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SlPlane } from "react-icons/sl";
+import { MdSearchOff } from "react-icons/md";
 
 function PageNotFound() {
   const navigate = useNavigate();
@@ -14,24 +14,25 @@ function PageNotFound() {
   }, [navigate]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-8 rounded-lg border border-gray-200 text-center w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen bg-white px-6">
+      <div className="text-center max-w-md">
         <div className="flex justify-center mb-6">
-          <SlPlane className="text-blue-600 text-5xl animate-bounce" />
+          <MdSearchOff className="text-gray-400 text-6xl" />
         </div>
-        <h1 className="text-3xl font-bold text-gray-700 mb-3">
-          404 - Page Not Found
-        </h1>
-        <p className="text-base text-gray-500 mb-6">
+        <h1 className="text-4xl font-medium text-gray-800 mb-2">404</h1>
+        <p className="text-lg text-gray-600 mb-2">Page not found</p>
+        <p className="text-sm text-gray-500 mb-8">
           Oops! The page you are looking for doesn’t exist.
         </p>
-
         <button
           onClick={() => navigate("/dashboard")}
-          className="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer"
+          className="px-5 py-2.5 cursor-pointer text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition"
         >
-          Back to Dashboard
+          Go to Dashboard
         </button>
+        <p className="mt-4 text-xs text-gray-400">
+          Redirecting you automatically…
+        </p>
       </div>
     </div>
   );
