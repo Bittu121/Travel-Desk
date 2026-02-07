@@ -1,5 +1,6 @@
 import LoginModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { transporter } from "../utils/email.js";
 import dotenv from "dotenv";
@@ -54,7 +55,7 @@ export const register = async (req, res) => {
       <p>You can now login using your email: <strong>${email}</strong> and password: <strong>${password}</strong>.</p>
       <p><b>We recommend changing the password after your first login for security purposes.</b></p>
       <p>You can now log in using the following link: <a href="${loginUrl}" target="_blank">${loginUrl}</a></p>
-      <p>Thank you,<br/>Vserv Team</p>
+      <p>Thank you,<br/>Travel Desk Team</p>
       `,
     };
     await transporter.sendMail(mailOptions);
@@ -236,3 +237,98 @@ export const deleteUser = async (req, res) => {
     console.log(error);
   }
 };
+
+//forgot-password
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email is required" });
+    }
+
+    const user = await LoginModel.findOne({ email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+    const resetPasswordExpires = Date.now() + 10 * 60 * 1000; // Token valid for 10 minutes
+
+    // Update only the resetPasswordToken and resetPasswordExpires fields
+    await LoginModel.findByIdAndUpdate(user._id, {
+      resetPasswordToken: token,
+      resetPasswordExpires,
+    });
+
+    const resetLink = `${process.env.VITE_FRONTEND_KEY}/reset-password/${token}`;
+    const mailOptions = {
+      from: `"Travel Desk" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Password Reset Request",
+      text: `You requested a password reset. Click the link below to reset your password:\n\n${resetLink}\n\nThis link will expire in 10 minutes. `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({
+      success: true,
+      message: "Reset password link has been sent to your email.",
+    });
+  } catch (error) {
+    console.error("Forgot Password Error:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+//reset-password
+// export const resetPassword = async (req, res) => {
+//   try {
+//     const { token } = req.params;
+//     const { newPassword } = req.body;
+//     if (!newPassword) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "New password is required" });
+//     }
+//     const user = await LoginModel.findOne({
+//       resetPasswordToken: token,
+//       resetPasswordExpires: { $gt: Date.now() },
+//     });
+
+//     if (!user) {
+//       return res.status(400).json({ message: "Invalid or expired token" });
+//     }
+//     const salt = await bcrypt.genSalt(10);
+//     user.password = await bcrypt.hash(newPassword, salt);
+//     user.resetPasswordToken = undefined;
+//     user.resetPasswordExpires = undefined;
+//     await user.save();
+//     res.status(200).json({ message: "Password has been reset successfully" });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// };
+
+// export const getManagers = async (req, res) => {
+//   try {
+//     const managers = await LoginModel.find({ role: "manager" });
+//     res.status(200).json(managers);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error fetching managers", error });
+//   }
+// };
+
+// export const getVendors = async (req, res) => {
+//   try {
+//     const vendors = await LoginModel.find({ role: "vender" });
+//     res.status(200).json(vendors);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error fetching vendors", error });
+//   }
+// };
+
