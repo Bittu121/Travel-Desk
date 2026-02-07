@@ -1,14 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { FiMenu, FiX } from "react-icons/fi";
-import { MdDashboard } from "react-icons/md";
+import {
+  MdAssignment,
+  MdDashboard,
+  MdManageAccounts,
+  MdOutlineDescription,
+  MdOutlineFlightTakeoff,
+  MdPersonAddAlt,
+  MdTaskAlt,
+} from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { MdCardTravel } from "react-icons/md";
-import { FaUserLarge } from "react-icons/fa6";
-import { FaUserCheck } from "react-icons/fa";
-import { SiReacthookform } from "react-icons/si";
-import { SlPlane } from "react-icons/sl";
-import { FaUserPen } from "react-icons/fa6";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { authData: user } = useSelector((state) => state.auth);
@@ -52,13 +54,18 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isCreateAndUpdateUser && (
               <NavLink
                 to="/dashboard"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                // className="flex items-center gap-4 p-4 text-gray-500"
+                // style={(e) => {
+                //   return {
+                //     color: e.isActive ? "blue" : "black",
+                //     fontWeight: e.isActive ? "bold" : "normal",
+                //   };
+                // }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
                 <MdDashboard className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
@@ -70,15 +77,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isTravelRequestAndAppliedForm && (
               <NavLink
                 to="/travel-request-form"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
-                <SlPlane className="text-xl" size={22} />
+                <MdOutlineFlightTakeoff className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Travel Request Form
                 </span>
@@ -87,15 +92,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isTravelRequestAndAppliedForm && (
               <NavLink
                 to="/applied-form"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
-                <SiReacthookform className="text-xl" size={22} />
+                <MdOutlineDescription className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Applied Form
                 </span>
@@ -104,15 +107,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isCreateAndUpdateUser && (
               <NavLink
                 to="/signup"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
-                <FaUserLarge className="text-xl" size={22} />
+                <MdPersonAddAlt className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Create User
                 </span>
@@ -121,15 +122,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isCreateAndUpdateUser && (
               <NavLink
                 to="/update-user"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
-                <FaUserPen className="text-xl" size={22} />
+                <MdManageAccounts className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Update User
                 </span>
@@ -138,15 +137,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isTravelRequestApproval && (
               <NavLink
                 to="/travel-requests"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
-                <MdCardTravel className="text-xl" size={24} />
+                <MdAssignment className="text-xl" size={24} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Travel Requests
                 </span>
@@ -155,15 +152,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             {isApprovedRequest && (
               <NavLink
                 to="/approved-requests"
-                className="flex items-center gap-4 p-4 text-gray-500"
-                style={(e) => {
-                  return {
-                    color: e.isActive ? "blue" : "black",
-                    fontWeight: e.isActive ? "bold" : "normal",
-                  };
-                }}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
+     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     hover:bg-gray-100`
+                }
               >
-                <FaUserCheck className="text-xl" size={24} />
+                <MdTaskAlt className="text-xl" size={24} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Approved Requests
                 </span>
@@ -213,7 +208,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <SlPlane className="text-xl" size={24} />
+              <MdOutlineFlightTakeoff className="text-xl" size={24} />
               <span>Travel Request Form</span>
             </NavLink>
           )}
@@ -228,7 +223,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <SiReacthookform className="text-xl" size={24} />
+              <MdOutlineDescription className="text-xl" size={24} />
               <span>Applied Form</span>
             </NavLink>
           )}
@@ -243,7 +238,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <FaUserLarge className="text-xl" size={24} />
+              <MdPersonAddAlt className="text-xl" size={24} />
               <span>Create User</span>
             </NavLink>
           )}
@@ -258,7 +253,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <FaUserPen className="text-xl" size={24} />
+              <MdManageAccounts className="text-xl" size={24} />
               <span>Update User</span>
             </NavLink>
           )}
@@ -273,7 +268,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <MdCardTravel className="text-xl" size={24} />
+              <MdAssignment className="text-xl" size={24} />
               <span>Travel Requests</span>
             </NavLink>
           )}
@@ -288,7 +283,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <FaUserCheck className="text-xl" size={24} />
+              <MdTaskAlt className="text-xl" size={24} />
               <span>Approved Requests</span>
             </NavLink>
           )}

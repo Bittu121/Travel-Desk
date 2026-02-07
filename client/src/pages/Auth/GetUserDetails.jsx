@@ -64,20 +64,20 @@ function GetUserDetails() {
         key={item?._id}
         className="border-b border-gray-100 hover:bg-gray-50 transition"
       >
-        <td className="px-4 py-3 text-gray-900">{item?.fullName}</td>
-        <td className="px-4 py-3 text-gray-700">{item?.empCode}</td>
-        <td className="px-4 py-3 text-gray-700">{item?.designation}</td>
-        <td className="px-4 py-3 text-gray-700">{item?.department}</td>
-        <td className="px-4 py-3 text-gray-700">{item?.email}</td>
-        <td className="px-4 py-3">
+        <td className="px-4 py-4 text-gray-900">{item?.fullName}</td>
+        <td className="px-4 py-4 text-gray-700">{item?.empCode}</td>
+        <td className="px-4 py-4 text-gray-700">{item?.designation}</td>
+        <td className="px-4 py-4 text-gray-700">{item?.department}</td>
+        <td className="px-4 py-4 text-gray-700">{item?.email}</td>
+        <td className="px-4 py-4">
           <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 font-medium text-gray-700">
             {item?.role}
           </span>
         </td>
-        <td className="px-4 py-3">
+        <td className="px-4 py-4">
           <UpdateUserDetails item={item} setUserData={setUserData} />
         </td>
-        <td className="px-4 py-3">
+        <td className="px-4 py-4">
           <DeleteUserDetails item={item} setUserData={setUserData} />
         </td>
       </tr>
@@ -121,7 +121,7 @@ function GetUserDetails() {
           <div className="max-h-[420px] overflow-y-auto">
             <table className="min-w-[1400px] w-full border-collapse text-sm">
               <thead className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200">
-                <tr>
+                <tr className="text-center text-sm">
                   {tableHeader.map((headerData, index) => (
                     <th
                       key={index}

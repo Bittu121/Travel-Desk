@@ -344,7 +344,7 @@ function Login() {
               bg-gray-50
               border border-gray-200
               rounded-xl
-              shadow-[0_8px_24px_rgba(0,0,0,0.08)]
+              shadow-[0_8px_24px_rgba(0,0,0,0.08),inset_-3px_0_0_rgba(37,99,235,0.15)]
               px-9 py-11
             "
           >
