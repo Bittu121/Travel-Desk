@@ -18,6 +18,10 @@ const authReducer = (state = initialState, action) => {
       return { ...state, authData: action.data, loading: false, error: null };
     case "USER_DETAILS_FAIL":
       return { ...state, loading: false, error: action.error };
+    case "FORGOT_PASSWORD_SUCCESS":
+      return { ...state, loading: false, error: null };
+    case "FORGOT_PASSWORD_FAIL":
+      return { ...state, loading: false, error: action.error };
     case "LOG_OUT":
       return { ...state, authData: null, loading: false, error: null };
     default:

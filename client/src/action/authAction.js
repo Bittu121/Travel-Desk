@@ -58,3 +58,22 @@ export const getUserData = () => async (dispatch) => {
   }
 };
 
+
+export const forgotPassword = (formData) => async (dispatch) => {
+  dispatch({ type: "FORGOT_PASSWORD_START" });
+  try {
+    const { data } = await AuthApi.forgotPassword(formData);
+    dispatch({ type: "FORGOT_PASSWORD_SUCCESS" });
+    toast.success(data.message);
+    return { type: "FORGOT_PASSWORD_SUCCESS", token: data.token };
+  } catch (error) {
+    const errorMessage = error.response?.data?.message;
+    dispatch({
+      type: "FORGOT_PASSWORD_FAIL",
+      error: error.response?.data?.message || "Failed to send reset link",
+    });
+    toast.error(errorMessage);
+  }
+};
+
+
