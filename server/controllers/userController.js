@@ -285,4 +285,34 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
+//reset-password
+export const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+    // console.log(token,newPassword)
+    if (!newPassword) {
+      return res
+        .status(400)
+        .json({ success: false, message: "New password is required" });
+    }
+    const user = await LoginModel.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
 
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired token" });
+    }
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+    res.status(200).json({ message: "Password has been reset successfully" });
+  } catch (error) {
+    console.error("Login API Error:", error.message);
+    console.error(error.stack);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};

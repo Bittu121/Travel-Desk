@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import travelImage from "../../assets/travel.webp";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../LoadingSpinner.jsx";
+import { forgotPassword } from "../../action/authAction.js";
 
 function ForgotPassword() {
   const [formData, setFormData] = useState({ email: "" });
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -12,7 +16,11 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData({ email: "" });
+    const action = await dispatch(forgotPassword(formData));
+    if (action?.type === "FORGOT_PASSWORD_SUCCESS") {
+      setFormData({ email: "" });
+      navigate("/login");
+    }
     // console.log("formData", formData);
   };
 
@@ -87,10 +95,10 @@ function ForgotPassword() {
 
                 <button
                   type="submit"
-                  className="inline-flex items-center cursor-pointer justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600/30"
+                  className="px-3 py-1 text-white bg-[#5553d6] rounded-md cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-[#231ffc] hover:border-2 hover:border-[#231ffc]"
+                  disabled={loading}
                 >
-                  {/* {loading ? <LoadingSpinner /> : "Send Reset Link"}  */}
-                  Send reset link
+                  {loading ? <LoadingSpinner /> : "Send Reset Link"}
                 </button>
               </div>
             </form>

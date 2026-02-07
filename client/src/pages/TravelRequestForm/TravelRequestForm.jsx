@@ -324,7 +324,7 @@ function TravelRequestForm() {
         <div className="max-w-5xl mx-auto px-6 py-3 flex justify-end">
           <button
             onClick={handleSubmit}
-            className="px-10 py-2 text-sm font-medium bg-gray-900 text-white rounded-md hover:bg-black"
+            className="px-10 cursor-pointer py-2 text-sm font-medium bg-gray-900 text-white rounded-md hover:bg-black"
           >
             Submit Request
           </button>

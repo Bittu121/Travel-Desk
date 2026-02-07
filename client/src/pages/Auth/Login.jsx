@@ -323,8 +323,8 @@ function Login() {
           />
 
           <div className="relative z-10 h-full flex flex-col justify-center px-12 text-white">
-            <h2 className="text-xl font-semibold tracking-tight">
-              Travel Desk
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Travel Desk 
             </h2>
             <p className="mt-2 text-sm text-blue-100 max-w-xs leading-relaxed">
               Secure internal access for employees and operations teams.
@@ -348,7 +348,7 @@ function Login() {
               px-9 py-11
             "
           >
-            <h3 className="text-sm font-semibold text-gray-900 mb-8">
+            <h3 className="text-md font-semibold text-gray-900 mb-8">
               Sign in
             </h3>
 

@@ -76,4 +76,20 @@ export const forgotPassword = (formData) => async (dispatch) => {
   }
 };
 
+export const resetPassword = (token, formData) => async (dispatch) => {
+  dispatch({ type: "RESET_PASSWORD_START" });
+  try {
+    const { data } = await AuthApi.resetPassword(token, formData);
+    dispatch({ type: "RESET_PASSWORD_SUCCESS" });
+    toast.success(data.message);
+    return { type: "RESET_PASSWORD_SUCCESS", data };
+  } catch (error) {
+    const errorMessage = error.response?.data?.message;
+    dispatch({
+      type: "RESET_PASSWORD_FAIL",
+      error: error.response?.data?.message || "Failed to reset password",
+    });
+    toast.error(errorMessage);
+  }
+};
 
