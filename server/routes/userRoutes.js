@@ -9,6 +9,7 @@ import {
   updateUser,
   forgotPassword,
   resetPassword,
+  getManagers,
 } from "../controllers/userController.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 
@@ -24,5 +25,7 @@ router.route("/delete-user/:userId").delete(authMiddleWare, deleteUser);
 
 router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password/:token").post(resetPassword);
+
+router.route("/managers").get(getManagers);
 
 export default router;

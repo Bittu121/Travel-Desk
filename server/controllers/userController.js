@@ -316,3 +316,12 @@ export const resetPassword = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+export const getManagers = async (req, res) => {
+  try {
+    const managers = await LoginModel.find({ role: "manager" });
+    res.status(200).json(managers);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching managers", error });
+  }
+};
