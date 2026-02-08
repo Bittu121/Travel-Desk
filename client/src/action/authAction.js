@@ -93,3 +93,29 @@ export const resetPassword = (token, formData) => async (dispatch) => {
   }
 };
 
+
+export const getManagers = () => async (dispatch) => {
+  dispatch({ type: "GET_MANAGER_ROLE_START" });
+  try {
+    const { data } = await AuthApi.getManagers();
+    dispatch({ type: "GET_MANAGER_ROLE_SUCCESS", data });
+  } catch (error) {
+    dispatch({
+      type: "GET_MANAGER_ROLE_FAIL",
+      error: error.response?.data?.message || "Failed to fetch managers",
+    });
+  }
+};
+
+export const getVendors = () => async (dispatch) => {
+  dispatch({ type: "GET_VENDORS_ROLE_START" });
+  try {
+    const { data } = await AuthApi.getVendors();
+    dispatch({ type: "GET_VENDORS_ROLE_SUCCESS", data });
+  } catch (error) {
+    dispatch({
+      type: "GET_VENDORS_ROLE_FAIL",
+      error: error.response?.data?.message || "Failed to fetch Vendors",
+    });
+  }
+};
