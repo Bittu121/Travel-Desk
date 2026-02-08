@@ -317,11 +317,22 @@ export const resetPassword = async (req, res) => {
   }
 };
 
+//get all manager
 export const getManagers = async (req, res) => {
   try {
     const managers = await LoginModel.find({ role: "manager" });
     res.status(200).json(managers);
   } catch (error) {
     res.status(500).json({ message: "Error fetching managers", error });
+  }
+};
+
+//get all vendor
+export const getVendors = async (req, res) => {
+  try {
+    const vendors = await LoginModel.find({ role: "vendor" });
+    res.status(200).json(vendors);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching vendors", error });
   }
 };

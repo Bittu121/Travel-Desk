@@ -10,6 +10,7 @@ import {
   forgotPassword,
   resetPassword,
   getManagers,
+  getVendors,
 } from "../controllers/userController.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 
@@ -27,5 +28,6 @@ router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password/:token").post(resetPassword);
 
 router.route("/managers").get(getManagers);
+router.route("/vendors").get(getVendors);
 
 export default router;
