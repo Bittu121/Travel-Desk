@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdPersonAdd } from "react-icons/md";
 import { IoPersonRemoveSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { travelRequestForm } from "../../action/travelRequestAction.js";
+import { getManagers } from "../../action/authAction.js";
 
 function TravelRequestForm() {
   const { authData } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.travelRequest);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -28,6 +32,12 @@ function TravelRequestForm() {
     remarks: "",
     travelers: [{ name: "", age: "", gender: "" }],
   });
+
+  // Fetch reporting managers for dropdown options
+  useEffect(() => {
+    dispatch(getManagers());
+  }, [dispatch]);
+  const { managers } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +69,11 @@ function TravelRequestForm() {
     e.preventDefault();
     try {
       //api call
-      console.log("formData", formData);  
+      const result = await dispatch(travelRequestForm(formData));
+      if (result?.type === "TRAVEL_REQUEST_FORM") {
+        navigate("/dashboard");
+      }
+      console.log("formData", formData);
     } catch (error) {
       console.log("Failed to submit travel request. Please try again.", error);
     }
@@ -203,7 +217,11 @@ function TravelRequestForm() {
             className={input}
           >
             <option value="">Reporting Manager</option>
-            <option value="bittu">Bittu Kumar</option>
+            {managers?.map((manager) => (
+              <option key={manager?._id} value={manager?.email}>
+                {manager?.fullName?.toUpperCase()}
+              </option>
+            ))}
           </select>
         </div>
       </div>
