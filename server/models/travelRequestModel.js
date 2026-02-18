@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const travelerSchema = new mongoose.Schema({
   name: {
     type: String,
-    //required: true,
   },
   age: {
     type: Number,

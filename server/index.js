@@ -24,7 +24,7 @@ app.use(
   })
 );
 app.use("/api/v1/auth/user", userRoute);
-app.use("api/v1/travel-request", travelRequestRoute);
+app.use("/api/v1/travel", travelRequestRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

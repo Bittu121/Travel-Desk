@@ -59,7 +59,7 @@ function TravelRequestForm() {
     e.preventDefault();
     try {
       //api call
-      console.log("formData", formData);
+      console.log("formData", formData);  
     } catch (error) {
       console.log("Failed to submit travel request. Please try again.", error);
     }

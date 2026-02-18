@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { transporter } from "../utils/email.js";
+import { loginCredentialsTemplate } from "../utils/loginCredentialsTemplate.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -44,21 +45,16 @@ export const register = async (req, res) => {
 
     await user.save();
     const loginUrl = process.env.VITE_FRONTEND_KEY;
-    //send email
-    const mailOptions = {
-      from: `"Travel Desk" <${process.env.EMAIL_USER}>`,
-      to: user.email,
-      subject: "Login Credentials",
-      html: `
-      <p>Dear ${fullName},</p>
-      <p>Your account has been successfully created.</p>
-      <p>You can now login using your email: <strong>${email}</strong> and password: <strong>${password}</strong>.</p>
-      <p><b>We recommend changing the password after your first login for security purposes.</b></p>
-      <p>You can now log in using the following link: <a href="${loginUrl}" target="_blank">${loginUrl}</a></p>
-      <p>Thank you,<br/>Travel Desk Team</p>
-      `,
-    };
+
+    // Send login credentials email to the user
+    const mailOptions = loginCredentialsTemplate(
+      fullName,
+      email,
+      password,
+      loginUrl,
+    );
     await transporter.sendMail(mailOptions);
+
     return res
       .status(201)
       .json({ success: true, message: "User registered successfully", user });
@@ -96,7 +92,7 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
-      }
+      },
     );
     // set token in cookie
     res.cookie("token", token, {
@@ -197,7 +193,7 @@ export const updateUser = async (req, res) => {
     const updatedUser = await LoginModel.findByIdAndUpdate(
       userId,
       { ...updateData },
-      { new: true }
+      { new: true },
     ).select("-password");
     return res.status(200).json({
       success: true,
