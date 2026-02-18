@@ -313,27 +313,36 @@ function Login() {
       <div className="relative w-full max-w-5xl min-h-[480px] bg-white rounded-xl shadow-sm overflow-hidden grid grid-cols-12">
         {/* LEFT DIAGONAL PANEL */}
         <div className="relative col-span-5 hidden md:block">
+          {/* Base layer */}
           <div
-            className="absolute inset-0 bg-blue-700"
-            style={{ clipPath: "polygon(0 0, 100% 0, 75% 100%, 0% 100%)" }}
+            className="absolute inset-0 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500"
+            style={{
+              clipPath: "polygon(0 0, 100% 0, 86% 100%, 0% 100%)",
+            }}
           />
+
+          {/* Depth overlay */}
           <div
-            className="absolute inset-0 bg-blue-600/80"
-            style={{ clipPath: "polygon(0 0, 92% 0, 68% 100%, 0% 100%)" }}
+            className="absolute inset-0 bg-blue-800/10"
+            style={{
+              clipPath: "polygon(0 0, 96% 0, 80% 100%, 0% 100%)",
+            }}
           />
 
           <div className="relative z-10 h-full flex flex-col justify-center px-12 text-white">
-            <h2 className="text-3xl font-semibold tracking-tight">
-              Travel Desk 
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Travel Desk
             </h2>
-            <p className="mt-2 text-sm text-blue-100 max-w-xs leading-relaxed">
-              Secure internal access for employees and operations teams.
+
+            <p className="mt-3 text-sm text-blue-100 max-w-[18rem] leading-relaxed">
+              Centralized platform for managing employee travel requests through
+              structured approvals, vendor handling, and finance tracking.
             </p>
 
-            <div className="mt-10 h-px w-12 bg-blue-300/60" />
+            <div className="mt-8 h-px w-10 bg-blue-300/60" />
 
-            <p className="mt-4 text-xs text-blue-200">
-              Enterprise • Secure • Role-based
+            <p className="mt-3 text-xs text-blue-200 tracking-wide uppercase">
+              Enterprise • Secure • Role-Based
             </p>
           </div>
         </div>
@@ -433,7 +442,7 @@ function Login() {
                   className="
                     inline-flex items-center cursor-pointer
                     rounded-md bg-blue-600
-                    px-5 py-2
+                    px-5 py-3
                     text-sm font-medium text-white
                     transition
                     hover:bg-blue-700

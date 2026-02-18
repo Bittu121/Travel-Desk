@@ -66,7 +66,7 @@ function Signup() {
               value={data.role}
               className="
           w-full rounded-md border border-gray-300 bg-white
-          px-3 py-2 text-sm text-gray-900
+          px-3 py-3 text-sm text-gray-900
           outline-none transition
           focus:border-blue-600
           focus:ring-1 focus:ring-blue-600
@@ -92,7 +92,7 @@ function Signup() {
               value={data.fullName}
               className="
           w-full rounded-md border border-gray-300
-          px-3 py-2 text-sm text-gray-900
+          px-3 py-3 text-sm text-gray-900
           placeholder-gray-400
           outline-none transition
           focus:border-blue-600
@@ -109,7 +109,7 @@ function Signup() {
               value={data.empCode}
               className="
           w-full rounded-md border border-gray-300
-          px-3 py-2 text-sm text-gray-900
+          px-3 py-3 text-sm text-gray-900
           placeholder-gray-400
           outline-none transition
           focus:border-blue-600
@@ -126,7 +126,7 @@ function Signup() {
               value={data.designation}
               className="
           w-full rounded-md border border-gray-300
-          px-3 py-2 text-sm text-gray-900
+          px-3 py-3 text-sm text-gray-900
           placeholder-gray-400
           outline-none transition
           focus:border-blue-600
@@ -143,7 +143,7 @@ function Signup() {
               value={data.department}
               className="
           w-full rounded-md border border-gray-300
-          px-3 py-2 text-sm text-gray-900
+          px-3 py-3 text-sm text-gray-900
           placeholder-gray-400
           outline-none transition
           focus:border-blue-600
@@ -160,7 +160,7 @@ function Signup() {
               value={data.email}
               className="
           w-full rounded-md border border-gray-300
-          px-3 py-2 text-sm text-gray-900
+          px-3 py-3 text-sm text-gray-900
           placeholder-gray-400
           outline-none transition
           focus:border-blue-600
@@ -179,7 +179,7 @@ function Signup() {
                 value={data.password}
                 className="
             w-full rounded-md border border-gray-300
-            px-3 py-2 text-sm text-gray-900
+            px-3 py-3 text-sm text-gray-900
             placeholder-gray-400
             outline-none transition
             focus:border-blue-600
@@ -208,7 +208,7 @@ function Signup() {
               className="
           inline-flex items-center
           rounded-md bg-blue-600
-          px-5 py-2
+          px-5 py-3 cursor-pointer
           text-sm font-medium text-white
           transition
           hover:bg-blue-700

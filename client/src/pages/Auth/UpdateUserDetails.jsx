@@ -158,13 +158,13 @@ function UpdateUserDetails({ item, setUserData }) {
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    className="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
+                    className="rounded-md border border-gray-300 px-4 py-3 cursor-pointer text-sm text-gray-700 hover:bg-gray-100 transition"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition"
+                    className="rounded-md bg-blue-600 px-4 py-3 cursor-pointer text-sm font-medium text-white hover:bg-blue-700 transition"
                   >
                     Save Changes
                   </button>
