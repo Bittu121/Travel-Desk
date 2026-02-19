@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { travelRequestForm } from "../../action/travelRequestAction.js";
 import { getManagers } from "../../action/authAction.js";
+import LoadingSpinner from "../../pages/LoadingSpinner.jsx";
 
 function TravelRequestForm() {
   const { authData } = useSelector((state) => state.auth);
@@ -96,9 +97,9 @@ function TravelRequestForm() {
   };
 
   const input =
-    "w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500";
+    "w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500";
 
-  const label = "text-xs font-medium text-gray-600 uppercase tracking-wide";
+  const label = "block text-xs font-medium text-gray-500 tracking-wide mb-1.5";
 
   const section = "bg-white border border-gray-200 rounded-xl p-6";
 
@@ -139,90 +140,134 @@ function TravelRequestForm() {
         <h2 className="text-sm font-semibold text-gray-800 mb-4">
           Travel Details
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input
-            type="date"
-            name="dateOfRequest"
-            value={formData.dateOfRequest}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <input
-            type="date"
-            name="travelDate"
-            value={formData.travelDate}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <input
-            type="date"
-            name="returnDate"
-            value={formData.returnDate}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <input
-            name="source"
-            placeholder="Source Station"
-            value={formData.source}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <input
-            name="destination"
-            placeholder="Destination Station"
-            value={formData.destination}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <input
-            name="purposeOfTravel"
-            placeholder="Purpose of Travel"
-            value={formData.purposeOfTravel}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <input
-            name="proposedVisit"
-            placeholder="Proposed Customer Visit"
-            value={formData.proposedVisit}
-            onChange={handleChange}
-            required
-            className={input}
-          />
-          <select
-            name="travelMode"
-            value={formData.travelMode}
-            onChange={handleChange}
-            required
-            className={input}
-          >
-            <option value="">Mode of Travel</option>
-            <option value="air">By Air</option>
-            <option value="train">By Train</option>
-            <option value="bus">By Bus</option>
-            <option value="cab">By Cab</option>
-          </select>
-          <select
-            name="reportingManager"
-            value={formData.reportingManager}
-            onChange={handleChange}
-            required
-            className={input}
-          >
-            <option value="">Reporting Manager</option>
-            {managers?.map((manager) => (
-              <option key={manager?._id} value={manager?.email}>
-                {manager?.fullName?.toUpperCase()}
-              </option>
-            ))}
-          </select>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-6">
+          <div className="flex flex-col">
+            <label className={label}>Date Of Request</label>
+            <input
+              type="date"
+              name="dateOfRequest"
+              value={formData.dateOfRequest}
+              onChange={handleChange}
+              required
+              min={new Date().toISOString().split("T")[0]}
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Date of Travel</label>
+            <input
+              type="date"
+              name="travelDate"
+              value={formData.travelDate}
+              onChange={handleChange}
+              required
+              min={
+                formData.dateOfRequest || new Date().toISOString().split("T")[0]
+              }
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Date of Return</label>
+            <input
+              type="date"
+              name="returnDate"
+              value={formData.returnDate}
+              onChange={handleChange}
+              required
+              min={
+                formData.travelDate ||
+                formData.dateOfRequest ||
+                new Date().toISOString().split("T")[0]
+              }
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Source Station</label>
+            <input
+              name="source"
+              placeholder="Source Station"
+              value={formData.source}
+              onChange={handleChange}
+              required
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Destination Station</label>
+            <input
+              name="destination"
+              placeholder="Destination Station"
+              value={formData.destination}
+              onChange={handleChange}
+              required
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Purpose of Travel</label>
+            <input
+              name="purposeOfTravel"
+              placeholder="Purpose of Travel"
+              value={formData.purposeOfTravel}
+              onChange={handleChange}
+              required
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Proposed Customer Visit</label>
+            <input
+              name="proposedVisit"
+              placeholder="Proposed Customer Visit"
+              value={formData.proposedVisit}
+              onChange={handleChange}
+              required
+              className={input}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Mode of Travel</label>
+            <select
+              name="travelMode"
+              value={formData.travelMode}
+              onChange={handleChange}
+              required
+              className={input}
+            >
+              <option value="">Mode of Travel</option>
+              <option value="air">By Air</option>
+              <option value="train">By Train</option>
+              <option value="bus">By Bus</option>
+              <option value="cab">By Cab</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col">
+            <label className={label}>Reporting Manager</label>
+            <select
+              name="reportingManager"
+              value={formData.reportingManager}
+              onChange={handleChange}
+              required
+              className={input}
+            >
+              <option value="">Reporting Manager</option>
+              {managers?.map((manager) => (
+                <option key={manager?._id} value={manager?.email}>
+                  {manager?.fullName?.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -251,22 +296,32 @@ function TravelRequestForm() {
         </div>
         {formData.hotelStay === "yes" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="date"
-              name="checkInDate"
-              value={formData.checkInDate}
-              onChange={handleChange}
-              required
-              className={input}
-            />
-            <input
-              type="date"
-              name="checkOutDate"
-              value={formData.checkOutDate}
-              onChange={handleChange}
-              required
-              className={input}
-            />
+            <div className="flex flex-col">
+              <label className={label}>Check-in Date</label>
+              <input
+                type="date"
+                name="checkInDate"
+                value={formData.checkInDate}
+                onChange={handleChange}
+                required
+                min={new Date().toISOString().split("T")[0]}
+                className={input}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className={label}>Check-out Date</label>
+              <input
+                type="date"
+                name="checkOutDate"
+                value={formData.checkOutDate}
+                onChange={handleChange}
+                required
+                min={
+                  formData.checkInDate || new Date().toISOString().split("T")[0]
+                }
+                className={input}
+              />
+            </div>
           </div>
         )}
       </div>
@@ -278,50 +333,70 @@ function TravelRequestForm() {
           <button
             type="button"
             onClick={addTraveler}
-            className="flex items-center gap-1 text-sm"
+            className="flex items-center gap-1 text-sm cursor-pointer"
           >
-            <MdPersonAdd /> Add
+            <MdPersonAdd size={18} /> Add
           </button>
         </div>
 
         {formData.travelers.map((t, i) => (
-          <div key={i} className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-3">
-            <input
-              name="name"
-              placeholder="Name"
-              value={t.name}
-              onChange={(e) => handleTravelerChange(i, e)}
-              required
-              className={input}
-            />
-            <input
-              name="age"
-              placeholder="Age"
-              value={t.age}
-              onChange={(e) => handleTravelerChange(i, e)}
-              required
-              className={input}
-            />
-            <select
-              name="gender"
-              value={t.gender}
-              onChange={(e) => handleTravelerChange(i, e)}
-              required
-              className={input}
-            >
-              <option value="">Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
+          <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <div className="flex flex-col">
+              <label className={label}>{i === 0 ? "Traveler Name" : ""}</label>
+              <input
+                name="name"
+                placeholder="Name"
+                value={t.name}
+                onChange={(e) => handleTravelerChange(i, e)}
+                required
+                className={input}
+              />
+            </div>
 
-            {i > 0 && (
-              <button
-                onClick={() => removeTraveler(i)}
-                className="text-gray-400 hover:text-red-500"
-              >
-                <IoPersonRemoveSharp />
-              </button>
-            )}
+            <div className="flex flex-col">
+              <label className={label}>{i === 0 ? "Age" : ""}</label>
+              <input
+                type="text"
+                name="age"
+                placeholder="Age"
+                value={t.age}
+                // onChange={(e) => handleTravelerChange(i, e)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (!/^\d*$/.test(value)) return;
+                  handleTravelerChange(i, e);
+                }}
+                required
+                pattern="^[0-9]+$"
+                inputMode="numeric"
+                className={input}
+              />
+            </div>
+
+            <div className="relative">
+              {i > 0 && (
+                <button
+                  onClick={() => removeTraveler(i)}
+                  className="absolute top-1 -right-6 p-1 text-gray-400 hover:text-red-500 cursor-pointer"
+                >
+                  <IoPersonRemoveSharp />
+                </button>
+              )}
+              <div className="flex flex-col">
+                <label className={label}>{i === 0 ? "Gender" : ""}</label>
+                <select
+                  name="gender"
+                  value={t.gender}
+                  onChange={(e) => handleTravelerChange(i, e)}
+                  required
+                  className={input}
+                >
+                  <option value="">Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -333,19 +408,26 @@ function TravelRequestForm() {
           name="remarks"
           value={formData.remarks}
           onChange={handleChange}
-          className={input}
+          // className={input}
+          className={`${input} resize-y min-h-[80px] max-h-[120px]`}
         />
       </div>
 
       {/* Sticky Footer */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
         <div className="max-w-5xl mx-auto px-6 py-3 flex justify-end">
-          <button
-            onClick={handleSubmit}
-            className="px-10 cursor-pointer py-2 text-sm font-medium bg-gray-900 text-white rounded-md hover:bg-black"
-          >
-            Submit Request
-          </button>
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <button
+                onClick={handleSubmit}
+                className="px-10 cursor-pointer py-2 text-sm font-medium bg-gray-900 text-white rounded-md hover:bg-black"
+              >
+                Submit Request
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
