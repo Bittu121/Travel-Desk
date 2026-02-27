@@ -136,7 +136,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             )}
             {isTravelRequestApproval && (
               <NavLink
-                to="/travel-requests"
+                to="/pending-requests"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
      ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
@@ -145,7 +145,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               >
                 <MdAssignment className="text-xl" size={24} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
-                  Travel Requests
+                  Pending Requests
                 </span>
               </NavLink>
             )}
@@ -259,7 +259,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           )}
           {isTravelRequestApproval && (
             <NavLink
-              to="/travel-requests"
+              to="/pending-requests"
               className="flex items-center gap-4 p-4 text-gray-500"
               style={(e) => {
                 return {
@@ -269,7 +269,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               }}
             >
               <MdAssignment className="text-xl" size={24} />
-              <span>Travel Requests</span>
+              <span>Pending Requests</span>
             </NavLink>
           )}
           {isApprovedRequest && (

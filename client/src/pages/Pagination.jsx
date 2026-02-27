@@ -10,7 +10,7 @@ function Pagination({ itemsPerPage, totalItems, currentPage, paginate }) {
   };
   return (
     <>
-      <div className="flex justify-end py-4 px-2">
+      <div className="flex justify-end px-2">
         <Stack spacing={2}>
           <MuiPagination
             count={count}
@@ -26,8 +26,8 @@ function Pagination({ itemsPerPage, totalItems, currentPage, paginate }) {
             boundaryCount={1}
             sx={{
               "& .MuiPaginationItem-root": {
-                minWidth: 36,
-                height: 36,
+                minWidth: 34,
+                height: 34,
                 padding: "0 6px",
                 margin: "0 4px",
                 fontSize: "0.875rem",
@@ -43,6 +43,7 @@ function Pagination({ itemsPerPage, totalItems, currentPage, paginate }) {
                 },
               },
             }}
+
           />
         </Stack>
       </div>

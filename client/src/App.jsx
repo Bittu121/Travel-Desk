@@ -27,7 +27,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/update-user" element={<GetUserDetails />} />
           <Route path="/approved-requests" element={<ApprovedRequest />} />
-          <Route path="/travel-requests" element={<TravelRequest />} />
+          <Route path="/pending-requests" element={<TravelRequest />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
