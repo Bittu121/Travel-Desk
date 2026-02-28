@@ -39,15 +39,12 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <>
-      <nav className="flex items-center justify-end p-4 bg-white shadow-md max-md:justify-between">
-        {/* Hamburger menu for mobile */}
+      <nav className="flex items-center justify-end p-[17px] bg-white max-md:justify-between border-l border-l-gray-100">
         <div className="flex items-center md:hidden">
           <button onClick={toggleSidebar} className="text-xl">
             <FiMenu />
           </button>
         </div>
-
-        {/* Profile dropdown */}
         <div>
           <Button
             aria-controls="simple-menu"

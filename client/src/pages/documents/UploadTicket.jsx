@@ -3,9 +3,7 @@ import React from "react";
 function UploadTicket({ item }) {
   return (
     <>
-      <div>
-        <h2>UploadTicket</h2>
-      </div>
+      <div>{/* <h2>UploadTicket</h2> */}</div>
     </>
   );
 }

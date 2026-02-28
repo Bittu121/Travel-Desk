@@ -5,5 +5,9 @@ const API = axios.create({
   withCredentials: true,
 });
 
+//Travel Request Form
 export const travelRequestForm = (formData) =>
   API.post("/travel-request", formData);
+
+//Applied form Details
+export const getUserTravelRequests = () => API.get("/requests/me");

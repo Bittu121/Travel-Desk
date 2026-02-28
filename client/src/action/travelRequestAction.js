@@ -17,3 +17,18 @@ export const travelRequestForm = (formData) => async (dispatch) => {
     return { type: "TRAVEL_REQUEST_FAIL", error };
   }
 };
+
+export const getUserTravelRequests = () => async (dispatch) => {
+  dispatch({ type: "GET_USER_TRAVEL_REQUESTS_START" });
+  try {
+    const { data } = await travelRequestApi.getUserTravelRequests();
+    dispatch({ type: "GET_USER_TRAVEL_REQUESTS", data: data });
+    return data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.message;
+    dispatch({
+      type: "GET_USER_TRAVEL_REQUESTS_FAIL",
+      error: errorMessage,
+    });
+  }
+};

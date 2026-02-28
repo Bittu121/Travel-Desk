@@ -71,7 +71,7 @@ function UpdateUserDetails({ item, setUserData }) {
         >
           <FaUserEdit
             size={18}
-            className="text-gray-500 group-hover:text-indigo-600 transition-colors"
+            className="text-gray-500 cursor-pointer group-hover:text-indigo-600 transition-colors"
           />
         </button>
         {isOpen && (
@@ -83,7 +83,7 @@ function UpdateUserDetails({ item, setUserData }) {
               className="w-full max-w-xl bg-white rounded-2xl shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+              <div className="flex items-center justify-between px-6 py-2 border-b border-gray-100">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">
                     Edit User
@@ -93,7 +93,7 @@ function UpdateUserDetails({ item, setUserData }) {
                   onClick={() => setIsOpen(false)}
                   className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  <FaTimes className="text-gray-500" size={18} />
+                  <FaTimes className="text-gray-500 cursor-pointer" size={18} />
                 </button>
               </div>
               <form onSubmit={handleSubmit} className="px-6 py-5">
@@ -192,7 +192,7 @@ function UpdateUserDetails({ item, setUserData }) {
                     </select>
                   </div>
                 </div>
-                <div className="flex items-center justify-end gap-3 mt-8 pt-5 border-t border-gray-100">
+                <div className="flex items-center justify-end gap-3 mt-8 pt-2 border-t border-gray-100">
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Pagination from "../Pagination";
 import LoadingSpinner from "../../pages/LoadingSpinner.jsx";
 import AppliedFormTravelers from "./AppliedFormTravelers.jsx";
 import UploadBills from "../documents/UploadBills.jsx";
 import UploadTicket from "../documents/UploadTicket.jsx";
+import { useEffect } from "react";
+import { getUserTravelRequests } from "../../action/travelRequestAction.js";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 function AppliedForm() {
   const { authData: user } = useSelector((state) => state.auth);
@@ -15,147 +18,24 @@ function AppliedForm() {
   const canSeeStatus = role === "user" || role === "manager" || role === "hr";
   const { loading, error } = useSelector((state) => state.travelRequest);
 
+  const dispatch = useDispatch();
+
+  const [appliedForm, setAppliedForm] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
-  const [appliedForm] = useState([
-    {
-      _id: "1",
-      travelRequestId: "TR-2024-001",
-      name: "Amit Sharma",
-      empCode: "EMP1001",
-      designation: "Software Engineer",
-      department: "North Region",
-      dateOfRequest: "2024-01-05",
-      travelDate: "2024-01-10",
-      returnDate: "2024-01-12",
-      source: "Delhi",
-      destination: "Bangalore",
-      purposeOfTravel: "Client Meeting",
-      proposedVisit: "ABC Technologies",
-      travelMode: "air",
-      hotelStay: "yes",
-      checkInDate: "2024-01-10",
-      checkOutDate: "2024-01-12",
-      remarks: "Initial client discussion Initial client discussion",
-      travelers: [{ name: "Amit Sharma", age: 28, gender: "male" }],
-      status: "Approved",
-    },
-    {
-      _id: "2",
-      travelRequestId: "TR-2024-002",
-      name: "Priya Verma",
-      empCode: "EMP1002",
-      designation: "Project Manager",
-      department: "West Region",
-      dateOfRequest: "2024-01-08",
-      travelDate: "2024-01-14",
-      returnDate: "2024-01-14",
-      source: "Mumbai",
-      destination: "Pune",
-      purposeOfTravel: "Project Review",
-      proposedVisit: "Internal Office",
-      travelMode: "cab",
-      hotelStay: "no",
-      checkInDate: "",
-      checkOutDate: "",
-      remarks: "One day review One day review",
-      travelers: [{ name: "Priya Verma", age: 34, gender: "female" }],
-      status: "Pending",
-    },
-    {
-      _id: "3",
-      travelRequestId: "TR-2024-003",
-      name: "Rahul Singh",
-      empCode: "EMP1003",
-      designation: "Senior Analyst",
-      department: "South Region",
-      dateOfRequest: "2024-01-12",
-      travelDate: "2024-01-18",
-      returnDate: "2024-01-22",
-      source: "Hyderabad",
-      destination: "Chennai",
-      purposeOfTravel: "Audit Support",
-      proposedVisit: "Finance Department",
-      travelMode: "train",
-      hotelStay: "yes",
-      checkInDate: "2024-01-18",
-      checkOutDate: "2024-01-22",
-      remarks: "One day review One day review",
-      travelers: [
-        { name: "Rahul Singh", age: 31, gender: "male" },
-        { name: "Suresh Kumar", age: 35, gender: "male" },
-      ],
-      status: "Approved",
-    },
-    {
-      _id: "4",
-      travelRequestId: "TR-2024-004",
-      name: "Neha Gupta",
-      empCode: "EMP1004",
-      designation: "HR Executive",
-      department: "Central Region",
-      dateOfRequest: "2024-01-15",
-      travelDate: "2024-01-20",
-      returnDate: "2024-01-21",
-      source: "Bhopal",
-      destination: "Indore",
-      purposeOfTravel: "Hiring Drive",
-      proposedVisit: "Campus Visit",
-      travelMode: "bus",
-      hotelStay: "no",
-      checkInDate: "",
-      checkOutDate: "",
-      remarks: "Campus recruitment One day review",
-      travelers: [{ name: "Neha Gupta", age: 29, gender: "female" }],
-      status: "Rejected",
-    },
-    {
-      _id: "5",
-      travelRequestId: "TR-2024-005",
-      name: "Vikram Joshi",
-      empCode: "EMP1005",
-      designation: "Tech Lead",
-      department: "North Region",
-      dateOfRequest: "2024-01-18",
-      travelDate: "2024-01-25",
-      returnDate: "2024-01-28",
-      source: "Noida",
-      destination: "Pune",
-      purposeOfTravel: "Architecture Review",
-      proposedVisit: "Client Engineering Team",
-      travelMode: "air",
-      hotelStay: "yes",
-      checkInDate: "2024-01-25",
-      checkOutDate: "2024-01-28",
-      remarks: "System design discussion One day review",
-      travelers: [{ name: "Vikram Joshi", age: 36, gender: "male" }],
-      status: "Pending",
-    },
-    {
-      _id: "6",
-      travelRequestId: "TR-2024-006",
-      name: "Anjali Mehta",
-      empCode: "EMP1006",
-      designation: "Business Analyst",
-      department: "West Region",
-      dateOfRequest: "2024-01-22",
-      travelDate: "2024-01-27",
-      returnDate: "2024-01-29",
-      source: "Ahmedabad",
-      destination: "Jaipur",
-      purposeOfTravel: "Requirement Gathering",
-      proposedVisit: "Client Operations",
-      travelMode: "train",
-      hotelStay: "yes",
-      checkInDate: "2024-01-27",
-      checkOutDate: "2024-01-29",
-      remarks: "",
-      travelers: [{ name: "Anjali Mehta", age: 32, gender: "female" }],
-      status: "Approved",
-    },
-  ]);
+  const fetchUserTravelRequests = async () => {
+    try {
+      const data = await dispatch(getUserTravelRequests());
+      setAppliedForm(data?.data || []);
+    } catch (error) {
+      console.error("Error fetching travel requests:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserTravelRequests();
+  }, [dispatch]);
 
   const filteredData = appliedForm.filter((item) =>
     Object.values(item)
@@ -169,32 +49,64 @@ function AppliedForm() {
   const currentItems = filteredData.slice(indexOfFirst, indexOfLast);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const getStatusBadge = (status) => {
-    const base = "px-3 py-1 text-xs font-medium rounded-full inline-block";
-    switch (status) {
-      case "Approved":
-        return (
-          <span className={`${base} bg-green-100 text-green-600`}>
-            Approved
+  const getStatusBadge = (item) => {
+    const base =
+      "px-3 py-1 text-xs font-medium rounded-full inline-flex items-center gap-1.5 cursor-pointer transition-all duration-200 group relative";
+
+    const tooltipBase =
+      "absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs px-2 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50";
+
+    if (item?.isBooked) {
+      return (
+        <span className={`${base} bg-blue-50 text-blue-600 hover:bg-blue-100`}>
+          Booked
+          <AiOutlineInfoCircle className="text-sm opacity-70" />
+          <span className={`${tooltipBase} bg-gray-900 text-white`}>
+            Tickets have been booked
           </span>
-        );
-      case "Pending":
-        return (
-          <span className={`${base} bg-yellow-100 text-yellow-600`}>
-            Pending
-          </span>
-        );
-      case "Rejected":
-        return (
-          <span className={`${base} bg-red-100 text-red-600`}>Rejected</span>
-        );
-      default:
-        return (
-          <span className={`${base} bg-gray-100 text-gray-600`}>
-            {status || "Pending"}
-          </span>
-        );
+        </span>
+      );
     }
+
+    if (item?.isB2Approved) {
+      return (
+        <span
+          className={`${base} bg-green-50 text-green-600 hover:bg-green-100`}
+        >
+          HR Approved
+          <AiOutlineInfoCircle className="text-sm opacity-70" />
+          <span className={`${tooltipBase} bg-gray-900 text-white`}>
+            Request approved by HR and sent to vendor
+          </span>
+        </span>
+      );
+    }
+
+    if (item?.isB1Approved) {
+      return (
+        <span
+          className={`${base} bg-yellow-50 text-yellow-700 hover:bg-yellow-100`}
+        >
+          HR Pending
+          <AiOutlineInfoCircle className="text-sm opacity-70" />
+          <span className={`${tooltipBase} bg-gray-900 text-white`}>
+            Approval pending at HR
+          </span>
+        </span>
+      );
+    }
+
+    return (
+      <span
+        className={`${base} bg-orange-50 text-orange-600 hover:bg-orange-100`}
+      >
+        Manager Pending
+        <AiOutlineInfoCircle className="text-sm opacity-70" />
+        <span className={`${tooltipBase} bg-gray-900 text-white`}>
+          Approval pending at reporting manager
+        </span>
+      </span>
+    );
   };
 
   const NoDataFound = () => (
@@ -247,7 +159,7 @@ function AppliedForm() {
           <NoDataFound />
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-[3200px] w-full text-sm">
+            <table className="min-w-[3300px] w-full text-sm">
               <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
                 <tr>
                   <th className="px-4 py-3 text-left">Travel ID</th>
@@ -329,8 +241,8 @@ function AppliedForm() {
                     </td>
                     <td className="px-4 py-4">
                       <AppliedFormTravelers
-                        item={item.travelers}
-                        id={item._id}
+                        item={item?.travelers}
+                        id={item?._id}
                       />
                     </td>
                     <td className="px-4 py-4">
@@ -352,9 +264,7 @@ function AppliedForm() {
                       </>
                     )}
                     {canSeeStatus && (
-                      <td className="px-4 py-4">
-                        {getStatusBadge(item.status)}
-                      </td>
+                      <td className="px-4 py-4">{getStatusBadge(item)}</td>
                     )}
                   </tr>
                 ))}

@@ -62,10 +62,10 @@ export const travelRequestForm = async (req, res) => {
       travelRequestData,
       loginUrl,
     );
-     transporter.sendMail(managerMailOptions, (error, info) => {
+    transporter.sendMail(managerMailOptions, (error, info) => {
       if (error) {
         console.error("Error sending email to manager:", error);
-      } 
+      }
     });
 
     res.status(201).json({
@@ -82,3 +82,28 @@ export const travelRequestForm = async (req, res) => {
   }
 };
 
+//Applied form Details
+export const getUserTravelRequests = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const userTravelRequests = await TravelRequestModel.find({ userId });
+
+    res.status(200).json({
+      success: true,
+      data: userTravelRequests,
+      message: "User travel requests fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch user travel requests",
+      error: error.message,
+    });
+  }
+};

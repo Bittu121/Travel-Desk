@@ -1,5 +1,8 @@
 import express from "express";
-import { travelRequestForm } from "../controllers/travelRequestController.js";
+import {
+  getUserTravelRequests,
+  travelRequestForm,
+} from "../controllers/travelRequestController.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 import { isAuthorized } from "../middleware/isAuthorized.js";
 
@@ -11,4 +14,13 @@ router
     isAuthorized(["user", "manager", "hr"]),
     travelRequestForm,
   );
+
+router
+  .route("/requests/me")
+  .get(
+    authMiddleWare,
+    isAuthorized(["user", "manager", "hr"]),
+    getUserTravelRequests,
+  );
+  
 export default router;

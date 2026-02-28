@@ -1,11 +1,9 @@
 import React from "react";
 
-function UploadBills({item}) {
+function UploadBills({ item }) {
   return (
     <>
-      <div>
-        <h2>UploadBills</h2>
-      </div>
+      <div>{/* <h2>UploadBills</h2> */}</div>
     </>
   );
 }

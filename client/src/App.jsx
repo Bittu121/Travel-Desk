@@ -6,7 +6,7 @@ import TravelRequestForm from "./pages/TravelRequestForm/TravelRequestForm.jsx";
 import AppliedForm from "./pages/AppliedForm/AppliedForm.jsx";
 import Signup from "./pages/Auth/Signup.jsx";
 import ApprovedRequest from "./pages/ApprovedRequest/ApprovedRequest.jsx";
-import TravelRequest from "./pages/TravelRequest/TravelRequest.jsx";
+import PendingRequest from "./pages/PendingRequest/PendingRequest.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
@@ -27,7 +27,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/update-user" element={<GetUserDetails />} />
           <Route path="/approved-requests" element={<ApprovedRequest />} />
-          <Route path="/pending-requests" element={<TravelRequest />} />
+          <Route path="/pending-requests" element={<PendingRequest />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />

@@ -25,6 +25,25 @@ const travelRequestReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "GET_USER_TRAVEL_REQUESTS_START":
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case "GET_USER_TRAVEL_REQUESTS":
+      return {
+        ...state,
+        travelRequests: action.data,
+        loading: false,
+        error: null,
+      };
+    case "GET_USER_TRAVEL_REQUESTS_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }

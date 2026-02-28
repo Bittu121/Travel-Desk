@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiClock,FiCheckCircle,FiShield,FiUserCheck    } from "react-icons/fi";
 import {
   MdAssignment,
   MdDashboard,
@@ -35,7 +35,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             isOpen ? "w-16" : "w-64"
           }`}
         >
-          <div className="flex items-center justify-between px-4 py-6 border-b border-gray-300">
+          <div className="flex items-center justify-between px-4 py-6 border-b border-gray-100">
             <h2
               className={` ${
                 isOpen ? "hidden" : "block"
@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 // }}
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
@@ -79,7 +79,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 to="/travel-request-form"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
@@ -94,11 +94,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 to="/applied-form"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
-                <MdOutlineDescription className="text-xl" size={22} />
+                <FiCheckCircle className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Applied Form
                 </span>
@@ -109,7 +109,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 to="/signup"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
@@ -124,7 +124,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 to="/update-user"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
@@ -139,11 +139,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 to="/pending-requests"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
-                <MdAssignment className="text-xl" size={24} />
+                <FiClock className="text-xl" size={22} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Pending Requests
                 </span>
@@ -154,11 +154,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 to="/approved-requests"
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
-     ${isActive ? "bg-blue-50 text-blue-600 font-semibold" : "text-gray-600"}
+     ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
      hover:bg-gray-100`
                 }
               >
-                <MdTaskAlt className="text-xl" size={24} />
+                <FiUserCheck  className="text-xl" size={24} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Approved Requests
                 </span>
@@ -223,7 +223,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <MdOutlineDescription className="text-xl" size={24} />
+              <FiCheckCircle className="text-xl" size={24} />
               <span>Applied Form</span>
             </NavLink>
           )}
@@ -268,7 +268,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <MdAssignment className="text-xl" size={24} />
+              <FiClock className="text-xl" size={24} />
               <span>Pending Requests</span>
             </NavLink>
           )}
@@ -283,7 +283,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <MdTaskAlt className="text-xl" size={24} />
+              <FiUserCheck  className="text-xl" size={24} />
               <span>Approved Requests</span>
             </NavLink>
           )}
