@@ -20,7 +20,7 @@ export const getAllTravelRequestsByRole = async (req, res) => {
         isB2Approved: false,
         isB2Rejected: false,
       });
-    } else if (userRole === "vender") {
+    } else if (userRole === "vendor") {
       travelRequests = await TravelRequestModel.find({
         isB2Approved: true,
       });
@@ -64,6 +64,5 @@ export const getTravelRequestById = async (req, res) => {
     });
   }
 };
-
 
 //Approved request

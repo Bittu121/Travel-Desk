@@ -1,11 +1,11 @@
 import React from "react";
 import PendingRequestConfirmationModal from "./PendingRequestConfirmationModal.jsx";
 
-function PendingRequestLine() {
+function PendingRequestLine({ item, fetchPendingRequestData }) {
   return (
     <>
       <div>
-        <p>PendingRequestLine</p>
+        
       </div>
     </>
   );

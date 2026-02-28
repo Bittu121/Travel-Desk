@@ -11,7 +11,7 @@ router
   .route("/pending")
   .get(
     authMiddleWare,
-    isAuthorized(["manager", "hr", "vender"]),
+    isAuthorized(["manager", "hr", "vendor"]),
     getAllTravelRequestsByRole,
   );
 

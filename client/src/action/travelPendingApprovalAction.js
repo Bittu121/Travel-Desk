@@ -4,8 +4,7 @@ import { toast } from "react-toastify";
 export const getAllTravelRequestsByRole = () => async (dispatch) => {
   dispatch({ type: "GET_ALL_TRAVEL_REQUESTS_START" });
   try {
-    const { data } =
-      await travelPendingApprovalApi.getAllTravelRequestsByRole();
+    const { data } = await travelPendingApprovalApi.getAllTravelRequestsByRole();
     dispatch({ type: "GET_ALL_TRAVEL_REQUESTS", data: data });
     return data;
   } catch (error) {
@@ -17,4 +16,4 @@ export const getAllTravelRequestsByRole = () => async (dispatch) => {
   }
 };
 
-export const getTravelRequestById = (id) => async (dispatch) => {};
+export const getTravelRequestById = () => async (dispatch) => {};
