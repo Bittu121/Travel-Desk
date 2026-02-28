@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import PendingRequestLine from "./PendingRequestLine.jsx"
 
 function PendingRequest() {
   return (
-    <div>PendingRequest</div>
-  )
+    <>
+      <div>
+        <p>PendingRequest</p>
+      </div>
+    </>
+  );
 }
 
-export default PendingRequest
+export default PendingRequest;
