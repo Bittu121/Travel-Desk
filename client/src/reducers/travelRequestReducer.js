@@ -1,5 +1,6 @@
 const initialState = {
   formData: {},
+  travelRequests: [],
   loading: false,
   error: null,
 };
@@ -44,6 +45,28 @@ const travelRequestReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    //Pending request
+    case "GET_ALL_TRAVEL_REQUESTS_START":
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case "GET_ALL_TRAVEL_REQUESTS":
+      return {
+        ...state,
+        travelRequests: action.data,
+        loading: false,
+        error: null,
+      };
+    case "GET_ALL_TRAVEL_REQUESTS_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    //Approved request
+
     default:
       return state;
   }
