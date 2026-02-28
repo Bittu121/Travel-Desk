@@ -109,44 +109,4 @@ export const getUserTravelRequests = async (req, res) => {
 };
 
 
-export const getAllTravelRequestsByRole = async (req, res) => {
-  try {
-    const userRole = req.user.role;
-    const userEmail = req.user.email;
-
-    let travelRequests;
-    if (userRole === "manager") {
-      travelRequests = await TravelRequestModel.find({
-        reportingManager: userEmail,
-      });
-    } else if (userRole === "hr") {
-      travelRequests = await TravelRequestModel.find({
-        isB1Approved: true,
-        isB2Approved: false,
-        isB2Rejected: false,
-      });
-    } else if (userRole === "vender") {
-      travelRequests = await TravelRequestModel.find({
-        isB2Approved: true,
-      });
-    } else {
-      return res.status(403).json({
-        success: false,
-        message: "Access Denied",
-      });
-    }
-    res.json({
-      success: true,
-      data: travelRequests,
-    });
-  } catch (error) {
-    console.error("Get All Travel Requests Error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to get all Travel Requests",
-      error: error.message,
-    });
-  }
-};
-
 
