@@ -5,7 +5,10 @@ import { RiFileExcel2Line } from "react-icons/ri";
 import * as XLSX from "xlsx";
 import { Pagination } from "@mui/material";
 import LoadingSpinner from "../LoadingSpinner.jsx";
-import { getAllTravelRequestsByRole } from "../../action/travelPendingApprovalAction.js";
+import {
+  getAllTravelRequestsByRole,
+  updatePendingTravelRequestById,
+} from "../../action/travelPendingApprovalAction.js";
 import { BiExport } from "react-icons/bi";
 
 function PendingRequest() {
@@ -65,8 +68,9 @@ function PendingRequest() {
       }
     }
     try {
-      //Api Call
-      // await dispatch(updateTravelRequestById(updatedItem?._id, updatedItem));
+      await dispatch(
+        updatePendingTravelRequestById(updatedItem?._id, updatedItem),
+      );
       await fetchPendingRequestData();
     } catch (error) {
       console.error("Error updating travel request:", error);
