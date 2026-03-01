@@ -16,6 +16,8 @@ function PendingRequest() {
   const isHrUser = user?.user?.role === "hr";
 
   const [data, setData] = useState([]);
+  const [update, setUpdate] = useState(false);
+  const [travelRejected, setTravelRejected] = useState(false);
   const [vendor, setVendor] = useState(false);
   const [searchName, setSearchName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,9 +44,33 @@ function PendingRequest() {
   }, []);
 
   const travelRequestUpdate = async (request) => {
+    const updatedItem = { ...request };
+    if (update && !travelRejected) {
+      if (user?.user?.email === request.reportingManager) {
+        updatedItem.isB1Approved = true;
+        updatedItem.isB1Rejected = false;
+      } else if (isHrUser) {
+        updatedItem.isB2Approved = true;
+        updatedItem.isB2Rejected = false;
+        updatedItem.vendors = vendor;
+      }
+    } else if (!update && travelRejected) {
+      if (user?.user?.email === request.reportingManager) {
+        updatedItem.isB1Approved = false;
+        updatedItem.isB1Rejected = true;
+      } else if (isHrUser) {
+        updatedItem.isB2Approved = false;
+        updatedItem.isB2Rejected = true;
+        updatedItem.vendors = vendor;
+      }
+    }
     try {
-      //update api call
-    } catch (error) {}
+      //Api Call
+      // await dispatch(updateTravelRequestById(updatedItem?._id, updatedItem));
+      await fetchPendingRequestData();
+    } catch (error) {
+      console.error("Error updating travel request:", error);
+    }
   };
 
   const exportToExcel = () => {
@@ -250,9 +276,12 @@ function PendingRequest() {
                           >
                             <PendingRequestLine
                               item={item}
+                              _id={item?._id}
                               travelRequestUpdate={() =>
                                 travelRequestUpdate(item)
                               }
+                              setUpdate={setUpdate}
+                              setTravelRejected={setTravelRejected}
                               setVendor={setVendor}
                               fetchPendingRequestData={fetchPendingRequestData}
                             />

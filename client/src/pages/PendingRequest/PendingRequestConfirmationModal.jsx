@@ -1,6 +1,6 @@
 import React from "react";
 
-function PendingRequestConfirmationModal() {
+function PendingRequestConfirmationModal({}) {
   return (
     <>
       <div>
