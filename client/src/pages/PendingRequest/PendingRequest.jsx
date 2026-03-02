@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PendingRequestLine from "./PendingRequestLine.jsx";
 import { RiFileExcel2Line } from "react-icons/ri";
 import * as XLSX from "xlsx";
-import { Pagination } from "@mui/material";
+import Pagination from "../Pagination";
 import LoadingSpinner from "../LoadingSpinner.jsx";
 import {
   getAllTravelRequestsByRole,
@@ -201,7 +201,7 @@ function PendingRequest() {
               <LoadingSpinner />
             ) : error ? (
               <p className="text-red-500">{error}</p>
-            ) : (user.user.role === "manager" &&
+            ) : (user?.user?.role === "manager" &&
                 managerApproved.length === 0) ||
               (isHrUser && hrApproved.length === 0) ||
               (isVendorUser && unbookedData.length === 0) ||
@@ -274,10 +274,7 @@ function PendingRequest() {
                         (isVendorUser && item.isB2Approved);
                       return shouldRender ? (
                         <>
-                          <tr
-                            key={item?._id}
-                            className="border-b hover:bg-gray-50"
-                          >
+                          <tr key={item?._id} className=" hover:bg-gray-50">
                             <PendingRequestLine
                               item={item}
                               _id={item?._id}
@@ -298,6 +295,12 @@ function PendingRequest() {
               </div>
             )}
           </div>
+          <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={filteredData.length}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
         </div>
       </div>
     </>

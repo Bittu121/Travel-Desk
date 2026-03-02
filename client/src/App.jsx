@@ -13,6 +13,7 @@ import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 import ResetPassword from "./pages/Auth/ResetPassword.jsx";
 import GetUserDetails from "./pages/Auth/GetUserDetails.jsx";
 import { useSelector } from "react-redux";
+import TravelRequestFormDetails from "./pages/PendingRequest/TravelRequestFormDetails.jsx";
 
 function App() {
   const { authData: user } = useSelector((state) => state.auth);
@@ -28,6 +29,10 @@ function App() {
           <Route path="/update-user" element={<GetUserDetails />} />
           <Route path="/approved-requests" element={<ApprovedRequest />} />
           <Route path="/pending-requests" element={<PendingRequest />} />
+          <Route
+            path="/pending-requests/:id"
+            element={<TravelRequestFormDetails />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Route>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />

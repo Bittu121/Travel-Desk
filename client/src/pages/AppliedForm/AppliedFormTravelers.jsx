@@ -1,20 +1,7 @@
-// import React from "react";
-
-// function AppliedFormTravelers({ item, id }) {
-//   return (
-//     <>
-//       <div>
-//         <h2>AppliedFormTravelers</h2>
-//       </div>
-//     </>
-//   );
-// }
-
-// export default AppliedFormTravelers;
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-function AppliedFormTravelers({ item = [] }) {
+function AppliedFormTravelers({ item }) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef(null);
   const modalRef = useRef(null);

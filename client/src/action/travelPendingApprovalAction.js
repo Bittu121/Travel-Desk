@@ -17,8 +17,6 @@ export const getAllTravelRequestsByRole = () => async (dispatch) => {
   }
 };
 
-export const getTravelRequestById = () => async (dispatch) => {};
-
 export const updatePendingTravelRequestById =
   (id, updateData) => async (dispatch) => {
     dispatch({ type: "UPDATE_TRAVEL_REQUEST_START" });

@@ -240,14 +240,11 @@ function AppliedForm() {
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <AppliedFormTravelers
-                        item={item?.travelers}
-                        id={item?._id}
-                      />
+                      <AppliedFormTravelers item={item?.travelers} />
                     </td>
                     <td className="px-4 py-4">
                       <NavLink
-                        to={`/travel-requests/${item._id}`}
+                        to={`/pending-requests/${item?._id}`}
                         className="px-3 py-1 text-xs rounded-lg bg-indigo-100 text-indigo-600 hover:bg-indigo-200"
                       >
                         Open
