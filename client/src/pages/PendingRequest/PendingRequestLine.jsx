@@ -5,6 +5,12 @@ import AppliedFormTravelers from "../AppliedForm/AppliedFormTravelers.jsx";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVendors } from "../../action/authAction.js";
+import UploadTicket from "./vendor-management/vendor-tickets/UploadTicket.jsx";
+import ViewTicket from "./vendor-management/vendor-tickets/ViewTicket.jsx";
+import UploadNewTicket from "./vendor-management/vendor-tickets/UploadNewTicket.jsx";
+import ViewNewTicket from "./vendor-management/vendor-tickets/ViewNewTicket.jsx";
+import BookMarks from "./vendor-management/vendor-status/BookMarks.jsx";
+import TicketStatus from "./vendor-management/vendor-status/TicketStatus.jsx";
 
 function PendingRequestLine({
   item,
@@ -162,7 +168,42 @@ function PendingRequestLine({
               />
             </>
           )}
-          
+          {/* Vendor management includes uploading and viewing tickets, including new tickets.
+           */}
+          {user?.user?.role === "vender" && (
+            <>
+              <td className="px-4 py-4">
+                <UploadTicket _id={item?._id} />
+              </td>
+              <td className="px-4 py-4">
+                {" "}
+                <ViewTicket _id={item?._id} />
+              </td>
+              <td className="px-4 py-4">
+                <UploadNewTicket _id={item?._id} />
+              </td>
+              <td className="px-4 py-4">
+                {" "}
+                <ViewNewTicket _id={item?._id} />
+              </td>
+            </>
+          )}
+          {/* status,bookmarks & ticket status */}
+          {user?.user?.role === "vender" && (
+            <>
+              <td className="px-4 py-4">{item?.status}</td>
+              <td className="px-4 py-4">
+                <BookMarks item={item} />
+              </td>
+              <td className="px-4 py-4">
+                <TicketStatus
+                  _id={item?._id}
+                  getBookedStatus={item?.isBooked}
+                  fetchPendingRequestData={fetchPendingRequestData}
+                />
+              </td>
+            </>
+          )}
         </>
       )}
     </>
