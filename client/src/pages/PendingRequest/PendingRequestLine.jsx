@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { LuCheck, LuX } from "react-icons/lu";
 import PendingRequestConfirmationModal from "./PendingRequestConfirmationModal.jsx";
 import AppliedFormTravelers from "../AppliedForm/AppliedFormTravelers.jsx";
 import { NavLink } from "react-router-dom";
@@ -17,18 +18,40 @@ function PendingRequestLine({
   const dispatch = useDispatch();
   const { authData: user } = useSelector((state) => state.auth);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isApproved, setIsApproved] = useState(null);
+
   const [selectedVendor, setSelectedVendor] = useState("");
   const handleVendorChange = (e) => {
     setSelectedVendor(e.target.value);
     setVendor(e.target.value); // This updates the parent state
   };
-  
+
   //get manager
   useEffect(() => {
     dispatch(getVendors());
   }, [dispatch]);
   const { vendors } = useSelector((state) => state.auth);
-  const vendorsList = Array.isArray(vendors) ? vendors : vendors?.vendors ?? [];
+  const vendorsList = Array.isArray(vendors)
+    ? vendors
+    : (vendors?.vendors ?? []);
+
+  const handleOpenModal = (approved) => {
+    setIsApproved(approved);
+    setIsModalOpen(true);
+  };
+
+  if (isApproved) {
+    setUpdate(true);
+    setTravelRejected(false);
+  } else if (isApproved == false) {
+    setUpdate(false);
+    setTravelRejected(true);
+  }
+
+  const handleConfirm = () => {
+    travelRequestUpdate(_id, isApproved, selectedVendor);
+  };
 
   return (
     <>
@@ -109,6 +132,37 @@ function PendingRequestLine({
               </select>
             </td>
           )}
+          {((user?.user?.email === item.reportingManager &&
+            !item.isB1Approved &&
+            !item.isB1Rejected) ||
+            (user?.user?.role === "hr" &&
+              item.isB1Approved &&
+              !item.isB2Approved &&
+              !item.isB2Rejected)) && (
+            <>
+              <td className="px-4 py-4 text-center">
+                <LuCheck
+                  size={26}
+                  className="font-bold rounded text-green-600 cursor-pointer"
+                  onClick={() => handleOpenModal(true)}
+                />
+              </td>
+              <td className="px-4 py-3 text-center">
+                <LuX
+                  size={26}
+                  className="font-bold rounded text-red-600 cursor-pointer"
+                  onClick={() => handleOpenModal(false)}
+                />
+              </td>
+              <PendingRequestConfirmationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                isApproved={isApproved}
+                onConfirm={handleConfirm}
+              />
+            </>
+          )}
+          
         </>
       )}
     </>

@@ -8,4 +8,4 @@ const API = axios.create({
 export const getAllTravelRequestsByRole = () => API.get("/pending");
 export const getTravelRequestById = (id) => API.get(`/pending/${id}`);
 export const updatePendingTravelRequestById = (id, updateData) =>
-  API.put(`/${id}`, updateData);
+  API.put(`/pending/update/${id}`, updateData);
