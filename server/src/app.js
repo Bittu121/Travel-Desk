@@ -2,9 +2,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import userRoute from "./routes/userRoutes.js";
-import travelRequestRoute from "./routes/travelRequestRoutes.js";
-import travelPendingAndApproveRoute from "./routes/travelPendingAndApproveRoutes.js";
+import userRoute from "./routes/user.routes.js";
+import travelRequestRoute from "./routes/travelRequest.routes.js";
+import travelPendingAndApproveRoute from "./routes/travelPendingAndApprove.routes.js";
+import globalErrorHandler from "./middleware/error.middleware.js";
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use(
 app.use("/api/v1/auth/user", userRoute);
 app.use("/api/v1/travel", travelRequestRoute);
 app.use("/api/v1/travel-requests", travelPendingAndApproveRoute);
+app.use(globalErrorHandler);
 
 export default app;

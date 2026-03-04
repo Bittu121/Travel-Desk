@@ -11,7 +11,7 @@ import {
   resetPassword,
   getManagers,
   getVendors,
-} from "../controllers/userController.js";
+} from "../controllers/user.controller.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 
 const router = express.Router();

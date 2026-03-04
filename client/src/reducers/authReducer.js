@@ -1,5 +1,7 @@
 const initialState = {
   authData: null,
+  managers: [],
+  vendors: [],
   loading: false,
   error: null,
 };
@@ -36,17 +38,27 @@ const authReducer = (state = initialState, action) => {
       return { ...state, loading: true, error: null };
 
     case "GET_MANAGER_ROLE_SUCCESS":
-      return { ...state, managers: action.data, loading: false, error: null };
+      return {
+        ...state,
+        managers: action.data?.managers ?? action.data ?? [],
+        loading: false,
+        error: null,
+      };
     case "GET_MANAGER_ROLE_FAIL":
       return { ...state, loading: false, error: action.error };
 
     case "GET_VENDORS_ROLE_START":
       return { ...state, loading: true, error: null };
     case "GET_VENDORS_ROLE_SUCCESS":
-      return { ...state, vendors: action.data, loading: false, error: null };
+      return {
+        ...state,
+        vendors: action.data?.vendors ?? action.data ?? [],
+        loading: false,
+        error: null,
+      };
     case "GET_VENDORS_ROLE_FAIL":
       return { ...state, loading: false, error: action.error };
-      
+
     case "LOG_OUT":
       return { ...state, authData: null, loading: false, error: null };
     default:

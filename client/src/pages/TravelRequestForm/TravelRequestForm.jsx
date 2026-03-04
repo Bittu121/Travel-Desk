@@ -39,6 +39,7 @@ function TravelRequestForm() {
     dispatch(getManagers());
   }, [dispatch]);
   const { managers } = useSelector((state) => state.auth);
+  const managersList = Array.isArray(managers) ? managers : managers?.managers ?? [];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -261,7 +262,7 @@ function TravelRequestForm() {
               className={input}
             >
               <option value="">Reporting Manager</option>
-              {managers?.map((manager) => (
+              {managersList.map((manager) => (
                 <option key={manager?._id} value={manager?.email}>
                   {manager?.fullName?.toUpperCase()}
                 </option>

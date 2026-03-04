@@ -3,7 +3,7 @@ import {
   getAllTravelRequestsByRole,
   getTravelRequestById,
   updatePendingTravelRequestById,
-} from "../controllers/travelPendingAndApproveController.js";
+} from "../controllers/travelPendingAndApprove.controller.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 import { isAuthorized } from "../middleware/isAuthorized.js";
 

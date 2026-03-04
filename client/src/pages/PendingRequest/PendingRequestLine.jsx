@@ -22,11 +22,13 @@ function PendingRequestLine({
     setSelectedVendor(e.target.value);
     setVendor(e.target.value); // This updates the parent state
   };
+  
   //get manager
   useEffect(() => {
     dispatch(getVendors());
   }, [dispatch]);
   const { vendors } = useSelector((state) => state.auth);
+  const vendorsList = Array.isArray(vendors) ? vendors : vendors?.vendors ?? [];
 
   return (
     <>
@@ -99,9 +101,9 @@ function PendingRequestLine({
                 onChange={handleVendorChange}
               >
                 <option value="">Select Vendor</option>
-                {vendors?.map((vendor) => (
+                {vendorsList.map((vendor) => (
                   <option key={vendor._id} value={vendor.email}>
-                    {vendor.fullName.toUpperCase()}
+                    {vendor?.fullName.toUpperCase()}
                   </option>
                 ))}
               </select>

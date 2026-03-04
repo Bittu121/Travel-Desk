@@ -2,7 +2,7 @@ import express from "express";
 import {
   getUserTravelRequests,
   travelRequestForm,
-} from "../controllers/travelRequestController.js";
+} from "../controllers/travelRequest.controller.js";
 import authMiddleWare from "../middleware/AuthMiddleware.js";
 import { isAuthorized } from "../middleware/isAuthorized.js";
 
