@@ -170,7 +170,7 @@ function PendingRequestLine({
           )}
           {/* Vendor management includes uploading and viewing tickets, including new tickets.
            */}
-          {user?.user?.role === "vender" && (
+          {user?.user?.role === "vendor" && (
             <>
               <td className="px-4 py-4">
                 <UploadTicket _id={item?._id} />
@@ -189,7 +189,7 @@ function PendingRequestLine({
             </>
           )}
           {/* status,bookmarks & ticket status */}
-          {user?.user?.role === "vender" && (
+          {user?.user?.role === "vendor" && (
             <>
               <td className="px-4 py-4">{item?.status}</td>
               <td className="px-4 py-4">

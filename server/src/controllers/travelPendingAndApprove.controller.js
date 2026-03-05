@@ -2,6 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import dotenv from "dotenv";
 import {
   getAllTravelRequestsByRoleService,
+  getApprovedRequestDataService,
   getTravelRequestServiceById,
   updatePendingTravelRequestServiceById,
 } from "../services/travelPendingAndApprove.services.js";
@@ -46,4 +47,15 @@ export const updatePendingTravelRequestById = asyncHandler(async (req, res) => {
   });
 });
 
-//Approved request
+//Get Approved Request Data
+export const getApprovedRequestData = asyncHandler(async (req, res) => {
+  const userRole = req.user.role;
+  const travelRequestsAcceptedDetails =
+    await getApprovedRequestDataService(userRole);
+
+  res.status(200).json({
+    success: true,
+    data: travelRequestsAcceptedDetails,
+    message: "Filtered travel requests fetched successfully",
+  });
+});

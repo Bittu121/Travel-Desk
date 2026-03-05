@@ -39,3 +39,18 @@ export const updatePendingTravelRequestById =
       toast.error(errorMessage);
     }
   };
+
+export const getApprovedRequestData = () => async (dispatch) => {
+  dispatch({ type: "GET_APPROVED_REQUESTS_DATA_START" });
+  try {
+    const { data } = await travelPendingApprovalApi.getApprovedRequestData();
+    dispatch({ type: "GET_APPROVED_REQUESTS_DATA", data: data });
+    return data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.message;
+    dispatch({
+      type: "GET_APPROVED_REQUESTS_DATA_FAIL",
+      error: errorMessage,
+    });
+  }
+};

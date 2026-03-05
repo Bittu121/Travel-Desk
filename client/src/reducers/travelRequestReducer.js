@@ -89,6 +89,25 @@ const travelRequestReducer = (state = initialState, action) => {
         error: action.error,
       };
     //Approved request
+    case "GET_APPROVED_REQUESTS_DATA_START":
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case "GET_APPROVED_REQUESTS_DATA":
+      return {
+        ...state,
+        travelRequests: action.data,
+        loading: false,
+        error: null,
+      };
+    case "GET_APPROVED_REQUESTS_DATA_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
 
     default:
       return state;

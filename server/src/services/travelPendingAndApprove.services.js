@@ -150,3 +150,27 @@ export const updatePendingTravelRequestServiceById = async (
   }
   return updateTravelRequest;
 };
+
+export const getApprovedRequestDataService = async (userRole) => {
+  let travelRequestsAcceptedDetails;
+  if (userRole === "manager") {
+    travelRequestsAcceptedDetails = await TravelRequestModel.find({
+      isB1Approved: true,
+    });
+  } else if (userRole === "hr") {
+    travelRequestsAcceptedDetails = await TravelRequestModel.find({
+      isB2Approved: true,
+    });
+  } else if (userRole === "vender") {
+    travelRequestsAcceptedDetails = await TravelRequestModel.find({
+      isB3Approved: true,
+    });
+  } else if (userRole === "finance") {
+    travelRequestsAcceptedDetails = await TravelRequestModel.find({
+      isB2Approved: true,
+    });
+  } else {
+    throw new AppError("Access Denied", 403);
+  }
+  return travelRequestsAcceptedDetails;
+};
