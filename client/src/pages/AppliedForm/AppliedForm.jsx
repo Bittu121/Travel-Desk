@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import Pagination from "../Pagination";
 import LoadingSpinner from "../../pages/LoadingSpinner.jsx";
 import AppliedFormTravelers from "./AppliedFormTravelers.jsx";
-import UploadBills from "./documents/UploadBills.jsx";
-import UploadTicket from "./documents/UploadTicket.jsx";
 import { useEffect } from "react";
 import { getUserTravelRequests } from "../../action/travelRequestAction.js";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import ViewUploadBillsByVendor from "../ApprovedRequest/ViewUploadBillsByVendor.jsx";
+import ViewUploadTicketsByVendor from "../ApprovedRequest/ViewUploadTicketsByVendor.jsx";
 
 function AppliedForm() {
   const { authData: user } = useSelector((state) => state.auth);
@@ -253,10 +253,12 @@ function AppliedForm() {
                     {canUpload && (
                       <>
                         <td className="px-4 py-4">
-                          <UploadBills item={item?.uploadBill} />
+                          <ViewUploadBillsByVendor item={item?.uploadBill} />
                         </td>
                         <td className="px-4 py-4">
-                          <UploadTicket item={item?.uploadTicket} />
+                          <ViewUploadTicketsByVendor
+                            item={item?.uploadTicket}
+                          />
                         </td>
                       </>
                     )}

@@ -5,12 +5,11 @@ import AppliedFormTravelers from "../AppliedForm/AppliedFormTravelers.jsx";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVendors } from "../../action/authAction.js";
-import UploadTicket from "./vendor-management/vendor-tickets/UploadTicket.jsx";
-import ViewTicket from "./vendor-management/vendor-tickets/ViewTicket.jsx";
-import UploadNewTicket from "./vendor-management/vendor-tickets/UploadNewTicket.jsx";
-import ViewNewTicket from "./vendor-management/vendor-tickets/ViewNewTicket.jsx";
-import BookMarks from "./vendor-management/vendor-status/BookMarks.jsx";
 import TicketStatus from "./vendor-management/vendor-status/TicketStatus.jsx";
+import UploadBillForm from "./vendor-management/vendor-requests/UploadBillForm.jsx";
+import BillsList from "./vendor-management/vendor-requests/BillsList.jsx";
+import UploadTicketForm from "./vendor-management/vendor-requests/UploadTicketForm.jsx";
+import TicketsList from "./vendor-management/vendor-requests/TicketsList.jsx";
 
 function PendingRequestLine({
   item,
@@ -56,7 +55,7 @@ function PendingRequestLine({
   }
 
   const handleConfirm = () => {
-    travelRequestUpdate(_id, isApproved, selectedVendor);
+    travelRequestUpdate(item);
   };
 
   return (
@@ -115,7 +114,7 @@ function PendingRequestLine({
           <td className="px-4 py-4">
             <NavLink
               className="text-blue-600 text-sm underline"
-              to={`/pending-requests/${item?._id}`}
+              to={`/pending-requests/${item?.id}`}
             >
               Open Form
             </NavLink>
@@ -145,6 +144,7 @@ function PendingRequestLine({
               item.isB1Approved &&
               !item.isB2Approved &&
               !item.isB2Rejected)) && (
+              !item.isB2Rejected) && (
             <>
               <td className="px-4 py-4 text-center">
                 <LuCheck
@@ -173,18 +173,18 @@ function PendingRequestLine({
           {user?.user?.role === "vendor" && (
             <>
               <td className="px-4 py-4">
-                <UploadTicket _id={item?._id} />
+                <UploadBillForm _id={item?.id} />
               </td>
               <td className="px-4 py-4">
                 {" "}
-                <ViewTicket _id={item?._id} />
+                <BillsList _id={item?.id} />
               </td>
               <td className="px-4 py-4">
-                <UploadNewTicket _id={item?._id} />
+                <UploadTicketForm _id={item?.id} />
               </td>
               <td className="px-4 py-4">
                 {" "}
-                <ViewNewTicket _id={item?._id} />
+                <TicketsList _id={item?.id} />
               </td>
             </>
           )}
@@ -192,12 +192,10 @@ function PendingRequestLine({
           {user?.user?.role === "vendor" && (
             <>
               <td className="px-4 py-4">{item?.status}</td>
-              <td className="px-4 py-4">
-                <BookMarks item={item} />
-              </td>
+              <td className="px-4 py-4 ">{item?.bookMarks}</td>
               <td className="px-4 py-4">
                 <TicketStatus
-                  _id={item?._id}
+                  _id={item?.id}
                   getBookedStatus={item?.isBooked}
                   fetchPendingRequestData={fetchPendingRequestData}
                 />

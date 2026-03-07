@@ -55,7 +55,7 @@ const travelRequestReducer = (state = initialState, action) => {
     case "GET_ALL_TRAVEL_REQUESTS":
       return {
         ...state,
-        travelRequests: action.data,
+        travelRequests: action.data.data,
         loading: false,
         error: null,
       };
@@ -76,9 +76,9 @@ const travelRequestReducer = (state = initialState, action) => {
         ...state,
         travelRequests: Array.isArray(state.travelRequests)
           ? state.travelRequests.map((request) =>
-              request._id === action.data._id ? action.data : request,
+              request.id === action.data.data.id ? action.data.data : request,
             )
-          : [action.data],
+          : [action.data.data],
         loading: false,
         error: null,
       };

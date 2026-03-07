@@ -13,19 +13,30 @@ import {
   updateUserService,
 } from "../services/user.services.js";
 import asyncHandler from "../utils/asyncHandler.js";
+import { registerUserDTO } from "../dto/user/registerUser.dto.js";
+import { userResponseDTO } from "../dto/user/userResponse.dto.js";
+import { loginUserDTO } from "../dto/user/loginUser.dto.js";
+import { updateUserDTO } from "../dto/user/updateUser.dto.js";
+import { forgotPasswordDTO } from "../dto/user/forgotPassword.dto.js";
+import { resetPasswordDTO } from "../dto/user/resetPassword.dto.js";
+
 dotenv.config();
 
 //register user
 export const register = asyncHandler(async (req, res) => {
-  const user = await registerUserService(req.body);
-  return res
-    .status(201)
-    .json({ success: true, message: "User registered successfully", user });
+  const dto = registerUserDTO(req.body);
+  const user = await registerUserService(dto);
+  return res.status(201).json({
+    success: true,
+    message: "User registered successfully",
+    user: userResponseDTO(user),
+  });
 });
 
 //login user
 export const login = asyncHandler(async (req, res) => {
-  const { token, user } = await loginUserService(req.body);
+  const dto = loginUserDTO(req.body);
+  const { token, user } = await loginUserService(dto);
 
   // set token in cookie
   res.cookie("token", token, {
@@ -56,27 +67,29 @@ export const logout = asyncHandler(async (req, res) => {
 //get user data
 export const getUserData = asyncHandler(async (req, res) => {
   const user = await getUserDataService(req.user.id);
-  return res.status(200).json({ success: true, user });
+  return res.status(200).json({ success: true, user: userResponseDTO(user) });
 });
 
 //Get all users
 export const getAllUsers = asyncHandler(async (req, res) => {
   const users = await getAllUsersService();
+  const response = users.map(userResponseDTO);
   return res.status(200).json({
     success: true,
-    users,
+    users: response,
   });
 });
 
 //Update users
 export const updateUser = asyncHandler(async (req, res) => {
   const { userId } = req.params;
-  const updateData = req.body;
-  const updatedUser = await updateUserService(userId, updateData);
+  // const updateData = req.body;
+  const dto = updateUserDTO(req.body);
+  const updatedUser = await updateUserService(userId, dto);
   return res.status(200).json({
     success: true,
     message: "User updated successfully",
-    user: updatedUser,
+    user: userResponseDTO(updatedUser),
   });
 });
 
@@ -92,8 +105,10 @@ export const deleteUser = asyncHandler(async (req, res) => {
 
 //forgot-password
 export const forgotPassword = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-  await forgotPasswordService(email);
+  // const { email } = req.body;
+  // await forgotPasswordService(email);
+  const dto = forgotPasswordDTO(req.body);
+  await forgotPasswordService(dto.email);
   res.status(200).json({
     success: true,
     message: "Reset password link has been sent to your email.",
@@ -103,21 +118,26 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 //reset-password
 export const resetPassword = asyncHandler(async (req, res) => {
   const { token } = req.params;
-  const { newPassword } = req.body;
-  await resetPasswordService(token, newPassword);
+  // const { newPassword } = req.body;
+  // await resetPasswordService(token, newPassword);
+  const dto = resetPasswordDTO(req.body);
+
+  await resetPasswordService(token, dto.newPassword);
   res.status(200).json({ message: "Password has been reset successfully" });
 });
 
 //get all manager
 export const getManagers = asyncHandler(async (req, res) => {
   const managers = await getManagersService();
-  res.status(200).json({ success: true, managers });
+  const response = managers.map(userResponseDTO);
+  res.status(200).json({ success: true, managers: response });
 });
 
 //get all vendor
 export const getVendors = asyncHandler(async (req, res) => {
   const vendors = await getVendorService();
-  res.status(200).json({ success: true, vendors });
+  const response = vendors.map(userResponseDTO);
+  res.status(200).json({ success: true, vendors: response });
 });
 
 // import LoginModel from "../models/user.model.js";

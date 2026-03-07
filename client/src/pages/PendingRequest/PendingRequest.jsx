@@ -30,13 +30,16 @@ function PendingRequest() {
   const isSelectedVendor = data.filter(
     (item) => item.vendors === user.user.email,
   );
-  const managerApproved = data.filter((item) => item.isB1Approved === false);
-  const hrApproved = data.filter((item) => item.isB2Approved === false);
+  const managerApproved = data.filter((item) => !item.isB1Approved);
+  const hrApproved = data.filter(
+    (item) => !item.isB2Approved,
+  );
 
   const fetchPendingRequestData = async () => {
     try {
       const response = await dispatch(getAllTravelRequestsByRole());
-      setData(response?.data || []);
+      const fetchedData = response?.data;
+      setData(Array.isArray(fetchedData) ? fetchedData : fetchedData?.data || []);
     } catch (error) {
       console.error("Error fetching travel requests:", error);
     }
@@ -69,7 +72,7 @@ function PendingRequest() {
     }
     try {
       await dispatch(
-        updatePendingTravelRequestById(updatedItem?._id, updatedItem),
+        updatePendingTravelRequestById(updatedItem?.id, updatedItem),
       );
       await fetchPendingRequestData();
     } catch (error) {
@@ -90,7 +93,7 @@ function PendingRequest() {
       "isB2Rejected",
       "isB3Approved",
       "isB3Rejected",
-      "_id",
+      "id",
       "uploadTicket",
       "uploadBill",
       "createdAt",
@@ -128,12 +131,26 @@ function PendingRequest() {
           .map((val) => val?.toString().toLowerCase() || "")
           .some((val) => val.includes(term));
       });
-    if (isVendorUser) return filterBySearch(unbookedData && isSelectedVendor);
+    if (isVendorUser) {
+      const vendorData = unbookedData.filter(
+        (item) => item.vendors === user.user.email,
+      );
+      return filterBySearch(vendorData);
+    }
     if (user?.user?.role === "manager") return filterBySearch(managerApproved);
     if (isHrUser) return filterBySearch(hrApproved);
 
     return [];
-  }, [data, searchName, unbookedData, managerApproved, hrApproved]);
+  }, [
+    data,
+    searchName,
+    isVendorUser,
+    unbookedData,
+    isSelectedVendor,
+    managerApproved,
+    hrApproved,
+    user,
+  ]);
 
   const currentItems = useMemo(() => {
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -165,6 +182,8 @@ function PendingRequest() {
       </p>
     </div>
   );
+
+  console.log("data", data);
 
   return (
     <>
@@ -274,10 +293,10 @@ function PendingRequest() {
                         (isVendorUser && item.isB2Approved);
                       return shouldRender ? (
                         <>
-                          <tr key={item?._id} className=" hover:bg-gray-50">
-                            <PendingRequestLine
-                              item={item}
-                              _id={item?._id}
+                        <tr key={item?.id} className=" hover:bg-gray-50">
+                          <PendingRequestLine
+                            item={item}
+                            _id={item?.id}
                               travelRequestUpdate={() =>
                                 travelRequestUpdate(item)
                               }

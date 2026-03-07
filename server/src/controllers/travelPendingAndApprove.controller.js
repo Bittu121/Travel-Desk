@@ -6,6 +6,8 @@ import {
   getTravelRequestServiceById,
   updatePendingTravelRequestServiceById,
 } from "../services/travelPendingAndApprove.services.js";
+import { travelRequestResponseDTO } from "../dto/travelRequest/travelRequestResponse.dto.js";
+import { updateTravelRequestDTO } from "../dto/travelRequest/updateTravelRequest.dto.js";
 dotenv.config();
 
 //Pending request
@@ -17,9 +19,11 @@ export const getAllTravelRequestsByRole = asyncHandler(async (req, res) => {
     userRole,
     userEmail,
   );
+  const response = travelRequests.map(travelRequestResponseDTO);
   res.json({
     success: true,
-    data: travelRequests,
+    // data: travelRequests,
+    data: response,
   });
 });
 
@@ -28,21 +32,24 @@ export const getTravelRequestById = asyncHandler(async (req, res) => {
   const travelRequest = await getTravelRequestServiceById(id);
   res.status(200).json({
     success: true,
-    data: travelRequest,
+    data: travelRequestResponseDTO(travelRequest),
   });
 });
 
 export const updatePendingTravelRequestById = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const updateTravelRequestData = req.body;
+  // const updateTravelRequestData = req.body;
+  const dto = updateTravelRequestDTO(req.body);
   const updateTravelRequest = await updatePendingTravelRequestServiceById(
     id,
-    updateTravelRequestData,
+    // updateTravelRequestData,
+    dto,
   );
 
   res.status(200).json({
     success: true,
-    data: updateTravelRequest,
+    // data: updateTravelRequest,
+    data: travelRequestResponseDTO(updateTravelRequest),
     message: "Travel request status updated successfully",
   });
 });
@@ -53,9 +60,12 @@ export const getApprovedRequestData = asyncHandler(async (req, res) => {
   const travelRequestsAcceptedDetails =
     await getApprovedRequestDataService(userRole);
 
+  const response = travelRequestsAcceptedDetails.map(travelRequestResponseDTO);
+
   res.status(200).json({
     success: true,
-    data: travelRequestsAcceptedDetails,
+    // data: travelRequestsAcceptedDetails,
+    data: response,
     message: "Filtered travel requests fetched successfully",
   });
 });

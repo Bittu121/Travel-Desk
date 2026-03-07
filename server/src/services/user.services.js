@@ -26,10 +26,9 @@ export const registerUserService = async (data) => {
   const existingUser = await LoginModel.findOne({ email: lowerEmail });
 
   if (existingUser) {
-    return res
-      .status(400)
-      .json({ success: false, message: "User already exists" });
+    throw new AppError("User already exists", 400);
   }
+  
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new LoginModel({
     fullName,
@@ -189,7 +188,7 @@ export const resetPasswordService = async (token, newPassword) => {
   if (!user) {
     throw new AppError("Invalid or expired token", 400);
   }
-  
+
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(newPassword, salt);
   user.resetPasswordToken = undefined;
