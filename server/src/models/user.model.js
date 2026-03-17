@@ -13,6 +13,16 @@ const loginSchema = new Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+
+  refreshToken: {
+      type: String,
+      default: null,
+    },
+
+    refreshTokenExpires: {
+      type: Date,
+      default: null,
+    },
 });
 const LoginModel = mongoose.model("Login", loginSchema);
 export default LoginModel;
