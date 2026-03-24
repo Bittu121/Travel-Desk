@@ -183,7 +183,7 @@ function PendingRequest() {
     </div>
   );
 
-  console.log("data", data);
+  // console.log("data", data);
 
   return (
     <>

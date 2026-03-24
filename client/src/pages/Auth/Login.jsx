@@ -111,6 +111,7 @@
 // }
 // export default Login;
 
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -143,11 +144,10 @@ function Login() {
   const isDisabled = loading || !data.email || !data.password;
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center p-6">
       <div
         className="
         relative w-full min-h-[520px]
-        bg-white
         rounded-md
         border border-gray-200
         shadow-xs

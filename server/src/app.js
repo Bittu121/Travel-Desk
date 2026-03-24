@@ -6,6 +6,9 @@ import userRoute from "./routes/user.routes.js";
 import travelRequestRoute from "./routes/travelRequest.routes.js";
 import travelPendingAndApproveRoute from "./routes/travelPendingAndApprove.routes.js";
 import globalErrorHandler from "./middleware/error.middleware.js";
+import uploadBillRoute from "./routes/uploadBills.routes.js";
+import uploadTicketRoute from "./routes/uploadTickets.routes.js";
+import checkedStatusRoute from "./routes/checkedStatus.routes.js";
 
 const app = express();
 
@@ -23,6 +26,9 @@ app.use(
 app.use("/api/v1/auth/user", userRoute);
 app.use("/api/v1/travel", travelRequestRoute);
 app.use("/api/v1/travel-requests", travelPendingAndApproveRoute);
+app.use("/api/v1/bills", uploadBillRoute);
+app.use("/api/v1/tickets", uploadTicketRoute);
+app.use("/api/v1/status", checkedStatusRoute);
 app.use(globalErrorHandler);
 
 export default app;
