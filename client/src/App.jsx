@@ -12,6 +12,7 @@ import Login from "./pages/Auth/Login.jsx";
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 import ResetPassword from "./pages/Auth/ResetPassword.jsx";
 import GetUserDetails from "./pages/Auth/GetUserDetails.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 import { useSelector } from "react-redux";
 import TravelRequestFormDetails from "./pages/PendingRequest/TravelRequestFormDetails.jsx";
 
@@ -21,7 +22,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={user ? <Layout /> : <Login />}>
+        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <LandingPage />} />
+
+        {/* Protected layout routes */}
+        <Route element={user ? <Layout /> : <Navigate to="/login" />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/travel-request-form" element={<TravelRequestForm />} />
           <Route path="/applied-form" element={<AppliedForm />} />
@@ -29,21 +33,13 @@ function App() {
           <Route path="/update-user" element={<GetUserDetails />} />
           <Route path="/approved-requests" element={<ApprovedRequest />} />
           <Route path="/pending-requests" element={<PendingRequest />} />
-          <Route
-            path="/pending-requests/:id"
-            element={<TravelRequestFormDetails />}
-          />
+          <Route path="/pending-requests/:id" element={<TravelRequestFormDetails />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-        <Route
-          path="/forgot-password"
-          element={user ? <Navigate to="/" /> : <ForgotPassword />}
-        />
-        <Route
-          path="/reset-password/:token"
-          element={user ? <Navigate to="/" /> : <ResetPassword />}
-        />
+
+        <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
+        <Route path="/forgot-password" element={user ? <Navigate to="/dashboard" /> : <ForgotPassword />} />
+        <Route path="/reset-password/:token" element={user ? <Navigate to="/dashboard" /> : <ResetPassword />} />
       </Routes>
     </>
   );
