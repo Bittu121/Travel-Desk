@@ -2,6 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import userRoute from "./routes/user.routes.js";
 import travelRequestRoute from "./routes/travelRequest.routes.js";
 import travelPendingAndApproveRoute from "./routes/travelPendingAndApprove.routes.js";
@@ -10,6 +12,8 @@ import uploadBillRoute from "./routes/uploadBills.routes.js";
 import uploadTicketRoute from "./routes/uploadTickets.routes.js";
 import checkedStatusRoute from "./routes/checkedStatus.routes.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 //middleware
@@ -23,6 +27,7 @@ app.use(
     credentials: true,
   }),
 );
+app.use("/upload", express.static(path.join(__dirname, "upload")));
 app.use("/api/v1/auth/user", userRoute);
 app.use("/api/v1/travel", travelRequestRoute);
 app.use("/api/v1/travel-requests", travelPendingAndApproveRoute);
