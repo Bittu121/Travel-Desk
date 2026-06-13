@@ -31,15 +31,15 @@ function PendingRequest() {
     (item) => item.vendors === user.user.email,
   );
   const managerApproved = data.filter((item) => !item.isB1Approved);
-  const hrApproved = data.filter(
-    (item) => !item.isB2Approved,
-  );
+  const hrApproved = data.filter((item) => !item.isB2Approved);
 
   const fetchPendingRequestData = async () => {
     try {
       const response = await dispatch(getAllTravelRequestsByRole());
       const fetchedData = response?.data;
-      setData(Array.isArray(fetchedData) ? fetchedData : fetchedData?.data || []);
+      setData(
+        Array.isArray(fetchedData) ? fetchedData : fetchedData?.data || [],
+      );
     } catch (error) {
       console.error("Error fetching travel requests:", error);
     }
@@ -132,10 +132,14 @@ function PendingRequest() {
           .some((val) => val.includes(term));
       });
     if (isVendorUser) {
-      const vendorData = unbookedData.filter(
+      const vendorData = data.filter(
         (item) => item.vendors === user.user.email,
       );
-      return filterBySearch(vendorData);
+      // Keep unbooked rows on top, push booked rows to the bottom
+      const sortedVendorData = [...vendorData].sort(
+        (a, b) => Number(a.isBooked) - Number(b.isBooked),
+      );
+      return filterBySearch(sortedVendorData);
     }
     if (user?.user?.role === "manager") return filterBySearch(managerApproved);
     if (isHrUser) return filterBySearch(hrApproved);
@@ -223,7 +227,6 @@ function PendingRequest() {
             ) : (user?.user?.role === "manager" &&
                 managerApproved.length === 0) ||
               (isHrUser && hrApproved.length === 0) ||
-              (isVendorUser && unbookedData.length === 0) ||
               (isVendorUser && isSelectedVendor.length === 0) ? (
               <NoDataFound />
             ) : (
@@ -293,10 +296,10 @@ function PendingRequest() {
                         (isVendorUser && item.isB2Approved);
                       return shouldRender ? (
                         <>
-                        <tr key={item?.id} className=" hover:bg-gray-50">
-                          <PendingRequestLine
-                            item={item}
-                            _id={item?.id}
+                          <tr key={item?.id} className=" hover:bg-gray-50">
+                            <PendingRequestLine
+                              item={item}
+                              _id={item?.id}
                               travelRequestUpdate={() =>
                                 travelRequestUpdate(item)
                               }

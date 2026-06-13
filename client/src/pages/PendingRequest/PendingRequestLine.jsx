@@ -62,7 +62,7 @@ function PendingRequestLine({
 
   return (
     <>
-      {!item?.isBooked && (
+      {
         <>
           <td className="px-4 py-4">{item.travelRequestId}</td>
           <td className="px-4 py-4">{item.name}</td>
@@ -206,7 +206,7 @@ function PendingRequestLine({
             </>
           )}
         </>
-      )}
+      }
     </>
   );
 }

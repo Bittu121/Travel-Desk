@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../LoadingSpinner.jsx";
 import { resetPassword } from "../../action/authAction.js";
-import logo from "../../../public/logo.png";
+import LeftSideContent from "./LeftSideContent.jsx";
 
 function ResetPassword() {
   const [formData, setFormData] = useState({ newPassword: "" });
@@ -39,24 +39,7 @@ function ResetPassword() {
         overflow-hidden
         grid grid-cols-12"
       >
-        {/* Left Section */}
-        <div className="col-span-5 hidden md:block bg-gradient-to-br from-slate-900 to-slate-800">
-          <div className="h-full flex flex-col justify-center px-14 text-white">
-            <div className="flex items-center gap-3">
-              <img src={logo} className="w-12 rounded-md bg-white p-1" />
-              <h2 className="text-2xl font-semibold tracking-tight">
-                Travel Desk
-              </h2>
-            </div>
-            <p className="mt-8 text-base font-light text-slate-300 leading-relaxed max-w-[22rem]">
-              Secure internal access for employees and operations teams.
-            </p>
-            <div className="mt-12 h-px w-14 bg-slate-600/70" />
-            <p className="mt-5 text-xs font-medium text-slate-400 tracking-[0.25em] uppercase">
-              Secure • Scalable • Role-Based Access
-            </p>
-          </div>
-        </div>
+        <LeftSideContent />
         {/* Right Section */}
         <div className="col-span-12 md:col-span-7 flex items-center justify-center bg-white">
           <div

@@ -29,6 +29,7 @@ export const travelRequestResponseDTO = (travel) => {
 
     status: travel.status,
     isBooked: travel.isBooked,
+    bookMarks: travel.bookMarks,
 
     isB1Approved: travel.isB1Approved,
     isB1Rejected: travel.isB1Rejected,

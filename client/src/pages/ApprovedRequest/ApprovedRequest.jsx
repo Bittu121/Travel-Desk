@@ -234,7 +234,10 @@ function ApprovedRequest() {
                       )}
                       {canSeeStatus && (
                         <td className="px-4 py-4">
-                          <BookMarks item={item} />
+                          <BookMarks
+                            item={item}
+                            fetchPendingRequestData={fetchApprovedRequestsData}
+                          />
                         </td>
                       )}
                     </tr>

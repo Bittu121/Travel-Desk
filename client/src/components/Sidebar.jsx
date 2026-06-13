@@ -25,6 +25,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     user?.user?.role === "user" ||
     user?.user?.role === "manager" ||
     user?.user?.role === "hr";
+  const isDashboard =
+    user?.user?.role === "user" ||
+    user?.user?.role === "manager" ||
+    user?.user?.role === "hr";
   const isCreateAndUpdateUser = user?.user?.role === "hr";
   const isTravelRequestApproval =
     user?.user?.role === "manager" ||
@@ -58,16 +62,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             </button>
           </div>
           <nav>
-            {isCreateAndUpdateUser && (
+            {isDashboard && (
               <NavLink
                 to="/dashboard"
-                // className="flex items-center gap-4 p-4 text-gray-500"
-                // style={(e) => {
-                //   return {
-                //     color: e.isActive ? "blue" : "black",
-                //     fontWeight: e.isActive ? "bold" : "normal",
-                //   };
-                // }}
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-4 mx-2 my-1 rounded-lg transition-all duration-200
      ${isActive ? "bg-indigo-50 text-indigo-600 font-semibold" : "text-gray-600"}
@@ -188,7 +185,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <FiX size={24} />
             </button>
           </div>
-          {isCreateAndUpdateUser && (
+          {isDashboard && (
             <NavLink
               to="/dashboard"
               className="flex items-center gap-4 p-4 text-gray-500"
