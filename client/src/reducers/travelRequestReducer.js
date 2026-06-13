@@ -108,6 +108,24 @@ const travelRequestReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "UPLOAD_BILL_START":
+    case "UPLOAD_TICKET_START":
+      return { ...state, loading: true, error: null };
+    case "UPLOAD_BILL_SUCCESS":
+    case "UPLOAD_TICKET_SUCCESS":
+      return {
+        ...state,
+        travelRequests: Array.isArray(state.travelRequests)
+          ? state.travelRequests.map((request) =>
+              request._id === action.data._id ? action.data : request,
+            )
+          : [action.data],
+        loading: false,
+        error: null,
+      };
+    case "UPLOAD_BILL_FAIL":
+    case "UPLOAD_TICKET_FAIL":
+      return { ...state, loading: false, error: action.error };
 
     default:
       return state;
