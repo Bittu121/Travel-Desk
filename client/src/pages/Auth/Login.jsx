@@ -33,10 +33,10 @@ function Login() {
     <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center p-6">
       <div
         className="
-        relative w-full min-h-[520px]
-        rounded-md
+        relative w-full max-w-6xl min-h-[480px]
+        rounded-xl
         border border-gray-200
-        shadow-xs
+        shadow-sm
         overflow-hidden
         grid grid-cols-12
       "
@@ -44,17 +44,8 @@ function Login() {
         <LeftSideContent />
         {/* RIGHT SIDE */}
         <div className="col-span-12 md:col-span-7 flex items-center justify-center bg-white">
-          <div
-            className="
-            w-full max-w-md
-            bg-white
-            border border-gray-200
-            rounded-lg
-            shadow-xs
-            px-10 py-12
-          "
-          >
-            <div className="mb-10">
+          <div className="w-full max-w-sm px-8 py-10">
+            <div className="mb-8">
               <p className="text-sm text-slate-500">Welcome back</p>
               <h3 className="text-2xl font-semibold text-slate-900 mt-1">
                 Sign in

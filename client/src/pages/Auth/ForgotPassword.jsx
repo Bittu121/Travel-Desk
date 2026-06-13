@@ -28,7 +28,7 @@ function ForgotPassword() {
     <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center px-6">
       <div
         className="
-        relative w-full min-h-[520px]
+        relative w-full max-w-6xl min-h-[520px]
         bg-white
         rounded-md
         border border-gray-200

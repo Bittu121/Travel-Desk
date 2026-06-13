@@ -6,7 +6,7 @@ import {
   MdFlightTakeoff,
   MdApproval,
   MdReceiptLong,
-  MdAdminPanelSettings,
+  MdMailOutline,
   MdTrendingUp,
   MdSecurity,
 } from "react-icons/md";
@@ -21,38 +21,38 @@ import { RiFlightTakeoffLine } from "react-icons/ri";
 const FEATURES = [
   {
     icon: <MdApproval size={26} />,
-    title: "Multi-Level Approval Matrix",
-    desc: "Transparent, role-based validation across manager, HR, and finance — every request tracked end-to-end.",
+    title: "Step-by-Step Approvals",
+    desc: "Your manager approves first, then HR approves and picks a vendor, and finally finance handles the payment.",
     color: "from-blue-500 to-blue-700",
   },
   {
     icon: <MdFlightTakeoff size={26} />,
-    title: "Smart Travel Requests",
-    desc: "Submit domestic or international trips in minutes. Attach itineraries, auto-notify approvers instantly.",
+    title: "Easy Travel Requests",
+    desc: "Fill one simple form — pick flight, train, bus or cab, add hotel stay, travelers, dates and the reason for travel.",
     color: "from-violet-500 to-violet-700",
   },
   {
+    icon: <MdMailOutline size={26} />,
+    title: "Automatic Emails",
+    desc: "You get an email when your request is sent, and the next person gets an email when it is their turn to act.",
+    color: "from-sky-500 to-cyan-600",
+  },
+  {
     icon: <MdReceiptLong size={26} />,
-    title: "Vendor Ticket & Bills",
-    desc: "Vendors upload tickets and bills directly. Finance teams verify and close the loop — zero email chaos.",
+    title: "Upload Tickets & Bills",
+    desc: "The vendor uploads the booked tickets and bills right on the request, so nothing gets lost in email.",
     color: "from-emerald-500 to-emerald-700",
   },
   {
-    icon: <MdAdminPanelSettings size={26} />,
-    title: "Role-Based Access Control",
-    desc: "Employee, Manager, HR, Finance, Vendor — each sees exactly what they need. Nothing more.",
-    color: "from-amber-500 to-orange-600",
-  },
-  {
     icon: <MdTrendingUp size={26} />,
-    title: "Real-Time Status Tracking",
-    desc: "Live dashboards for pending, approved, and rejected requests. No more chasing status over Slack.",
+    title: "Your Own Dashboard",
+    desc: "Everyone sees their own list of pending, approved and booked requests. You can search and download it to Excel.",
     color: "from-pink-500 to-rose-600",
   },
   {
     icon: <MdSecurity size={26} />,
-    title: "Secure & Auditable",
-    desc: "JWT-secured sessions, encrypted data, and a full audit trail. Enterprise-grade without the complexity.",
+    title: "Safe & Secure Login",
+    desc: "Login is protected and each role sees only what it should. Forgot your password? Reset it easily by email.",
     color: "from-slate-600 to-slate-800",
   },
 ];
@@ -61,24 +61,24 @@ const STEPS = [
   {
     num: "01",
     title: "Submit a Request",
-    desc: "Employee fills a travel form — destination, dates, travelers, and purpose. Submitted in under 2 minutes.",
+    desc: "Employee fills a travel form — source, destination, dates, travelers, mode and purpose — and submits in minutes.",
   },
   {
     num: "02",
-    title: "Approvals Flow Automatically",
-    desc: "Manager, HR, and Finance are notified in sequence. Each approves or rejects with a single click.",
+    title: "Manager & HR Approve",
+    desc: "The reporting manager approves first, then HR signs off and assigns a vendor — each notified by email in turn.",
   },
   {
     num: "03",
-    title: "Vendor & Finance Close the Loop",
-    desc: "Vendors upload tickets. Finance marks payment. Everyone sees the final status on their dashboard.",
+    title: "Vendor Books, Finance Closes",
+    desc: "The vendor uploads tickets and bills, finance marks payment, and the final status shows on every dashboard.",
   },
 ];
 
 const STATS = [
-  { value: "3×", label: "Faster approvals vs email" },
-  { value: "100%", label: "Approvals" },
   { value: "5", label: "Roles, zero overlap" },
+  { value: "4", label: "Travel modes supported" },
+  { value: "2", label: "Level approval matrix" },
   { value: "0", label: "Spreadsheets needed" },
 ];
 
@@ -98,16 +98,16 @@ const ROLES = [
     desc: "Submit requests",
   },
   { icon: <BsBuildings size={22} />, role: "Manager", desc: "First approval" },
-  { icon: <BsShieldCheck size={22} />, role: "HR", desc: "Policy check" },
-  {
-    icon: <MdReceiptLong size={22} />,
-    role: "Finance",
-    desc: "Payment sign-off",
-  },
+  { icon: <BsShieldCheck size={22} />, role: "HR", desc: "Approve & assign vendor" },
   {
     icon: <RiFlightTakeoffLine size={22} />,
     role: "Vendor",
-    desc: "Upload tickets",
+    desc: "Book & upload tickets",
+  },
+  {
+    icon: <MdReceiptLong size={22} />,
+    role: "Finance",
+    desc: "Payment & closure",
   },
 ];
 
@@ -187,7 +187,7 @@ function Hero({ onGetStarted, onSeeHowItWorks }) {
             onClick={onGetStarted}
             className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 text-base"
           >
-            Start managing travel
+            Go to your dashboard
             <HiOutlineArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
@@ -428,10 +428,10 @@ function CallToAction({ onGetStarted }) {
         </p>
         <button
           onClick={onGetStarted}
-          className="group mt-10 inline-flex items-center gap-2.5 bg-white text-slate-900 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all shadow-xl text-base"
+          className="group mt-10 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 text-base"
         >
-          Go to your dashboard
-          <HiOutlineChevronRight
+          Sign in to continue
+          <HiOutlineArrowRight
             size={18}
             className="group-hover:translate-x-1 transition-transform"
           />
