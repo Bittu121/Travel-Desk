@@ -33,9 +33,26 @@ export const getUploadBillsByRequestId = asyncHandler(async (req, res) => {
   });
 });
 
-
 //Delete a bill from the uploaded bills for a specific travel request
 export const deleteBill = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { filePath } = req.body;
 
-  // deleteBillService
+  // DEBUG
+  // console.debug("deleteBill method:", req.method);
+  // console.debug("deleteBill content-type:", req.get("content-type"));
+  // console.debug("deleteBill content-length:", req.get("content-length"));
+  // console.debug("deleteBill headers:", req.headers);
+  // console.debug("deleteBill req.body:", req.body);
+  // console.debug("deleteBill req.query:", req.query);
+  // const filePath =
+  //   req.body?.filePath || req.query?.filePath || req.get("x-file-path");
+
+  const uploadBill = await deleteBillService({ requestId: id, filePath });
+
+  res.status(200).json({
+    success: true,
+    message: "Bill deleted successfully",
+    uploadBill,
+  });
 });

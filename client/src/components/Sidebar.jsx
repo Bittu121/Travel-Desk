@@ -1,6 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { FiMenu, FiX, FiClock,FiCheckCircle,FiShield,FiUserCheck    } from "react-icons/fi";
+import {
+  FiMenu,
+  FiX,
+  FiClock,
+  FiCheckCircle,
+  FiShield,
+  FiUserCheck,
+} from "react-icons/fi";
 import {
   MdAssignment,
   MdDashboard,
@@ -158,7 +165,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
      hover:bg-gray-100`
                 }
               >
-                <FiUserCheck  className="text-xl" size={24} />
+                <FiUserCheck className="text-xl" size={24} />
                 <span className={`${isOpen ? "hidden" : "block"}`}>
                   Approved Requests
                 </span>
@@ -283,7 +290,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 };
               }}
             >
-              <FiUserCheck  className="text-xl" size={24} />
+              <FiUserCheck className="text-xl" size={24} />
               <span>Approved Requests</span>
             </NavLink>
           )}

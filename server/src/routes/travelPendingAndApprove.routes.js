@@ -9,6 +9,8 @@ import authMiddleWare from "../middleware/AuthMiddleware.js";
 import { isAuthorized } from "../middleware/isAuthorized.js";
 
 const router = express.Router();
+
+//Pending request
 router
   .route("/pending")
   .get(

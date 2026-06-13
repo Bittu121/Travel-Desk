@@ -5,10 +5,11 @@ import { getApprovedRequestData } from "../../action/travelPendingApprovalAction
 import Pagination from "../Pagination.jsx";
 import LoadingSpinner from "../LoadingSpinner.jsx";
 import AppliedFormTravelers from "../AppliedForm/AppliedFormTravelers.jsx";
+
 import UpdateFinancePaymentStatus from "./UpdateFinancePaymentStatus.jsx";
-import UpdateVendorBookMarkStatus from "./UpdateVendorBookMarkStatus.jsx";
-import ViewUploadBillsByVendor from "./ViewUploadBillsByVendor.jsx";
-import ViewUploadTicketsByVendor from "./ViewUploadTicketsByVendor.jsx";
+import BookMarks from "../PendingRequest/Vendor/BookMarks.jsx"; //from pendingRequest component
+import ViewBillsInApprovedRequest from "./ViewBillsInApprovedRequest.jsx";
+import ViewTicketsInApprovedRequest from "./ViewTicketsInApprovedRequest.jsx";
 
 function ApprovedRequest() {
   const dispatch = useDispatch();
@@ -215,10 +216,12 @@ function ApprovedRequest() {
                       {canUpload && (
                         <>
                           <td className="px-4 py-4">
-                            <ViewUploadBillsByVendor item={item?.uploadBill} />
+                            <ViewBillsInApprovedRequest
+                              item={item?.uploadBill}
+                            />
                           </td>
                           <td className="px-4 py-4">
-                            <ViewUploadTicketsByVendor
+                            <ViewTicketsInApprovedRequest
                               item={item?.uploadTicket}
                             />
                           </td>
@@ -231,7 +234,7 @@ function ApprovedRequest() {
                       )}
                       {canSeeStatus && (
                         <td className="px-4 py-4">
-                          <UpdateVendorBookMarkStatus item={item} />
+                          <BookMarks item={item} />
                         </td>
                       )}
                     </tr>

@@ -43,7 +43,6 @@ function Pagination({ itemsPerPage, totalItems, currentPage, paginate }) {
                 },
               },
             }}
-
           />
         </Stack>
       </div>

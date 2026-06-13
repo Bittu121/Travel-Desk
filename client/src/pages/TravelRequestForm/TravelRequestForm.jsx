@@ -39,7 +39,9 @@ function TravelRequestForm() {
     dispatch(getManagers());
   }, [dispatch]);
   const { managers } = useSelector((state) => state.auth);
-  const managersList = Array.isArray(managers) ? managers : managers?.managers ?? [];
+  const managersList = Array.isArray(managers)
+    ? managers
+    : (managers?.managers ?? []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -5,11 +5,13 @@ import AppliedFormTravelers from "../AppliedForm/AppliedFormTravelers.jsx";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVendors } from "../../action/authAction.js";
-import TicketStatus from "./vendor-management/vendor-status/TicketStatus.jsx";
-import UploadBillForm from "./vendor-management/vendor-requests/UploadBillForm.jsx";
-import BillsList from "./vendor-management/vendor-requests/BillsList.jsx";
-import UploadTicketForm from "./vendor-management/vendor-requests/UploadTicketForm.jsx";
-import TicketsList from "./vendor-management/vendor-requests/TicketsList.jsx";
+
+import TicketStatus from "./Vendor/TicketStatus.jsx";
+import UploadBills from "./Vendor/UploadBills.jsx";
+import ViewBills from "./Vendor/ViewBills.jsx";
+import UploadTickets from "./Vendor/UploadTickets.jsx";
+import ViewTickets from "./Vendor/ViewTickets.jsx";
+import BookMarks from "./Vendor/BookMarks.jsx";
 
 function PendingRequestLine({
   item,
@@ -143,48 +145,46 @@ function PendingRequestLine({
             (user?.user?.role === "hr" &&
               item.isB1Approved &&
               !item.isB2Approved &&
-              !item.isB2Rejected)) && (
-              !item.isB2Rejected) && (
-            <>
-              <td className="px-4 py-4 text-center">
-                <LuCheck
-                  size={26}
-                  className="font-bold rounded text-green-600 cursor-pointer"
-                  onClick={() => handleOpenModal(true)}
+              !item.isB2Rejected)) &&
+            !item.isB2Rejected && (
+              <>
+                <td className="px-4 py-4 text-center">
+                  <LuCheck
+                    size={26}
+                    className="font-bold rounded text-green-600 cursor-pointer"
+                    onClick={() => handleOpenModal(true)}
+                  />
+                </td>
+                <td className="px-4 py-3 text-center">
+                  <LuX
+                    size={26}
+                    className="font-bold rounded text-red-600 cursor-pointer"
+                    onClick={() => handleOpenModal(false)}
+                  />
+                </td>
+                <PendingRequestConfirmationModal
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  isApproved={isApproved}
+                  onConfirm={handleConfirm}
                 />
-              </td>
-              <td className="px-4 py-3 text-center">
-                <LuX
-                  size={26}
-                  className="font-bold rounded text-red-600 cursor-pointer"
-                  onClick={() => handleOpenModal(false)}
-                />
-              </td>
-              <PendingRequestConfirmationModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                isApproved={isApproved}
-                onConfirm={handleConfirm}
-              />
-            </>
-          )}
-          {/* Vendor management includes uploading and viewing tickets, including new tickets.
+              </>
+            )}
+          {/* Vendor management includes uploading and viewing tickets.
            */}
           {user?.user?.role === "vendor" && (
             <>
               <td className="px-4 py-4">
-                <UploadBillForm _id={item?.id} />
+                <UploadBills _id={item?.id} />
               </td>
               <td className="px-4 py-4">
-                {" "}
-                <BillsList _id={item?.id} />
+                <ViewBills _id={item?.id} />
               </td>
               <td className="px-4 py-4">
-                <UploadTicketForm _id={item?.id} />
+                <UploadTickets _id={item?.id} />
               </td>
               <td className="px-4 py-4">
-                {" "}
-                <TicketsList _id={item?.id} />
+                <ViewTickets _id={item?.id} />
               </td>
             </>
           )}
@@ -192,7 +192,10 @@ function PendingRequestLine({
           {user?.user?.role === "vendor" && (
             <>
               <td className="px-4 py-4">{item?.status}</td>
-              <td className="px-4 py-4 ">{item?.bookMarks}</td>
+              {/* <td className="px-4 py-4 ">{item?.bookMarks}</td> */}
+              <td className="px-4 py-4">
+                <BookMarks item={item} />
+              </td>
               <td className="px-4 py-4">
                 <TicketStatus
                   _id={item?.id}

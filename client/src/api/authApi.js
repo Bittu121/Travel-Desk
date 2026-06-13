@@ -11,11 +11,14 @@ export const logout = () => API.post("/logout");
 export const getUserData = () => API.get("/");
 
 export const getAllUsers = () => API.get("/all-users");
-export const updateUser = (userId, updateData) => API.put(`/update-user/${userId}`, updateData);
+export const updateUser = (userId, updateData) =>
+  API.put(`/update-user/${userId}`, updateData);
 export const deleteUser = (userId) => API.delete(`/delete-user/${userId}`);
 
-export const forgotPassword = (formData) => API.post("/forgot-password", formData);
-export const resetPassword = (token, formData) => API.post(`/reset-password/${token}`, formData);
+export const forgotPassword = (formData) =>
+  API.post("/forgot-password", formData);
+export const resetPassword = (token, formData) =>
+  API.post(`/reset-password/${token}`, formData);
 
 export const getManagers = () => API.get("/managers");
 export const getVendors = () => API.get("/vendors");

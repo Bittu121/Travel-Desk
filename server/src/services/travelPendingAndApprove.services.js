@@ -161,7 +161,7 @@ export const getApprovedRequestDataService = async (userRole) => {
     travelRequestsAcceptedDetails = await TravelRequestModel.find({
       isB2Approved: true,
     });
-  } else if (userRole === "vender") {
+  } else if (userRole === "vendor") {
     travelRequestsAcceptedDetails = await TravelRequestModel.find({
       isB3Approved: true,
     });

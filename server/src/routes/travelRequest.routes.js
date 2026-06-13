@@ -7,6 +7,8 @@ import authMiddleWare from "../middleware/AuthMiddleware.js";
 import { isAuthorized } from "../middleware/isAuthorized.js";
 
 const router = express.Router();
+
+//travelRequestForm
 router
   .route("/travel-request")
   .post(
@@ -23,6 +25,5 @@ router
     isAuthorized(["user", "manager", "hr"]),
     getUserTravelRequests,
   );
-  
 
 export default router;

@@ -22,7 +22,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <LandingPage />} />
+        <Route
+          path="/"
+          element={user ? <Navigate to="/dashboard" /> : <LandingPage />}
+        />
 
         {/* Protected layout routes */}
         <Route element={user ? <Layout /> : <Navigate to="/login" />}>
@@ -33,13 +36,25 @@ function App() {
           <Route path="/update-user" element={<GetUserDetails />} />
           <Route path="/approved-requests" element={<ApprovedRequest />} />
           <Route path="/pending-requests" element={<PendingRequest />} />
-          <Route path="/pending-requests/:id" element={<TravelRequestFormDetails />} />
+          <Route
+            path="/pending-requests/:id"
+            element={<TravelRequestFormDetails />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Route>
 
-        <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
-        <Route path="/forgot-password" element={user ? <Navigate to="/dashboard" /> : <ForgotPassword />} />
-        <Route path="/reset-password/:token" element={user ? <Navigate to="/dashboard" /> : <ResetPassword />} />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/dashboard" /> : <Login />}
+        />
+        <Route
+          path="/forgot-password"
+          element={user ? <Navigate to="/dashboard" /> : <ForgotPassword />}
+        />
+        <Route
+          path="/reset-password/:token"
+          element={user ? <Navigate to="/dashboard" /> : <ResetPassword />}
+        />
       </Routes>
     </>
   );

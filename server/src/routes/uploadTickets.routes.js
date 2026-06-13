@@ -14,16 +14,16 @@ router
   .route("/upload-ticket/:id")
   .put(
     authMiddleWare,
-    isAuthorized(["vender"]),
+    isAuthorized(["vendor"]),
     upload.array("files"),
     uploadTicket,
   );
 
 router
   .route("/:id/uploadTicket")
-  .get(authMiddleWare, isAuthorized(["vender"]), getUploadTicketByRequestId);
+  .get(authMiddleWare, isAuthorized(["vendor"]), getUploadTicketByRequestId);
 
 router
   .route("/:id/deleteTicket")
-  .delete(authMiddleWare, isAuthorized(["vender"]), deleteTicket);
+  .delete(authMiddleWare, isAuthorized(["vendor"]), deleteTicket);
 export default router;

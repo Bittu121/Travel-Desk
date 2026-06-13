@@ -15,14 +15,14 @@ const loginSchema = new Schema({
   resetPasswordExpires: Date,
 
   refreshToken: {
-      type: String,
-      default: null,
-    },
+    type: String,
+    default: null,
+  },
 
-    refreshTokenExpires: {
-      type: Date,
-      default: null,
-    },
+  refreshTokenExpires: {
+    type: Date,
+    default: null,
+  },
 });
 const LoginModel = mongoose.model("Login", loginSchema);
 export default LoginModel;

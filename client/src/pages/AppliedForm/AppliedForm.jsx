@@ -7,14 +7,14 @@ import AppliedFormTravelers from "./AppliedFormTravelers.jsx";
 import { useEffect } from "react";
 import { getUserTravelRequests } from "../../action/travelRequestAction.js";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import ViewUploadBillsByVendor from "../ApprovedRequest/ViewUploadBillsByVendor.jsx";
-import ViewUploadTicketsByVendor from "../ApprovedRequest/ViewUploadTicketsByVendor.jsx";
+import ViewBillsInApprovedRequest from "../ApprovedRequest/ViewBillsInApprovedRequest.jsx";
+import ViewTicketsInApprovedRequest from "../ApprovedRequest/ViewTicketsInApprovedRequest.jsx";
 
 function AppliedForm() {
   const { authData: user } = useSelector((state) => state.auth);
   const role = user?.user?.role;
 
-  const canUpload = role === "user" || role === "manager";
+  const canUpload = role === "user" || role === "manager"; //role user and manager can seen uploaded bills and ticket here
   const canSeeStatus = role === "user" || role === "manager" || role === "hr";
   const { loading, error } = useSelector((state) => state.travelRequest);
 
@@ -253,10 +253,10 @@ function AppliedForm() {
                     {canUpload && (
                       <>
                         <td className="px-4 py-4">
-                          <ViewUploadBillsByVendor item={item?.uploadBill} />
+                          <ViewBillsInApprovedRequest item={item?.uploadBill} />
                         </td>
                         <td className="px-4 py-4">
-                          <ViewUploadTicketsByVendor
+                          <ViewTicketsInApprovedRequest
                             item={item?.uploadTicket}
                           />
                         </td>

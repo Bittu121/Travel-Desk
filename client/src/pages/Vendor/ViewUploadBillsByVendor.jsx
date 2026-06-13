@@ -1,7 +1,8 @@
 import React from "react";
 
 function ViewUploadBillsByVendor({ item }) {
-  //[hr, finance --> seen ] -->  View Bills
+    //get uploaded Bills from item
+  //[hr, finance --> seen ]
   return (
     <>
       <div></div>

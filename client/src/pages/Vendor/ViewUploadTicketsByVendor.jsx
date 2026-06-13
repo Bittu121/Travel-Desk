@@ -1,7 +1,8 @@
 import React from "react";
 
 function ViewUploadTicketsByVendor({ item }) {
-  //[hr, finance --> seen ] --> View Tickets
+  //get uploaded ticket from item
+  //[hr, finance --> seen ]
   return (
     <>
       <div></div>

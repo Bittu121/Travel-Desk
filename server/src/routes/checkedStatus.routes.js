@@ -15,10 +15,10 @@ router
 
 router
   .route("/bookMarks/:id")
-  .put(authMiddleWare, isAuthorized(["vender"]), updateBookMark);
+  .put(authMiddleWare, isAuthorized(["vendor"]), updateBookMark);
 
 router
   .route("/updateBookedStatus/:id")
-  .put(authMiddleWare, isAuthorized(["vender"]), updateBookedTicketStatus);
+  .put(authMiddleWare, isAuthorized(["vendor"]), updateBookedTicketStatus);
 
 export default router;

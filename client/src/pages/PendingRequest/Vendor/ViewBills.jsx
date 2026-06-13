@@ -1,12 +1,12 @@
 import React from "react";
 
-function BillsList({ _id }) {
+function ViewBills({ _id }) {
   //api -->  getUploadBillsByRequestId    column -->[View Bills]
   return (
-    <>
-      <div></div>
-    </>
+    <div>
+      <p>ViewBills</p>
+    </div>
   );
 }
 
-export default BillsList;
+export default ViewBills;

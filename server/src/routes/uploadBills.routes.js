@@ -14,17 +14,17 @@ router
   .route("/upload-bill/:id")
   .put(
     authMiddleWare,
-    isAuthorized(["vender"]),
+    isAuthorized(["vendor"]),
     upload.array("files"),
     uploadBill,
   );
 
 router
   .route("/:id/uploadBill")
-  .get(authMiddleWare, isAuthorized(["vender"]), getUploadBillsByRequestId);
+  .get(authMiddleWare, isAuthorized(["vendor"]), getUploadBillsByRequestId);
 
 router
   .route("/:id/deleteBill")
-  .delete(authMiddleWare, isAuthorized(["vender"]), deleteBill);
+  .delete(authMiddleWare, isAuthorized(["vendor"]), deleteBill);
 
 export default router;

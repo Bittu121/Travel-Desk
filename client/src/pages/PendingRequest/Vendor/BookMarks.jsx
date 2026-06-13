@@ -1,12 +1,14 @@
 import React from "react";
 
-function UpdateVendorBookMarkStatus() {
+function BookMarks({ item }) {
   //Vendor status api --> updateBookMark  [only vendor can update] but seen [hr, finance]
   return (
     <>
-      <div></div>
+      <div>
+        <p>BookMarks</p>
+      </div>
     </>
   );
 }
 
-export default UpdateVendorBookMarkStatus;
+export default BookMarks;

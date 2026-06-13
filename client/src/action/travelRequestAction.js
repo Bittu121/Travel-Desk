@@ -1,6 +1,7 @@
 import * as travelRequestApi from "../api/travelRequestApi.js";
 import { toast } from "react-toastify";
 
+//Travel Request Form
 export const travelRequestForm = (formData) => async (dispatch) => {
   dispatch({ type: "TRAVEL_REQUEST_START" });
   try {
@@ -18,6 +19,7 @@ export const travelRequestForm = (formData) => async (dispatch) => {
   }
 };
 
+//Applied form Details
 export const getUserTravelRequests = () => async (dispatch) => {
   dispatch({ type: "GET_USER_TRAVEL_REQUESTS_START" });
   try {
