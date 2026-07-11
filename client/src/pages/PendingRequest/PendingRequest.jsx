@@ -143,6 +143,7 @@ function PendingRequest() {
     }
     if (user?.user?.role === "manager") return filterBySearch(managerApproved);
     if (isHrUser) return filterBySearch(hrApproved);
+    if (user?.user?.role === "admin") return filterBySearch(data);
 
     return [];
   }, [
@@ -293,7 +294,8 @@ function PendingRequest() {
                           !item.isB1Approved &&
                           !item.isB1Rejected) ||
                         (isHrUser && item.isB1Approved && !item.isB2Approved) ||
-                        (isVendorUser && item.isB2Approved);
+                        (isVendorUser && item.isB2Approved) ||
+                        user?.user?.role === "admin";
                       return shouldRender ? (
                         <>
                           <tr key={item?.id} className=" hover:bg-gray-50">

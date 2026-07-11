@@ -23,6 +23,8 @@ export const getAllTravelRequestsByRoleService = async (
     travelRequests = await TravelRequestModel.find({
       isB2Approved: true,
     });
+  } else if (userRole === "admin") {
+    travelRequests = await TravelRequestModel.find({});
   } else {
     throw new AppError("Access Denied", 403);
   }
@@ -169,6 +171,8 @@ export const getApprovedRequestDataService = async (userRole) => {
     travelRequestsAcceptedDetails = await TravelRequestModel.find({
       isB2Approved: true,
     });
+  } else if (userRole === "admin") {
+    travelRequestsAcceptedDetails = await TravelRequestModel.find({});
   } else {
     throw new AppError("Access Denied", 403);
   }

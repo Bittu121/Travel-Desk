@@ -11,14 +11,14 @@ const router = express.Router();
 
 router
   .route("/status/:id")
-  .put(authMiddleWare, isAuthorized(["finance"]), updateStatus);
+  .put(authMiddleWare, isAuthorized(["finance","admin"]), updateStatus);
 
 router
   .route("/bookMarks/:id")
-  .put(authMiddleWare, isAuthorized(["vendor"]), updateBookMark);
+  .put(authMiddleWare, isAuthorized(["vendor","admin"]), updateBookMark);
 
 router
   .route("/updateBookedStatus/:id")
-  .put(authMiddleWare, isAuthorized(["vendor"]), updateBookedTicketStatus);
+  .put(authMiddleWare, isAuthorized(["vendor","admin"]), updateBookedTicketStatus);
 
 export default router;

@@ -13,7 +13,7 @@ router
   .route("/travel-request")
   .post(
     authMiddleWare,
-    isAuthorized(["user", "manager", "hr"]),
+    isAuthorized(["user", "manager", "hr","admin"]),
     travelRequestForm,
   );
 
@@ -22,7 +22,7 @@ router
   .route("/requests/me")
   .get(
     authMiddleWare,
-    isAuthorized(["user", "manager", "hr"]),
+    isAuthorized(["user", "manager", "hr","admin"]),
     getUserTravelRequests,
   );
 

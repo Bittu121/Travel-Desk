@@ -13,7 +13,8 @@ import {
 import {
   HiOutlineCheckCircle,
   HiOutlineArrowRight,
-  HiOutlineChevronRight,
+  HiOutlineArrowLeft,
+  HiOutlineArrowUp,
 } from "react-icons/hi";
 import { BsBuildings, BsPeopleFill, BsShieldCheck } from "react-icons/bs";
 import { RiFlightTakeoffLine } from "react-icons/ri";
@@ -34,7 +35,7 @@ const FEATURES = [
   {
     icon: <MdMailOutline size={26} />,
     title: "Automatic Emails",
-    desc: "You get an email when your request is sent, and the next person gets an email when it is their turn to act.",
+    desc: "HR gets an email as soon as the manager approves, and the vendor gets an email as soon as HR approves. No one has to check in.",
     color: "from-sky-500 to-cyan-600",
   },
   {
@@ -46,7 +47,7 @@ const FEATURES = [
   {
     icon: <MdTrendingUp size={26} />,
     title: "Your Own Dashboard",
-    desc: "Everyone sees their own list of pending, approved and booked requests. You can search and download it to Excel.",
+    desc: "Everyone sees their own list of pending and approved requests, with search built in. Pending requests can be downloaded to Excel.",
     color: "from-pink-500 to-rose-600",
   },
   {
@@ -82,7 +83,6 @@ const STATS = [
   { value: "0", label: "Spreadsheets needed" },
 ];
 
-// Short list shown as little check-mark badges under the hero text.
 const TRUST_BADGES = [
   "Multi-level approvals",
   "Role-based access",
@@ -90,7 +90,7 @@ const TRUST_BADGES = [
   "Finance tracking",
 ];
 
-// The five role cards in the "one system, five roles" section.
+// The five role
 const ROLES = [
   {
     icon: <BsPeopleFill size={22} />,
@@ -98,7 +98,11 @@ const ROLES = [
     desc: "Submit requests",
   },
   { icon: <BsBuildings size={22} />, role: "Manager", desc: "First approval" },
-  { icon: <BsShieldCheck size={22} />, role: "HR", desc: "Approve & assign vendor" },
+  {
+    icon: <BsShieldCheck size={22} />,
+    role: "HR",
+    desc: "Approve & assign vendor",
+  },
   {
     icon: <RiFlightTakeoffLine size={22} />,
     role: "Vendor",
@@ -110,6 +114,101 @@ const ROLES = [
     desc: "Payment & closure",
   },
 ];
+
+//images
+const SHOWCASE_SLIDES = [
+  {
+    role: "Employee",
+    title: "Submit a travel request in minutes",
+    image: null,
+  },
+  {
+    role: "Manager & HR",
+    title: "Approve and assign a vendor in one place",
+    image: null,
+  },
+  {
+    role: "Vendor",
+    title: "Upload tickets and bills against a request",
+    image: null,
+  },
+  {
+    role: "Finance",
+    title: "Track payment status through to closure",
+    image: null,
+  },
+];
+
+// Dashboard preview slider
+function DashboardShowcase() {
+  const [index, setIndex] = useState(0);
+  const slide = SHOWCASE_SLIDES[index];
+
+  const goPrev = () =>
+    setIndex((i) => (i === 0 ? SHOWCASE_SLIDES.length - 1 : i - 1));
+  const goNext = () =>
+    setIndex((i) => (i === SHOWCASE_SLIDES.length - 1 ? 0 : i + 1));
+
+  return (
+    <section className="py-24 px-6 bg-[#1D2046]">
+      <div className="max-w-5xl mx-auto text-center">
+        {/* Preview frame */}
+        <div className="relative rounded-lg border border-slate-200 bg-slate-50 aspect-video overflow-hidden shadow-xl shadow-slate-200/60 flex items-center justify-center">
+          {slide.image ? (
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="flex flex-col items-center gap-3 text-slate-400">
+              <MdTrendingUp size={36} />
+              <span className="text-sm font-semibold">Coming soon</span>
+            </div>
+          )}
+        </div>
+
+        {/* Caption */}
+        <p className="mt-8 text-lg font-semibold text-slate-800">
+          {slide.title}
+        </p>
+        <p className="text-sm text-slate-400 mt-1">{slide.role} dashboard</p>
+
+        {/* Controls */}
+        <div className="mt-8 flex items-center justify-center gap-5">
+          <button
+            onClick={goPrev}
+            aria-label="Previous slide"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all"
+          >
+            <HiOutlineArrowLeft size={16} />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {SHOWCASE_SLIDES.map((s, i) => (
+              <button
+                key={s.role}
+                onClick={() => setIndex(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === index ? "w-6 bg-slate-900" : "w-1.5 bg-slate-300"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={goNext}
+            aria-label="Next slide"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all"
+          >
+            <HiOutlineArrowRight size={16} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 // Navbar
 function Navbar({ scrolled, onGetStarted }) {
@@ -130,18 +229,18 @@ function Navbar({ scrolled, onGetStarted }) {
             className="w-9 h-9 rounded-lg object-contain bg-white p-1"
           />
           <span
-            className={`text-base font-semibold tracking-tight transition-colors ${
+            className={`text-lg font-semibold tracking-tight transition-colors ${
               scrolled ? "text-slate-900" : "text-white"
             }`}
           >
-            Travel Desk
+            Travel Desk Management System
           </span>
         </div>
 
         {/* Button on the right */}
         <button
           onClick={onGetStarted}
-          className="text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg transition-all shadow-sm hover:shadow-blue-600/30 hover:shadow-md"
+          className="text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md transition-all shadow-sm hover:shadow-blue-600/30 hover:shadow-md"
         >
           Get started
         </button>
@@ -178,16 +277,16 @@ function Hero({ onGetStarted, onSeeHowItWorks }) {
 
         <p className="mt-8 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
           One platform for employees, managers, HR, finance, and vendors. Every
-          travel request — submitted, approved, booked, and closed.
+          travel request — submitted, approved, booked.
         </p>
 
         {/* The two main buttons */}
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={onGetStarted}
-            className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 text-base"
+            className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 rounded-md transition-all shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 text-base"
           >
-            Go to your dashboard
+            Dashboard
             <HiOutlineArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
@@ -195,14 +294,14 @@ function Hero({ onGetStarted, onSeeHowItWorks }) {
           </button>
           <button
             onClick={onSeeHowItWorks}
-            className="inline-flex items-center gap-2 text-slate-300 hover:text-white font-medium px-6 py-4 rounded-xl border border-white/10 hover:border-white/25 transition-all text-base backdrop-blur-sm"
+            className="inline-flex items-center gap-2 text-slate-300 hover:text-white font-medium px-4 py-3 rounded-md border border-white/10 hover:border-white/25 transition-all text-base backdrop-blur-sm"
           >
             See how it works
           </button>
         </div>
 
-        {/* Little check-mark badges */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-6 text-slate-500 text-sm">
+        {/* Little check-mark badges, set apart from the CTAs by a divider */}
+        <div className="mt-14 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-slate-500 text-sm">
           {TRUST_BADGES.map((text) => (
             <span key={text} className="flex items-center gap-1.5">
               <HiOutlineCheckCircle size={15} className="text-emerald-500" />
@@ -215,53 +314,6 @@ function Hero({ onGetStarted, onSeeHowItWorks }) {
   );
 }
 
-//StatNumber
-function StatNumber({ value }) {
-  const [current, setCurrent] = useState(0);
-
-  const target = parseInt(value, 10);
-
-  // Keep the part of the text that is NOT a number, like "%" or "×".
-  const suffix = value.replace(/[0-9]/g, "");
-
-  useEffect(() => {
-    if (isNaN(target)) {
-      return;
-    }
-
-    // We want the count to finish in about 1 second.
-    // Update roughly 60 times a second (every ~16 milliseconds).
-    const totalSteps = 60;
-    const stepAmount = target / totalSteps;
-
-    let count = 0;
-
-    // setInterval runs the function again and again until we stop it.
-    const timer = setInterval(() => {
-      count = count + stepAmount;
-
-      if (count >= target) {
-        // Reached the goal: show the exact target and stop the timer.
-        setCurrent(target);
-        clearInterval(timer);
-      } else {
-        // Still counting: show the rounded number so far.
-        setCurrent(Math.floor(count));
-      }
-    }, 16);
-
-    // Clean up: stop the timer if the page is closed mid-animation.
-    return () => clearInterval(timer);
-  }, [target]);
-
-  return (
-    <span>
-      {isNaN(target) ? value : current}
-      {suffix}
-    </span>
-  );
-}
-
 function Stats() {
   return (
     <section className="bg-slate-900 py-20 px-6">
@@ -270,7 +322,7 @@ function Stats() {
           {STATS.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                <StatNumber value={stat.value} />
+                {stat.value}
               </div>
               <p className="mt-2 text-sm text-slate-400 font-medium">
                 {stat.label}
@@ -292,13 +344,6 @@ function Features() {
         <div className="text-center mb-20">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-3">
             Platform features
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
-            Everything your travel desk needs
-          </h2>
-          <p className="mt-5 text-lg text-slate-500 max-w-xl mx-auto font-light">
-            Built for modern corporate travel — from first request to final
-            payment.
           </p>
         </div>
 
@@ -338,9 +383,6 @@ function HowItWorks() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-3">
             How it works
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
-            Three steps, zero confusion
-          </h2>
         </div>
 
         <div className="relative">
@@ -350,7 +392,7 @@ function HowItWorks() {
           <div className="grid md:grid-cols-3 gap-10">
             {STEPS.map((step) => (
               <div key={step.num} className="relative text-center">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-slate-900 text-white text-2xl font-bold mb-6 shadow-lg shadow-slate-900/20 relative z-10">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-900 text-white text-2xl font-bold mb-6 shadow-lg shadow-slate-900/20 relative z-10">
                   {step.num}
                 </div>
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">
@@ -378,9 +420,6 @@ function Roles() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-3">
             Built for every stakeholder
           </p>
-          <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
-            One system, five roles
-          </h2>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -419,16 +458,13 @@ function CallToAction({ onGetStarted }) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-blue-600/20 blur-[80px] pointer-events-none" />
 
       <div className="relative max-w-3xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-          Ready to modernize your travel desk?
-        </h2>
         <p className="mt-6 text-lg text-slate-400 font-light max-w-lg mx-auto">
           Sign in and take control of every travel request — from submission to
           settlement.
         </p>
         <button
           onClick={onGetStarted}
-          className="group mt-10 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 text-base"
+          className="group mt-10 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-3 rounded-md transition-all shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 text-base"
         >
           Sign in to continue
           <HiOutlineArrowRight
@@ -447,26 +483,119 @@ function Footer({ onSignIn }) {
 
   return (
     <footer className="bg-slate-950 py-10 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2.5">
           <img
             src={logo}
             alt="Travel Desk"
             className="w-8 h-8 rounded-md object-contain bg-white p-0.5"
           />
-          <span className="text-sm font-semibold text-white">Travel Desk</span>
+          <div className="flex flex-col">
+            <span className="text-sm font-semibold text-white leading-tight">
+              Travel Desk Management System
+            </span>
+          </div>
         </div>
+        <button
+          onClick={onSignIn}
+          className="group flex items-center gap-1.5 text-xs font-semibold text-slate-200 border border-slate-700 rounded-md px-4 py-2.5 bg-white/[0.03] hover:text-white hover:border-blue-400/60 hover:bg-white/[0.06] hover:shadow-[0_0_0_1px_rgba(96,165,250,0.3),0_4px_20px_-4px_rgba(59,130,246,0.4)] transition-all duration-200"
+        >
+          Sign in
+          <HiOutlineArrowRight
+            size={14}
+            className="group-hover:translate-x-0.5 transition-transform"
+          />
+        </button>
+      </div>
+      <div className="max-w-7xl mx-auto border-t border-slate-800/80 mt-8 pt-5 text-center">
         <p className="text-xs text-slate-500">
           © {currentYear} Travel Desk Management System. All rights reserved.
         </p>
-        <button
-          onClick={onSignIn}
-          className="text-xs text-slate-400 hover:text-white transition font-medium"
-        >
-          Sign in →
-        </button>
       </div>
     </footer>
+  );
+}
+
+// Scroll-to-top button
+function ScrollToTopButton() {
+  const [progress, setProgress] = useState(0);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setProgress(pct);
+      setVisible(scrollTop > 400);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const radius = 20;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progress / 100) * circumference;
+
+  return (
+    <button
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+      className={`group fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center bg-slate-950/90 backdrop-blur-sm hover:bg-slate-900 hover:shadow-[0_4px_24px_-4px_rgba(59,130,246,0.5)] transition-all duration-300 ${
+        visible
+          ? "opacity-100 translate-y-0 pointer-events-auto"
+          : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <svg
+        className="absolute inset-0 w-full h-full -rotate-90"
+        viewBox="0 0 44 44"
+      >
+        <circle
+          cx="22"
+          cy="22"
+          r={radius}
+          fill="none"
+          stroke="rgba(255,255,255,0.12)"
+          strokeWidth="2"
+        />
+        <circle
+          cx="22"
+          cy="22"
+          r={radius}
+          fill="none"
+          stroke="url(#scrollProgressGradient)"
+          strokeWidth="2"
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          style={{ transition: "stroke-dashoffset 0.1s linear" }}
+        />
+        <defs>
+          <linearGradient
+            id="scrollProgressGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#60a5fa" />
+            <stop offset="100%" stopColor="#818cf8" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <HiOutlineArrowUp
+        size={18}
+        className="text-white group-hover:-translate-y-0.5 transition-transform"
+      />
+    </button>
   );
 }
 
@@ -498,12 +627,14 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden">
       <Navbar scrolled={scrolled} onGetStarted={goToLogin} />
       <Hero onGetStarted={goToLogin} onSeeHowItWorks={scrollToHowItWorks} />
+      <DashboardShowcase />
       <Stats />
       <Features />
       <HowItWorks />
       <Roles />
       <CallToAction onGetStarted={goToLogin} />
       <Footer onSignIn={goToLogin} />
+      <ScrollToTopButton />
     </div>
   );
 }

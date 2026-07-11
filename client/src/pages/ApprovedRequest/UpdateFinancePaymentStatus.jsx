@@ -55,7 +55,7 @@ function UpdateFinancePaymentStatus({ item }) {
       </>
     );
   }
-  if (["hr", "vender"].includes(user?.user?.role)) {
+  if (["hr", "vender", "admin"].includes(user?.user?.role)) {
     return <div className="px-3 py-1 capitalize">{status}</div>;
   }
 

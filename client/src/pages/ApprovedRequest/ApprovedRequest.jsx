@@ -16,8 +16,8 @@ function ApprovedRequest() {
   const { loading, error } = useSelector((state) => state.travelRequest);
   const { authData: user } = useSelector((state) => state.auth);
   const role = user?.user?.role;
-  const canUpload = role === "hr" || role === "finance";
-  const canSeeStatus = role === "finance" || role === "hr";
+  const canUpload = role === "hr" || role === "finance" || role === "admin";
+  const canSeeStatus = role === "finance" || role === "hr" || role === "admin";
 
   const [ApprovedRequestData, setApprovedRequestData] = useState([]);
   const [searchName, setSearchName] = useState("");
@@ -36,6 +36,8 @@ function ApprovedRequest() {
       } else if (user?.user?.role === "hr") {
         filtered = allApproved;
       } else if (user?.user?.role === "finance") {
+        filtered = allApproved;
+      } else if (user?.user?.role === "admin") {
         filtered = allApproved;
       }
       setApprovedRequestData(filtered);

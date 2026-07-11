@@ -15,7 +15,7 @@ router
   .route("/pending")
   .get(
     authMiddleWare,
-    isAuthorized(["manager", "hr", "vendor"]),
+    isAuthorized(["manager", "hr", "vendor","admin"]),
     getAllTravelRequestsByRole,
   );
 
@@ -25,7 +25,7 @@ router
   .route("/pending/update/:id")
   .put(
     authMiddleWare,
-    isAuthorized(["manager", "hr", "vendor", "finance"]),
+    isAuthorized(["manager", "hr", "vendor", "finance","admin"]),
     updatePendingTravelRequestById,
   );
 
@@ -33,7 +33,7 @@ router
   .route("/approved-requests")
   .get(
     authMiddleWare,
-    isAuthorized(["manager", "hr", "finance"]),
+    isAuthorized(["manager", "hr", "finance","admin"]),
     getApprovedRequestData,
   );
 

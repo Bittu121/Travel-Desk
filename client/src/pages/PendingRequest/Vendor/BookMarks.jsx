@@ -57,7 +57,7 @@ function BookMarks({ item, fetchPendingRequestData }) {
       </div>
     );
   }
-  if (["hr", "finance"].includes(user?.user?.role)) {
+  if (["hr", "finance", "admin"].includes(user?.user?.role)) {
     return (
       <div className="px-3 py-1 capitalize">
         <input

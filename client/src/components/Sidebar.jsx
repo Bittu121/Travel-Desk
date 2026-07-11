@@ -33,11 +33,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const isTravelRequestApproval =
     user?.user?.role === "manager" ||
     user?.user?.role === "hr" ||
-    user?.user?.role === "vendor";
+    user?.user?.role === "vendor" ||
+    user?.user?.role === "admin";
   const isApprovedRequest =
     user?.user?.role === "manager" ||
     user?.user?.role === "hr" ||
-    user?.user?.role === "finance";
+    user?.user?.role === "finance" ||
+    user?.user?.role === "admin";
   return (
     <>
       <div>
