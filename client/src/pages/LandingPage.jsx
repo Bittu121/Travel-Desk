@@ -6,9 +6,11 @@ import {
   MdFlightTakeoff,
   MdApproval,
   MdReceiptLong,
-  MdMailOutline,
   MdTrendingUp,
-  MdSecurity,
+  MdPayments,
+  MdAdminPanelSettings,
+  MdManageSearch,
+  MdGroups,
 } from "react-icons/md";
 import {
   HiOutlineCheckCircle,
@@ -16,68 +18,84 @@ import {
   HiOutlineArrowLeft,
   HiOutlineArrowUp,
 } from "react-icons/hi";
-import { BsBuildings, BsPeopleFill, BsShieldCheck } from "react-icons/bs";
+import { BsBuildings, BsPeopleFill, BsShieldCheck, BsEyeFill } from "react-icons/bs";
 import { RiFlightTakeoffLine } from "react-icons/ri";
 
 const FEATURES = [
   {
-    icon: <MdApproval size={26} />,
-    title: "Step-by-Step Approvals",
-    desc: "Your manager approves first, then HR approves and picks a vendor, and finally finance handles the payment.",
-    color: "from-blue-500 to-blue-700",
-  },
-  {
     icon: <MdFlightTakeoff size={26} />,
-    title: "Easy Travel Requests",
-    desc: "Fill one simple form — pick flight, train, bus or cab, add hotel stay, travelers, dates and the reason for travel.",
+    title: "Employee Requests",
+    desc: "Any employee can log in, fill out a travel request (even for multiple travelers on one trip), and submit it. A dashboard shows every request and its live status — pending, approved, rejected or booked.",
     color: "from-violet-500 to-violet-700",
   },
   {
-    icon: <MdMailOutline size={26} />,
-    title: "Automatic Emails",
-    desc: "HR gets an email as soon as the manager approves, and the vendor gets an email as soon as HR approves. No one has to check in.",
-    color: "from-sky-500 to-cyan-600",
+    icon: <MdApproval size={26} />,
+    title: "Two-Step Approval",
+    desc: "Every request goes to the reporting manager first, then to HR. An email goes out automatically at each step, so the next person always knows it's their turn.",
+    color: "from-blue-500 to-blue-700",
   },
   {
     icon: <MdReceiptLong size={26} />,
-    title: "Upload Tickets & Bills",
-    desc: "The vendor uploads the booked tickets and bills right on the request, so nothing gets lost in email.",
+    title: "Vendor Booking",
+    desc: "Once HR approves and picks a vendor, that vendor sees the request, uploads the ticket and bill, and marks it as booked once travel is confirmed.",
     color: "from-emerald-500 to-emerald-700",
   },
   {
-    icon: <MdTrendingUp size={26} />,
-    title: "Your Own Dashboard",
-    desc: "Everyone sees their own list of pending and approved requests, with search built in. Pending requests can be downloaded to Excel.",
+    icon: <MdPayments size={26} />,
+    title: "Finance Tracking",
+    desc: "Finance sees every request HR has approved and updates its payment status — pending, paid, or reimbursed.",
+    color: "from-sky-500 to-cyan-600",
+  },
+  {
+    icon: <MdAdminPanelSettings size={26} />,
+    title: "Admin Overview",
+    desc: "Admin can view every travel request across the company, pending and approved. It's a view-only role — nothing can be approved, edited, or uploaded from it.",
+    color: "from-slate-600 to-slate-800",
+  },
+  {
+    icon: <MdManageSearch size={26} />,
+    title: "Search, Filter & Export",
+    desc: "Search and page through long lists of requests, and export the data to Excel with one click.",
     color: "from-pink-500 to-rose-600",
   },
   {
-    icon: <MdSecurity size={26} />,
-    title: "Safe & Secure Login",
-    desc: "Login is protected and each role sees only what it should. Forgot your password? Reset it easily by email.",
-    color: "from-slate-600 to-slate-800",
+    icon: <MdGroups size={26} />,
+    title: "User Management",
+    desc: "HR can create, update, and remove accounts for employees, managers, vendors, and finance staff.",
+    color: "from-amber-500 to-orange-600",
   },
 ];
 
 const STEPS = [
   {
     num: "01",
-    title: "Submit a Request",
-    desc: "Employee fills a travel form — source, destination, dates, travelers, mode and purpose — and submits in minutes.",
+    title: "Submit the Request",
+    desc: "An employee or manager fills out the travel form and submits it. The reporting manager is emailed right away.",
   },
   {
     num: "02",
-    title: "Manager & HR Approve",
-    desc: "The reporting manager approves first, then HR signs off and assigns a vendor — each notified by email in turn.",
+    title: "Manager Reviews",
+    desc: "Accept moves it to HR and emails them. Reject ends the request here — it goes no further.",
   },
   {
     num: "03",
-    title: "Vendor Books, Finance Closes",
-    desc: "The vendor uploads tickets and bills, finance marks payment, and the final status shows on every dashboard.",
+    title: "HR Reviews & Picks a Vendor",
+    desc: "Accept assigns a vendor and emails them. Reject ends the request here.",
+  },
+  {
+    num: "04",
+    title: "Vendor Books Travel",
+    desc: "The vendor uploads tickets, bills and booking details, then marks the request as booked.",
+  },
+  {
+    num: "05",
+    title: "Finance Closes It Out",
+    desc: "Finance updates the payment status to paid or reimbursed, and the request is complete.",
   },
 ];
 
 const STATS = [
-  { value: "5", label: "Roles, zero overlap" },
+  { value: "6", label: "Roles, zero overlap" },
   { value: "4", label: "Travel modes supported" },
   { value: "2", label: "Level approval matrix" },
   { value: "0", label: "Spreadsheets needed" },
@@ -90,7 +108,7 @@ const TRUST_BADGES = [
   "Finance tracking",
 ];
 
-// The five role
+// The six roles
 const ROLES = [
   {
     icon: <BsPeopleFill size={22} />,
@@ -112,6 +130,11 @@ const ROLES = [
     icon: <MdReceiptLong size={22} />,
     role: "Finance",
     desc: "Payment & closure",
+  },
+  {
+    icon: <BsEyeFill size={22} />,
+    role: "Admin",
+    desc: "Full visibility, view-only",
   },
 ];
 
@@ -276,8 +299,9 @@ function Hero({ onGetStarted, onSeeHowItWorks }) {
         </h1>
 
         <p className="mt-8 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
-          One platform for employees, managers, HR, finance, and vendors. Every
-          travel request — submitted, approved, booked.
+          One platform for employees, managers, HR, vendors, finance, and
+          admins. Every travel request — submitted, approved, booked, and
+          paid.
         </p>
 
         {/* The two main buttons */}
@@ -377,7 +401,7 @@ function Features() {
 function HowItWorks() {
   return (
     <section id="how-it-works" className="py-28 px-6 bg-white">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section heading */}
         <div className="text-center mb-20">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-3">
@@ -387,15 +411,15 @@ function HowItWorks() {
 
         <div className="relative">
           {/* Thin line connecting the steps (only on bigger screens) */}
-          <div className="hidden md:block absolute top-10 left-[16.67%] right-[16.67%] h-px bg-slate-100" />
+          <div className="hidden md:block absolute top-8 left-[10%] right-[10%] h-px bg-slate-100" />
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-10">
             {STEPS.map((step) => (
               <div key={step.num} className="relative text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-900 text-white text-2xl font-bold mb-6 shadow-lg shadow-slate-900/20 relative z-10">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-slate-900 text-white text-lg font-bold mb-6 shadow-lg shadow-slate-900/20 relative z-10">
                   {step.num}
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                <h3 className="text-base font-semibold text-slate-900 mb-3">
                   {step.title}
                 </h3>
                 <p className="text-sm text-slate-500 leading-relaxed max-w-xs mx-auto">
@@ -422,7 +446,7 @@ function Roles() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {ROLES.map((item) => (
             <div
               key={item.role}
