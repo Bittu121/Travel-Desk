@@ -11,6 +11,7 @@ import {
   MdAdminPanelSettings,
   MdManageSearch,
   MdGroups,
+  MdLock,
 } from "react-icons/md";
 import {
   HiOutlineCheckCircle,
@@ -18,14 +19,19 @@ import {
   HiOutlineArrowLeft,
   HiOutlineArrowUp,
 } from "react-icons/hi";
-import { BsBuildings, BsPeopleFill, BsShieldCheck, BsEyeFill } from "react-icons/bs";
+import {
+  BsBuildings,
+  BsPeopleFill,
+  BsShieldCheck,
+  BsEyeFill,
+} from "react-icons/bs";
 import { RiFlightTakeoffLine } from "react-icons/ri";
 
 const FEATURES = [
   {
     icon: <MdFlightTakeoff size={26} />,
     title: "Employee Requests",
-    desc: "Any employee can log in, fill out a travel request (even for multiple travelers on one trip), and submit it. A dashboard shows every request and its live status — pending, approved, rejected or booked.",
+    desc: "Any employee can log in, fill out a travel request (even for multiple travelers on one trip), and submit it. A dashboard shows every request and its live status — pending, approved, or booked.",
     color: "from-violet-500 to-violet-700",
   },
   {
@@ -55,7 +61,7 @@ const FEATURES = [
   {
     icon: <MdManageSearch size={26} />,
     title: "Search, Filter & Export",
-    desc: "Search and page through long lists of requests, and export the data to Excel with one click.",
+    desc: "Search and page through long lists of requests, and export pending requests to Excel with one click.",
     color: "from-pink-500 to-rose-600",
   },
   {
@@ -63,6 +69,12 @@ const FEATURES = [
     title: "User Management",
     desc: "HR can create, update, and remove accounts for employees, managers, vendors, and finance staff.",
     color: "from-amber-500 to-orange-600",
+  },
+  {
+    icon: <MdLock size={26} />,
+    title: "Secure Login & Password Reset",
+    desc: "Login is protected with a secure session, and passwords are never stored in plain text. Forgot your password? Reset it by email.",
+    color: "from-teal-500 to-cyan-700",
   },
 ];
 
@@ -300,8 +312,7 @@ function Hero({ onGetStarted, onSeeHowItWorks }) {
 
         <p className="mt-8 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
           One platform for employees, managers, HR, vendors, finance, and
-          admins. Every travel request — submitted, approved, booked, and
-          paid.
+          admins. Every travel request — submitted, approved, booked, and paid.
         </p>
 
         {/* The two main buttons */}
