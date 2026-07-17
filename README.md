@@ -9,7 +9,7 @@ payment tracking.
 - [Dashboard preview](#dashboard-preview)
 - [Features](#features)
 - [Roles](#roles)
-- [How a request flows](#how-a-request-flows)
+- [How a Request Flows](#how-a-request-flows)
 - [Flow diagram](#flow-diagram)
 - [ER diagram](#er-diagram)
 - [Schema diagram](#schema-diagram)
@@ -19,19 +19,11 @@ payment tracking.
 - [Available scripts](#available-scripts)
 - [Known limitations](#known-limitations)
 
-## Tech stack
-
-**Client** — React 19, Vite, Tailwind CSS, MUI, Redux Toolkit, React Router,
-Axios, react-icons, xlsx (Excel export).
-
-**Server** — Node.js, Express, MongoDB (Mongoose), JWT auth (httpOnly
-cookies), bcrypt, Multer (file uploads), Nodemailer (email notifications).
-
 ## Dashboard preview
 
 | Employee | Manager / HR | Vendor | Finance | Admin |
 |----------|--------------|--------|---------|-------|
-
+| _screenshot coming soon_ | _screenshot coming soon_ | _screenshot coming soon_ | _screenshot coming soon_ | _screenshot coming soon_ |
 
 <!--
 Once screenshots are captured, drop them in `docs/screenshots/` and swap
@@ -39,47 +31,29 @@ each cell above for:
 ![Employee dashboard](docs/screenshots/employee-dashboard.png)
 -->
 
-
 ## Features
-## How a Request Flows
 
-### User Management
-HR creates and manages user accounts for Employees, Managers, Vendors, and Finance users.
-
-### Start
-An Employee or Manager logs into the system, fills out the travel request form, and submits it.
-
-### Travel Request Submitted
-The request status changes to **Pending Approval at Reporting Manager**, and the Reporting Manager receives an email notification.
-
-### Reporting Manager Decision
-The Reporting Manager reviews the request.
-
-- **Approve:** The status changes to **Pending Approval at HR**, and HR receives an email notification.
-- **Reject:** The status changes to **Rejected by Manager**, and the workflow ends.
-
-### HR Decision
-
-- **Approve:** HR assigns a travel vendor from the vendor list. The status changes to **Approved by HR – Assigned to Vendor**, and the selected vendor receives an email notification.
-- **Reject:** The status changes to **Rejected by HR**, and the workflow ends.
-
-### Vendor Receives the Request
-After receiving the notification, the assigned vendor can view the request in their dashboard.
-
-### Vendor Uploads Documents
-The vendor books the travel arrangements and uploads all required documents, such as tickets.
-
-### Vendor Updates Booking Status
-The vendor continues uploading the required documents until the travel is confirmed, then marks the request as **Booked**. The request is moved to the **Booked Tickets** view.
-
-### Finance Updates Payment
-After the booking is completed, the Finance team updates the payment status by marking it as **Paid**.
-
-### End
-Once the payment has been processed, the travel request lifecycle is complete.
-
-> **Note:** The Admin can view every request at any stage of the workflow across all employees and vendors. The Admin is not part of the approval process and has read-only access.
-
+- **Employee Requests** — submit a travel request (with multiple travelers on
+  one trip if needed) and track its live status from a personal "Applied
+  Form" list.
+- **Two-Step Approval** — every request goes to the reporting manager first,
+  then to HR. Each step sends an automatic email to the next approver
+  (manager → HR → vendor). A reject at either step ends the request there.
+- **Vendor Booking** — once HR approves and assigns a vendor, the vendor sees
+  the request, uploads the ticket and bill, and marks the request as booked
+  once travel is confirmed.
+- **Finance Tracking** — finance sees every HR-approved request and updates
+  its payment status.
+- **Admin Overview** — a read-only view (in the UI) of every pending and
+  approved request across the company, for full management visibility.
+- **Search, Filter & Export** — search and page through long lists of
+  requests, and export pending requests to Excel with one click.
+- **User Management** — HR can create, update, and remove accounts for
+  employees, managers, vendors, and finance staff.
+- **Secure Login & Password Reset** — JWT session in an httpOnly cookie,
+  bcrypt-hashed passwords, and an email-based forgot/reset-password flow.
+  New accounts can be created either by signing up directly or by HR adding
+  a user from the dashboard.
 
 ## Roles
 
@@ -92,62 +66,73 @@ Once the payment has been processed, the travel request lifecycle is complete.
 | Finance  | Updates payment status |
 | Admin    | Views every request across the company (read-only in the UI) |
 
+## How a Request Flows
 
+### User Management
+
+HR creates and manages user accounts for Employees, Managers, Vendors, and Finance users.
+
+### Start
+
+An Employee or Manager logs into the system, fills out the travel request form, and submits it.
+
+### Travel Request Submitted
+
+The request status changes to **Pending Approval at Reporting Manager**, and the Reporting Manager receives an email notification.
+
+### Reporting Manager Decision
+
+The Reporting Manager reviews the request.
+
+- **Approve:** The status changes to **Pending Approval at HR**, and HR receives an email notification.
+- **Reject:** The status changes to **Rejected by Manager**, and the workflow ends.
+
+### HR Decision
+
+- **Approve:** HR assigns a travel vendor from the vendor list. The status changes to **Approved by HR – Assigned to Vendor**, and the selected vendor receives an email notification.
+- **Reject:** The status changes to **Rejected by HR**, and the workflow ends.
+
+### Vendor Receives the Request
+
+After receiving the notification, the assigned vendor can view the request in their dashboard.
+
+### Vendor Uploads Documents
+
+The vendor books the travel arrangements and uploads all required documents, such as tickets.
+
+### Vendor Updates Booking Status
+
+The vendor continues uploading the required documents until the travel is confirmed, then marks the request as **Booked**. The request is moved to the **Booked Tickets** view.
+
+### Finance Updates Payment
+
+After the booking is completed, the Finance team updates the payment status by marking it as **Paid** or **Reimbursed**.
+
+### End
+
+Once the payment has been processed, the travel request lifecycle is complete.
+
+> **Note:** The Admin can view every request at any stage of the workflow across all employees and vendors. The Admin is not part of the approval process and has read-only access.
 
 ## Flow diagram
 
 ![System Workflow](./images/Travel_Desk_Management_system_Flow_Diagram.png)
 
-### User Management
-HR creates and manages user accounts for Employees, Manager, users, Vendors and Finance.
-
-### Start
-An employee or manager login in the system and fills the travel request form and submit.
-
-### Travel Request submitted
-The request status becomes Pending Approval at Reporting Manager, and the reporting manager receives an email notification.
-
-### Reporting Manager decision
-The reporting manager reviews the request.
-
-- If the manager approves it, the status changes to Pending Approval at HR, and HR receives an email notification.
-- If the manager rejects the request, the status becomes Rejected by Manager, and the workflow ends.
-
-### HR decision
-
-**Approve:**
-- HR assigns a travel vendor from the vendor list.
-- The status changes to Approved by HR – Assigned to Vendor.
-- The selected vendor receives an email notification.
-
-**Reject:**
-- Status changes to Rejected by HR, and the workflow ends.
-
-### Vendor receives the request
-After receiving the notification, the assigned vendor can view the request in their dashboard.
-
-### Vendor uploads documents
-The vendor books the travel arrangements and uploads all required documents, such as tickets.
-
-### Vendor updates booking status
-Keeps uploading until travel is confirmed, then marks the request as *booked*; it moves to the Booked Tickets view.
-
-### Finance updates payment
-After the booking is completed, the Finance team updates the payment information by marking the payment status as Paid.
-
-### End
-Once the payment has been processed, the travel request lifecycle is complete.
-
-> Admin can view the request at any point in this flow, across every employee and vendor, without needing to be part of the approval chain.
-
 ## ER diagram
 
 ![ER Diagram](./images/Travel_Desk_ER_Diagram.png)
 
-
 ## Schema diagram
 
 ![Schema Diagram](./images/Travel_Desk_Schema-Diagram.png)
+
+## Tech stack
+
+**Client** — React 19, Vite, Tailwind CSS, MUI, Redux Toolkit, React Router,
+Axios, react-icons, xlsx (Excel export).
+
+**Server** — Node.js, Express, MongoDB (Mongoose), JWT auth (httpOnly
+cookies), bcrypt, Multer (file uploads), Nodemailer (email notifications).
 
 ## Project structure
 
