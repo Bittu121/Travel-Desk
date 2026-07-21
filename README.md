@@ -30,7 +30,8 @@ payment tracking.
 | ![Pending requests](./images/Manager_HR_Pending_Requests.webp) | ![Vendor dashboard](./images/Vendor_Dashboard.webp) | ![E-ticket upload](./images/E_Ticket_Upload.webp) |
 
 | User Management (HR) |
-| ![User management](./images/User_Management.webp) 
+|------------------------|
+| ![User management](./images/User_Management.webp) |
 
 ## Features
 
