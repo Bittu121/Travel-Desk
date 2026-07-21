@@ -231,8 +231,8 @@ function PendingRequest() {
               (isVendorUser && isSelectedVendor.length === 0) ? (
               <NoDataFound />
             ) : (
-              <div className="overflow-x-auto">
-                <table className="min-w-[3300px] w-full text-sm">
+              <div className="overflow-x-auto thin-scrollbar">
+                <table className="min-w-[3300px] w-full text-sm whitespace-nowrap">
                   <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
                     <tr>
                       <th className="px-4 py-3 text-left">Travel ID</th>

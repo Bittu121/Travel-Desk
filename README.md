@@ -23,13 +23,7 @@ payment tracking.
 
 | Employee | Manager / HR | Vendor | Finance | Admin |
 |----------|--------------|--------|---------|-------|
-| _screenshot coming soon_ | _screenshot coming soon_ | _screenshot coming soon_ | _screenshot coming soon_ | _screenshot coming soon_ |
-
-<!--
-Once screenshots are captured, drop them in `docs/screenshots/` and swap
-each cell above for:
-![Employee dashboard](docs/screenshots/employee-dashboard.png)
--->
+| ![Employee dashboard](./images/Employee_Dashboard.webp) | ![Manager/HR pending requests](./images/Manager_HR_Pending_Requests.webp) | ![Vendor dashboard](./images/Vendor_Dashboard.webp) | _screenshot coming soon_ | _screenshot coming soon_ |
 
 ## Features
 

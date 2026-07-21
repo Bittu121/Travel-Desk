@@ -14,3 +14,29 @@
 .animate-fadeIn {
   animation: fadeIn 0.18s ease-out;
 }
+
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #a5b4fc transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #a5b4fc, #818cf8);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.2s ease;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #818cf8, #6366f1);
+}

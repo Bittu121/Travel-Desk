@@ -13,7 +13,7 @@ const Layout = () => {
         />
         <div className="flex-1 min-w-0">
           <Navbar toggleSidebar={() => setSidebarOpen(!isSidebarOpen)} />
-          <main className="p-4 bg-gray-100 h-full overflow-x-auto overflow-y-scroll">
+          <main className="p-2 bg-gray-100 h-full overflow-x-auto overflow-y-scroll">
             <Outlet />
           </main>
         </div>

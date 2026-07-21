@@ -136,7 +136,7 @@ function GetUserDetails() {
         ) : filteredData.length === 0 ? (
           <NoDataFound />
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto thin-scrollbar">
             <table className="min-w-[1200px] w-full text-sm">
               <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
                 <tr>

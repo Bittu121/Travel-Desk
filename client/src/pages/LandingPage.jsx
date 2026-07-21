@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../public/logo.png";
+import heroSectionImg from "../assets/landing-page/heroSectionFirst.webp";
+import loginImg from "../assets/landing-page/loginTwo.webp";
+import userDashboardImg from "../assets/landing-page/userDashboardViewThree.webp";
+import travelRequestFormImg from "../assets/landing-page/travelRequestFormFour.webp";
+import pendingRequestImg from "../assets/landing-page/pendingrequestFive.webp";
+import vendorManagementImg from "../assets/landing-page/vendorManagementSix.webp";
+import eTicketImg from "../assets/landing-page/E-TicketSeven.webp";
+import userManagementImg from "../assets/landing-page/usermanagementEight.webp";
 
 import {
   MdFlightTakeoff,
@@ -153,24 +161,44 @@ const ROLES = [
 //images
 const SHOWCASE_SLIDES = [
   {
+    role: "Overview",
+    title: "One platform for the whole travel desk",
+    image: heroSectionImg,
+  },
+  {
+    role: "Login",
+    title: "Secure sign-in for every role",
+    image: loginImg,
+  },
+  {
+    role: "Employee",
+    title: "See all your requests at a glance",
+    image: userDashboardImg,
+  },
+  {
     role: "Employee",
     title: "Submit a travel request in minutes",
-    image: null,
+    image: travelRequestFormImg,
   },
   {
     role: "Manager & HR",
-    title: "Approve and assign a vendor in one place",
-    image: null,
+    title: "Approve or reject requests in one place",
+    image: pendingRequestImg,
+  },
+  {
+    role: "Vendor",
+    title: "Assign and track vendor bookings",
+    image: vendorManagementImg,
   },
   {
     role: "Vendor",
     title: "Upload tickets and bills against a request",
-    image: null,
+    image: eTicketImg,
   },
   {
-    role: "Finance",
-    title: "Track payment status through to closure",
-    image: null,
+    role: "HR",
+    title: "Manage every account from one screen",
+    image: userManagementImg,
   },
 ];
 
@@ -193,7 +221,7 @@ function DashboardShowcase() {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           ) : (
             <div className="flex flex-col items-center gap-3 text-slate-400">
@@ -222,7 +250,7 @@ function DashboardShowcase() {
           <div className="flex items-center gap-2">
             {SHOWCASE_SLIDES.map((s, i) => (
               <button
-                key={s.role}
+                key={i}
                 onClick={() => setIndex(i)}
                 aria-label={`Go to slide ${i + 1}`}
                 className={`h-1.5 rounded-full transition-all ${
