@@ -21,9 +21,17 @@ payment tracking.
 
 ## Dashboard preview
 
-| Employee | Manager / HR | Vendor | Finance | Admin |
-|----------|--------------|--------|---------|-------|
-| ![Employee dashboard](./images/Employee_Dashboard.webp) | ![Manager/HR pending requests](./images/Manager_HR_Pending_Requests.webp) | ![Vendor dashboard](./images/Vendor_Dashboard.webp) | _screenshot coming soon_ | _screenshot coming soon_ |
+| Login | Main Dashboard | Travel Request Form |
+|-------|-----------------|----------------------|
+| ![Login page](./images/Login_Page.webp) | ![Main dashboard](./images/Employee_Dashboard.webp) | ![Travel request form](./images/Travel_Request_Form.webp) |
+
+| Pending Requests (Manager/HR) | Vendor Management | E-Ticket Upload |
+|--------------------------------|--------------------|-------------------|
+| ![Pending requests](./images/Manager_HR_Pending_Requests.webp) | ![Vendor dashboard](./images/Vendor_Dashboard.webp) | ![E-ticket upload](./images/E_Ticket_Upload.webp) |
+
+| User Management (HR) | Finance | Admin |
+|------------------------|---------|-------|
+| ![User management](./images/User_Management.webp) | _screenshot coming soon_ | _screenshot coming soon_ |
 
 ## Features
 
